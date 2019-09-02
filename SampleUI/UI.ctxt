@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=UI
+comment0.text=\r\n\ Display\ the\ design\ of\ basic\ UI.\r\n\r\n\ @author\ team\ 3\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=void\ login()
+comment2.params=
+comment2.target=void\ customerMainMenu()
+comment3.params=
+comment3.target=void\ viewHalls()
+comment4.params=
+comment4.target=void\ manageBookings()
+comment5.params=
+comment5.target=void\ manageAccount()
+comment6.params=
+comment6.target=void\ displayUI()
+numComments=7
