@@ -7,19 +7,64 @@ import java.util.Scanner;
  */
 public class UI
 {
+    public void loginPage()
+    {
+        Scanner console = new Scanner(System.in);
+        Text text = new Text();
+        text.simpleTitle("Welecome to the Prime Events");
+        text.displayInfo("   Select your choice:");
+        text.displayInfo("1. Log in");
+        text.displayInfo("2. New user sign up");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        String input = console.nextLine();
+        if (input == "1")
+            login();
+        if (input == "2")
+            register();
+    }
+    
+    public void register()
+    {
+        Scanner console = new Scanner(System.in);
+        Text text = new Text();
+        text.simpleTitle("Register");
+        text.displayInfo("Please select your user type:");
+        text.displayInfo("1. Customer");
+        text.displayInfo("2. Owner");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        int type = console.nextInt();
+        System.out.print('\u000C');
+        text.simpleTitle("Register");
+        text.displayInfo("Please enter your username:");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        String username = console.nextLine();
+        System.out.print('\u000C');
+        text.simpleTitle("Register");
+        text.displayInfo("Please enter your password:");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        String password = console.nextLine();
+        System.out.print('\u000C');
+        text.simpleTitle("Register");
+        text.displayInfo("Please enter your password again:");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        String check = console.nextLine();
+        System.out.print('\u000C');
+        // Display the message for succesfully sign up
+    }
+        
     public void login()
     {
         Scanner console = new Scanner(System.in);
         Text text = new Text();
-        text.title("Welecome to the Prime Events", "Customer", "username");
+        text.simpleTitle("Welecome to the Prime Events");
         text.displayInfo("Login:");
-        text.displayInfo("Plaes enter username:");
+        text.displayInfo("Please enter username:");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         console.nextLine();
         System.out.print('\u000C');
-        text.title("Welecome to the Prime Events", "Customer", "username");
+        text.simpleTitle("Welecome to the Prime Events");
         text.displayInfo("Login:");
-        text.displayInfo("Plaes enter password");
+        text.displayInfo("Please enter password:");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         console.nextLine();
         System.out.print('\u000C');
@@ -83,7 +128,7 @@ public class UI
     public void displayUI()
     {
         Scanner console = new Scanner(System.in);
-        login();
+        loginPage();
         console.nextLine();
         System.out.print('\u000C');
         customerMainMenu();

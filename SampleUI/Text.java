@@ -49,6 +49,17 @@ public class Text
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
     
+    public void simpleTitle(String title)
+    {
+        String leftSpace = leftSpace(title);
+        String rightSpace = rightSpace(title);
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        System.out.println("+                                                                       +");
+        System.out.println("+" + leftSpace + title + rightSpace + "+");
+        System.out.println("+                                                                       +");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+    }
+    
     public void displayInfo(String info)
     {
         int length = 71;
