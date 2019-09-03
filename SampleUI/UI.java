@@ -39,7 +39,10 @@ public class UI
         text.displayInfo("1. Customer");
         text.displayInfo("2. Owner");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        int type = console.nextInt();
+        //use console.nextLine() to capture input then prase it to integer
+        //should add exception handling
+        //console.nextInt() will cause some unexpected problems
+        int type = Integer.parseInt(console.nextLine());
         System.out.print('\u000C');
         text.simpleTitle("Register");
         text.displayInfo("Please enter your username:");

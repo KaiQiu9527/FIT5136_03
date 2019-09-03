@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=UI
-comment0.text=\r\n\ Display\ the\ design\ of\ basic\ UI.\r\n\r\n\ @author\ team\ 3\r\n\ @version\ 1.0\r\n
+comment0.text=\n\ Display\ the\ design\ of\ basic\ UI.\n\n\ @author\ team\ 3\n\ @version\ 1.0\n
 comment1.params=
 comment1.target=void\ loginPage()
 comment2.params=
