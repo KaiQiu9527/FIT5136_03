@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 /**
  * Display the design of basic UI.
@@ -16,11 +17,17 @@ public class UI
         text.displayInfo("1. Log in");
         text.displayInfo("2. New user sign up");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        String input = console.nextLine();
-        if (input == "1")
+        int input = console.nextInt();
+        if (input == 1)
+        {
+            System.out.print('\u000C');
             login();
-        if (input == "2")
+        }
+        if (input == 2)
+        {    
+            System.out.print('\u000C');
             register();
+        }
     }
     
     public void register()
