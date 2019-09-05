@@ -5,7 +5,7 @@ public class InputVerify {
     //There are some pre-set methods check the validation
 
     //This method is to ensure user can only input a number
-    public int checkWhetherInputNumber(String input)
+    public int checkWhetherInputIsNumber(String input)
     {
         int num = -1;
         Pattern pattern = Pattern.compile("[0-9]*");

@@ -1,0 +1,2 @@
+{fname=1, phone_no=1, password=1449589344, lname=1, address=1, usertype=customer, email=1@1, username=1}
+{fname=1, phone_no=111111, password=1449589344, lname=1, address=111, usertype=customer, email=1@1, username=1}

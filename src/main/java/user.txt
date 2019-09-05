@@ -1,0 +1,1 @@
+{fname=kai, phone_no=0423800055, password=1450575459, lname=qiu, address=943392550@qq.com, usertype=customer, email=943392550@, username=qiukai}
