@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Text
+comment0.text=\n\ Print\ out\ the\ sample\ UI\n\n\ @author\ Team\ 3\n\ @version\ 1.0\n
+comment1.params=input
+comment1.target=java.lang.String\ leftSpace(java.lang.String)
+comment2.params=input
+comment2.target=java.lang.String\ rightSpace(java.lang.String)
+comment3.params=title\ type\ user
+comment3.target=void\ title(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment4.params=title
+comment4.target=void\ simpleTitle(java.lang.String)
+comment5.params=info
+comment5.target=void\ displayInfo(java.lang.String)
+comment6.params=
+comment6.target=void\ displayHall()
+numComments=7
