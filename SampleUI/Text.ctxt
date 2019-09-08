@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Text
-comment0.text=\n\ Print\ out\ the\ sample\ UI\n\n\ @author\ Team\ 3\n\ @version\ 1.0\n
+comment0.text=\r\n\ Print\ out\ the\ sample\ UI\r\n\r\n\ @author\ Team\ 3\r\n\ @version\ 1.0\r\n
 comment1.params=input
 comment1.target=java.lang.String\ leftSpace(java.lang.String)
 comment2.params=input

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>530</x>
+      <y>120</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Owner</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>210</y>
+      <w>30</w>
+      <h>760</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1890</x>
+      <y>0</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/AbstractClass/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>170</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>:Boundary</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>190</y>
+      <w>30</w>
+      <h>780</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;760.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>170</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>:Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>190</y>
+      <w>30</w>
+      <h>780</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;760.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>170</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>:Prime Event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1030</x>
+      <y>190</y>
+      <w>30</w>
+      <h>780</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;760.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>240</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>choose "create a hall"
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>290</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Display page
+lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>260</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Page selected
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>320</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Input the name
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>340</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Name inputted
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>370</y>
+      <w>130</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Validate
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;60.0;40.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>410</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Name is valid
+lt=&lt;.
+Ask for event type
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>440</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Select event type
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>460</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Event type selected
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>490</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Ask for whether 
+lt=&lt;.
+ offering catering</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>520</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Select whether offer
+lt=&lt;-
+catering</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>540</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Wether catering
+lt=&lt;-
+selected</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>580</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Ask for standard price
+lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>610</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Enter standard price
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>630</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Standard price inputted
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>650</y>
+      <w>130</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Validate
+
+lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;60.0;40.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>690</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Standard price is valid
+lt=&lt;.
+Ask for description
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>720</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Enter description
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>750</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Description entered
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>860</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Save hall details
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>890</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>details Saved
+lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>790</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Display the hall details
+lt=&lt;.
+Ask for confirmation
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>820</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Enter yes
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>840</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Confirmed
+lt=&lt;-</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>920</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Display sucess page
+lt=&lt;.
+exit to main menu</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+</diagram>
