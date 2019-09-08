@@ -1,50 +1,126 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 public class Main {
+
+    String username = "";
 
     public static void main(String[] args) {
         Main main = new Main();
         Scanner console = new Scanner(System.in);
         Text text = new Text();
+        main.welcome();
+    }
+
+    public void welcome(){
+        Text text = new Text();
+        Scanner console = new Scanner(System.in);
         text.simpleTitle("Welecome to the Prime Events");
         text.displayInfo("   Select your choice:");
         text.displayInfo("1. Log in");
         text.displayInfo("2. New user sign up");
+        text.displayInfo("3. Exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        int input = console.nextInt();
-        if (input == 1)
+        try {
+            int input = Integer.parseInt(console.nextLine());
+            if (input == 1)
+            {
+                login();
+            }
+            if (input == 2)
+            {
+                register();
+            }
+            if (input == 3)
+            {
+                System.exit(0);
+            }
+        }catch (Exception e)
         {
-            System.out.print('\u000C');
-            main.login();
+            welcome();
         }
-        if (input == 2)
-        {
-            System.out.print('\u000C');
-            main.register();
-        }
+
+
+
+
     }
 
-     public void login()
+
+    public void login()
     {
         Scanner console = new Scanner(System.in);
         Text text = new Text();
+        String username;
+        String password_hash = "";
         text.simpleTitle("Welecome to the Prime Events");
-        text.displayInfo("Login:");
-        text.displayInfo("Please enter username:");
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        console.nextLine();
-        System.out.print('\u000C');
-        text.simpleTitle("Welecome to the Prime Events");
-        text.displayInfo("Login:");
-        text.displayInfo("Please enter password:");
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        console.nextLine();
-        System.out.print('\u000C');
-        System.out.println("Verifying...");
+        while (true) {
+            text.displayInfo("Login:");
+            text.displayInfo("Please enter username:");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            username = console.nextLine();
+            if (username.equals("")){
+                text.displayInfo("Please enter username:");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                System.out.println();
+                System.out.println();
+            }
+            else break;
+        }
+
+        while (true){
+            text.simpleTitle("Welecome to the Prime Events");
+            text.displayInfo("Login:");
+            text.displayInfo("Please enter password:");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            password_hash = String.valueOf(console.nextLine().hashCode());
+            //read the file and check the username and password
+            FileReader fileReader;
+            try {
+                fileReader = new FileReader("user.txt");
+                BufferedReader br = new BufferedReader(fileReader);
+                Map<String,String> map = new HashMap<>();
+                Boolean login_successfully = false;
+                String line;
+                while ((line = br.readLine()) != null){
+                    line = line.substring(1,line.length()-1);
+                    ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
+                    for (String e: list1){
+                        ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
+                        map.put(list2.get(0).strip(),list2.get(1).strip());
+                    }
+                    //check the user input with data
+                    if (map.get("username").equals(username) && map.get("password").equals(password_hash)){
+                        login_successfully = true;
+                        //Main main = new Main();
+                        break;
+                    }
+                }
+                //if not break, means login failed
+                if (login_successfully != true)
+                {
+                    System.out.println("Login Failed!");
+                    welcome();
+                }
+                else {
+                    System.out.println("Login Successfully!");
+                    welcome();
+                }
+
+                break;
+            } catch (FileNotFoundException e) {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                text.displayInfo("User profile not found. Please check the file or register a new user.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            } catch (IOException e) {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                text.displayInfo("User not found. Please check the file or register a new user.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            }
+            //if no user in user.txt, will turn to the register page
+            welcome();
+        }
+
+        //System.out.println("Verifying...");
     }
 
     public void register()
