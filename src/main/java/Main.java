@@ -25,10 +25,12 @@ public class Main {
             int input = Integer.parseInt(console.nextLine());
             if (input == 1)
             {
+                System.out.print('\u000C');
                 login();
             }
             if (input == 2)
             {
+                System.out.print('\u000C');
                 register();
             }
             if (input == 3)
@@ -74,50 +76,19 @@ public class Main {
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             password_hash = String.valueOf(console.nextLine().hashCode());
             //read the file and check the username and password
-            FileReader fileReader;
-            try {
-                fileReader = new FileReader("user.txt");
-                BufferedReader br = new BufferedReader(fileReader);
-                Map<String,String> map = new HashMap<>();
-                Boolean login_successfully = false;
-                String line;
-                while ((line = br.readLine()) != null){
-                    line = line.substring(1,line.length()-1);
-                    ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
-                    for (String e: list1){
-                        ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
-                        map.put(list2.get(0).strip(),list2.get(1).strip());
-                    }
-                    //check the user input with data
-                    if (map.get("username").equals(username) && map.get("password").equals(password_hash)){
-                        login_successfully = true;
-                        //Main main = new Main();
-                        break;
-                    }
-                }
-                //if not break, means login failed
-                if (login_successfully != true)
-                {
-                    System.out.println("Login Failed!");
-                    welcome();
-                }
-                else {
-                    System.out.println("Login Successfully!");
-                    welcome();
-                }
-
-                break;
-            } catch (FileNotFoundException e) {
+            FileIO fileIO = new FileIO();
+            if (fileIO.loginVerify(username,password_hash)) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("User profile not found. Please check the file or register a new user.");
+                text.displayInfo("Successfully!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-            } catch (IOException e) {
-                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("User not found. Please check the file or register a new user.");
-                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                welcome();
             }
-            //if no user in user.txt, will turn to the register page
-            welcome();
+            else{
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                text.displayInfo("Failed!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                welcome();
+            }
         }
 
         //System.out.println("Verifying...");
