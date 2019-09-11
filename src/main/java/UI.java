@@ -512,7 +512,7 @@ public class UI {
         displayLowerPart("R. Return to the Manage discounts");
     }
 
-    public void displayIU() {
+    public void displayUI() {
         Scanner console = new Scanner(System.in);
         loginPage();
         console.nextLine();

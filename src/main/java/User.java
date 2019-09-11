@@ -4,7 +4,7 @@ public abstract class User {
     String username;
     String fname;
     String lname;
-    Date dob;
+    String dob;
     String usertype;
     int userid;
     String password_hash;
@@ -28,11 +28,11 @@ public abstract class User {
         this.lname = lname;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

@@ -13,9 +13,10 @@ public class FileIO{
     User owner = new Owner();
 
     //verify the login
-    public boolean loginVerify(String username, String password_hash){
+    public User loginVerify(String username, String password_hash){
         FileReader fileReader;
         Boolean login_successfully = false;
+        User user;
         try {
             fileReader = new FileReader("user.txt");
             BufferedReader br = new BufferedReader(fileReader);
@@ -31,14 +32,25 @@ public class FileIO{
                 //check the user input with data
                 if (map.get("username").equals(username) && map.get("password").equals(password_hash)){
                     login_successfully = true;
-                    //if (map.get(""))
-
-                //Main main = new Main();
-                    break;
+                    if (map.get("usertype").equals("customer"))
+                    {
+                        user = new Customer(map.get("username"),map.get("fname"),map.get("lname"),
+                                map.get("dob"),map.get("password"),map.get("email"),map.get("address"),map.get("phone_no"));
+                        return user;
+                    }
+                    else if (map.get("usertype").equals("owner"))
+                    {
+                        user = new Owner(map.get("username"),map.get("fname"),map.get("lname"),
+                                map.get("dob"),map.get("password"),map.get("email"),map.get("address"),map.get("phone_no"));
+                        return user;
+                    }
+                    else {
+                        user = new Admin();
+                        return user;
+                    }
                 }
             }
             //if not break, means login failed
-
         } catch (FileNotFoundException e) {
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             text.displayInfo("User profile not found. Please check the file or register a new user.");
@@ -49,6 +61,9 @@ public class FileIO{
             text.displayInfo("User not found. Please check the file or register a new user.");
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         }
-        return login_successfully;
+        return null;
     }
+
+
+
 }

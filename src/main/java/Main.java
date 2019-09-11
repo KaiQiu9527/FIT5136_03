@@ -77,7 +77,7 @@ public class Main {
             password_hash = String.valueOf(console.nextLine().hashCode());
             //read the file and check the username and password
             FileIO fileIO = new FileIO();
-            if (fileIO.loginVerify(username,password_hash)) {
+            if (fileIO.loginVerify(username,password_hash) != null) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 text.displayInfo("Successfully!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
