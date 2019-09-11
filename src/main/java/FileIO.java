@@ -31,7 +31,7 @@ public class FileIO{
                 //check the user input with data
                 if (map.get("username").equals(username) && map.get("password").equals(password_hash)){
                     login_successfully = true;
-                    if (map.get(""))
+                    //if (map.get(""))
 
                 //Main main = new Main();
                     break;
