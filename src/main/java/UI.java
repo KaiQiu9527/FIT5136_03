@@ -213,9 +213,10 @@ public class UI {
         title("MAIN MENU", "Customer", "username");
         displayInfo("   Enter the choice:");
         displayInfo("1. View the halls");
-        displayInfo("2. View the quotations");
-        displayInfo("3. Manage bookings");
-        displayInfo("4. Manage account");
+        displayInfo("2. Search a hall");
+        displayInfo("3. View the quotations");
+        displayInfo("4. Manage bookings");
+        displayInfo("5. Manage account");
         displayLowerPart("Q. Log out");
     }
 
@@ -242,6 +243,15 @@ public class UI {
         System.out.print('\u000C');
         title("VIEW THE HALLS", "Customer", "username");
         displayHall("hall name");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Send a request for quotation");
+        displayInfo("2. View comments of the hall");
+        displayLowerPart("R. Return to View the halls");
+    }
+
+    public void searchAHall() {
+        System.out.print('\u000C');
+        title("SEARCH A HALL", "Customer", "username");
         displayInfo("   Enter the choice:");
         displayInfo("1. Send a request for quotation");
         displayInfo("2. View comments of the hall");
