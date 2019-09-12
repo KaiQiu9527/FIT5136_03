@@ -13,7 +13,7 @@ public class Owner extends User {
         this.lname = lname;
         this.password_hash = password_hash;
         this.dob = dob;
-        this.usertype = "customer";
+        this.usertype = "owner";
         this.email = email;
         this.address = address;
         this.phone_no = phone_no;

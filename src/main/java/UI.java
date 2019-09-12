@@ -127,6 +127,7 @@ public class UI {
         displayInfo("1. Log in");
         displayInfo("2. New user sign up");
         displayInfo("3. Forget password");
+        displayInfo("4. Exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
 
@@ -176,7 +177,6 @@ public class UI {
         System.out.print('\u000C');
         simpleTitle("REGISTER");
         displayInfo("Please enter your " +  input + ":");
-        displayLowerPart("Q. Quit registration");
     }
 
     /**
@@ -208,9 +208,9 @@ public class UI {
     /**
      * Display the main menu of customer
      */
-    public void customerMainMenu() {
+    public void customerMainMenu(String username) {
         System.out.print('\u000C');
-        title("MAIN MENU", "Customer", "username");
+        title("MAIN MENU", "Customer", username);
         displayInfo("   Enter the choice:");
         displayInfo("1. View the halls");
         displayInfo("2. Search a hall");
@@ -457,9 +457,9 @@ public class UI {
     /**
      * Display the main menu of administrator
      */
-    public void adminMainMenu() {
+    public void adminMainMenu(String username) {
         System.out.print('\u000C');
-        title("MAIN MENU", "Admin", "username");
+        title("MAIN MENU", "Admin", username);
         displayInfo("   Enter the choice:");
         displayInfo("1. Manage users");
         displayInfo("2. Manage discounts");
