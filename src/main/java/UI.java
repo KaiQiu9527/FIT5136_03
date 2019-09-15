@@ -107,6 +107,20 @@ public class UI {
         System.out.println("+Deposit paid:                                                          +");
         System.out.println("+-----------------------------------------------------------------------+");
     }
+
+    /**
+     * Display request information
+     * @param input the request info
+     */
+    private void displayRequest(String input) {
+        System.out.println("+Request " + input + ": information displays here                                    +");
+        System.out.println("+Event time:                                                            +");
+        System.out.println("+Hall name:                                                             +");
+        System.out.println("+Number of people:                                                      +");
+        System.out.println("+Whether catering:                                                      +");
+        System.out.println("+Requirements:                                                          +");
+        System.out.println("+-----------------------------------------------------------------------+");
+    }
     /**
      * Display the lower part of the UI, like return, log out function
      * @param input the content to display in the lower part
@@ -169,7 +183,7 @@ public class UI {
     }
 
     /**
-     * Display the message for successfully sign up
+     * Display the message for register
      *
      * @param input the String to determine the step of register
      */
@@ -249,15 +263,6 @@ public class UI {
         displayLowerPart("R. Return to View the halls");
     }
 
-    public void searchAHall() {
-        System.out.print('\u000C');
-        title("SEARCH A HALL", "Customer", "username");
-        displayInfo("   Enter the choice:");
-        displayInfo("1. Send a request for quotation");
-        displayInfo("2. View comments of the hall");
-        displayLowerPart("R. Return to View the halls");
-    }
-
     /**
      * Display the UI of sending request for quotation (need modify to display details)
      * @param input the String to determine the step of sending request for quotation
@@ -273,7 +278,7 @@ public class UI {
     /**
      * Display the confirm page of request for quotation (need modify to display details)
      */
-    public void confirmRequest() {
+    public void confirmSendRequest() {
         System.out.print('\u000C');
         title("SEND REQUEST FOR QUOTATION", "Customer", "username");
         displayHall("hall name");
@@ -294,7 +299,7 @@ public class UI {
         displayInfo("2. Afternoon time 13:00 to 17:00");
         displayInfo("3. Evening        18:00 to 22:00");
         displayLowerPart("Q. Quit sending request");
-    }
+    } 
 
     public void sendRequestSuccess() {
         System.out.print('\u000C');
@@ -302,6 +307,45 @@ public class UI {
         displayHall("hall name");
         displayInfo("Request for quotation sent successfully.");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+    }
+
+    /**
+     * Display the main page of search a hall
+     */
+    public void searchAHall() {
+        System.out.print('\u000C');
+        title("SEARCH A HALL", "Customer", "username");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Search a hall by name");
+        displayInfo("2. Search a hall by event type");
+        displayInfo("3. Search a hall by location");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display the page of search a hall by location or name (event type need to be selected)
+     */
+    public void searchAHallBy(String something) {
+        System.out.print('\u000C');
+        title("SEARCH A HALL", "Customer", "username");
+        displayInfo("   Search a hall by " + something + ":");
+        displayInfo("   Please enter the " + something);
+        displayLowerPart("R. Return to Search a Hall");
+    }
+
+    /**
+     * Display the page of search a hall by location or name (event type need to be selected)
+     */
+    public void searchAHallByEventType() {
+        System.out.print('\u000C');
+        title("SEARCH A HALL", "Customer", "username");
+        displayInfo("   Search a hall by event type:");
+        displayInfo("   Please select the event type you are interested:");
+        displayInfo("1. Wedding ceremony");
+        displayInfo("2. Wedding reception");
+        displayInfo("3. Birthday");
+        displayInfo("4. Anniversary");
+        displayLowerPart("R. Return to Search a Hall");
     }
 
     /**
@@ -366,7 +410,7 @@ public class UI {
     public void customerCancelConfirm() {
         System.out.print('\u000C');
         title("CANCEL BOOKING", "Customer", "username");
-        displayInfo("   Are you sure about cancel this booking?");
+        displayInfo("   Are you sure to cancel this booking?");
         displayInfo("   ---------------------------------------");
         displayInfo("Y. Yes, I want to cancel it.");
         displayInfo("N. No");
@@ -512,6 +556,201 @@ public class UI {
         displayLowerPart("R. Return to the Manage discounts");
     }
 
+    /**
+     * Display the owner's main menu (need modify to display details)
+     * @param username owner's username
+     */
+    public void ownerMainMenu(String username) {
+        System.out.print('\u000C');
+        title("MAIN MENU", "Owner", username);
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Create a hall");
+        displayInfo("2. Manage halls");
+        displayInfo("3. View Requests");
+        displayInfo("4. Manage bookings");
+        //manage bookings includes cancel bookings and refund payment
+        displayInfo("5. Manage Payment");
+        displayLowerPart("Q. Log out");
+    }
+
+    /**
+     * Display the page of create a hall (need modify to display details)
+     * @param content the content needed input
+     */
+    public void createAHall(String content) {
+        System.out.print('\u000C');
+        title("CREATE A HALL", "Owner", "username");
+        displayInfo("   Please enter the " + content);
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display the select event type page
+     * @param content
+     */
+    public void createAHallSelect(String content) {
+        System.out.print('\u000C');
+        title("CREATE A HALL", "Owner", "username");
+        displayInfo("   Please select a event type");
+        displayInfo("1. Wedding ceremony");
+        displayInfo("2. Wedding reception");
+        displayInfo("3. Birthday");
+        displayInfo("4. Anniversary");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display manage halls page (need modify to display details)
+     */
+    public void manageHalls() {
+        System.out.print('\u000C');
+        title("MANAGE HALLS", "Owner", "username");
+        displayInfo("   Enter the choice:");
+        displayHall("1. hall name1");
+        displayHall("2. hall name2");
+        displayHall("3. hall name3");
+        displayInfo("4. Next page");
+        displayInfo("5. Previous page");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display managing page of selected hall
+     */
+    public void manageSelectedHall() {
+        System.out.print('\u000C');
+        title("MANAGE HALLS", "Owner", "username");
+        displayHall("Hall name");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Update hall information");
+        displayInfo("2. Update discount for this hall");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display the main page of view requests
+     */
+    public void viewRequests() {
+        System.out.print('\u000C');
+        title("VIEW REQUESTS", "Owner", "username");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Sample request 1");
+        displayInfo("2. Sample request 2");
+        displayInfo("3. Sample request 3");
+        displayInfo("4. Next page");
+        displayInfo("5. Previous page");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display the page of view selected request
+     */
+    public void viewSelectedRequest() {
+        System.out.print('\u000C');
+        title("VIEW REQUESTS", "Owner", "username");
+        displayRequest("request no");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Accept this request");
+        displayInfo("2. Decline this request");
+        displayLowerPart("R. Return to the View Request");
+    }
+
+    /**
+     * Display the page of accept request
+     */
+    public void acceptRequest() {
+        System.out.print('\u000C');
+        title("VIEW REQUESTS", "Owner", "username");
+        displayRequest("request no");
+        displayInfo("   Enter the price for this offer:");
+        displayLowerPart("R. Return to the View Request");
+    }
+
+    /**
+     * Display the page of owner send quotation
+     */
+    public void sendQuotationConfirm() {
+        System.out.print('\u000C');
+        title("VIEW REQUESTS", "Owner", "username");
+        displayRequest("request no");
+        displayInfo("Are you sure to send this quotation to customer?");
+        displayInfo("Y. Confirm sending this quotation");
+        displayLowerPart("Q. Quit sending quotation");
+    }
+
+    /**
+     * Display the main page of owner manage bookings (need modify to display details)
+     */
+    public void ownerManageBookings() {
+        System.out.print('\u000C');
+        title("MANAGE BOOKINGS", "Owner", "username");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Sample booking 1");
+        displayInfo("2. Sample booking 2");
+        displayInfo("3. Sample booking 3");
+        displayInfo("4. Next page");
+        displayInfo("5. Previous page");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display the UI of owner select a booking (need modify to display details)
+     */
+    public void ownerSelectBookings() {
+        System.out.print('\u000C');
+        title("MANAGE BOOKINGS", "Customer", "username");
+        displayBooking("booking no");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Cancel the booking");
+        displayLowerPart("R. Return to Manage bookings");
+    }
+
+    /**
+     * Display the confirm page of owner cancelling booking
+     */
+    public void ownerCancelConfirm() {
+        System.out.print('\u000C');
+        title("CANCEL BOOKING", "Owner", "username");
+        displayBooking("booking no");
+        displayInfo("   Are you sure to cancel this booking?");
+        displayInfo("   ---------------------------------------");
+        displayInfo("Y. Yes, I want to cancel it.");
+        displayInfo("N. No");
+        displayLowerPart("R. Return to Manage bookings");
+    }
+
+    /**
+     * Display the confirm page of owner refund payment
+     */
+    public void ownerRefundPayment() {
+        System.out.print('\u000C');
+        title("CANCEL BOOKING", "Owner", "username");
+        displayInfo("   This booking has already be cancelled.");
+        displayInfo("   Do you want to refund this payment to the customer?.");
+        displayInfo("   ---------------------------------------");
+        displayInfo("Y. Yes, I want to do it.");
+        displayInfo("N. No");
+        displayLowerPart("R. Return to Manage bookings");
+    }
+
+    /**
+     * Display the main page of owner manage payment (need modify to display details)
+     */
+    public void ownerManagePayment() {
+        System.out.print('\u000C');
+        title("MANAGE PAYMENT", "Owner", "username");
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Sample cancelled booking 1");
+        displayInfo("2. Sample cancelled booking 2");
+        displayInfo("3. Sample cancelled booking 3");
+        displayInfo("4. Next page");
+        displayInfo("5. Previous page");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Method of displaying the UI
+     */
     public void displayUI() {
         Scanner console = new Scanner(System.in);
         loginPage();
