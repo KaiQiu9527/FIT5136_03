@@ -20,7 +20,6 @@ public class Main {
 
     public void welcome(){
         fileIO.startup();
-        fileIO.getAllOwner();
         Text text = new Text();
         Scanner console = new Scanner(System.in);
         ui.loginPage();
@@ -84,8 +83,10 @@ public class Main {
                     customerMain.welcome();
                     break;
                 }
-                if (usertype.equals("owner")) {
-                    System.out.println("You are owner.");
+                else if (usertype.equals("owner")) {
+                    OwnerMain ownerMain = new OwnerMain(user);
+                    ownerMain.welcome();
+                    //
                     break;
                 }
                 if (usertype.equals("admin")) {
@@ -255,10 +256,12 @@ public class Main {
         usermap.put("email",user.getEmail());
         usermap.put("address",user.getAddress());
         usermap.put("phone_no",user.getPhone_no());
+        usermap.put("id", String.valueOf(new FileIO().getUserAmount()+1));
         //display the information after input
         ui.registerSuccess();
         text = new Text();
         text.displayInfo("These are the information of you: ");
+        text.displayInfo("User ID: " + usermap.get("id"));
         text.displayInfo("UserType: " + usermap.get("usertype"));
         text.displayInfo("Username: " + usermap.get("username"));
         text.displayInfo("Firstname: " + usermap.get("fname"));

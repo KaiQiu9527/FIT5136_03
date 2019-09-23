@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class UI {
@@ -86,21 +88,24 @@ public class UI {
 
     /**
      * Display hall information
-     * @param input the hall info
      */
-    private void displayHall(String input) {
-        System.out.println("+Hall " + input + ": information displays here                                       +");
-        System.out.println("+Name:                                                                  +");
-        System.out.println("+Location:                                                              +");
-        System.out.println("+Description:                                                           +");
+    public void displayHall(Hall hall) {
+        System.out.println("+Name: " + hall.getName());
+        System.out.println("+Hall ID : " + hall.getHallId());
+        System.out.println("+Owner ID: " + hall.getOwnerId());
+        System.out.println("+Hall Location: " + hall.getLocation());
+        System.out.println("+Hall Support Event Type: " + hall.getSupportEventType());
+        System.out.println("+Discount: " + hall.getDiscount());
+        System.out.println("+Picture: " + hall.getPicture());
         System.out.println("+-----------------------------------------------------------------------+");
+        System.out.println();
     }
 
     /**
      * Display booking information
      * @param input the booking info
      */
-    private void displayBooking(String input) {
+    public void displayBooking(String input) {
         System.out.println("+Booking " + input + ": information displays here                                    +");
         System.out.println("+Event time:                                                            +");
         System.out.println("+Location:                                                              +");
@@ -125,7 +130,7 @@ public class UI {
      * Display the lower part of the UI, like return, log out function
      * @param input the content to display in the lower part
      */
-    private void displayLowerPart(String input){
+    public void displayLowerPart(String input){
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         displayInfo(input);
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -237,26 +242,26 @@ public class UI {
     /**
      * Display the main page of view halls (need modify to display details)
      */
-    public void viewHalls() {
+    public void viewHallList(ArrayList<Hall> halls,String username) {
         System.out.print('\u000C');
-        title("VIEW THE HALLS", "Customer", "username");
-        displayHall("1");
-        displayHall("2");
-        displayHall("3");
+        title("VIEW THE HALLS", "Customer", username);
+        for (Hall hall : halls){
+            int i = 1;
+            displayInfo(i+".");
+            displayHall(hall);
+            i++;
+        }
         displayInfo("   Enter the choice:");
-        displayInfo("   Enter 1, 2 or 3 to select the hall");
-        displayInfo("4. Next page");
-        displayInfo("5. Previous page");
         displayLowerPart("R. Return to the Main menu");
     }
 
     /**
      * Display the UI of customer select a hall (need modify to display details)
      */
-    public void customerSelectHall() {
+    public void customerSelectHall(Hall hall, String username) {
         System.out.print('\u000C');
-        title("VIEW THE HALLS", "Customer", "username");
-        displayHall("hall name");
+        title("VIEW THE HALLS", "Customer", username);
+        displayHall(hall);
         displayInfo("   Enter the choice:");
         displayInfo("1. Send a request for quotation");
         displayInfo("2. View comments of the hall");
@@ -267,10 +272,10 @@ public class UI {
      * Display the UI of sending request for quotation (need modify to display details)
      * @param input the String to determine the step of sending request for quotation
      */
-    public void sendRequestStep(String input) {
+    public void sendRequestStep(Hall hall, String input) {
         System.out.print('\u000C');
         title("SEND REQUEST FOR QUOTATION", "Customer", "username");
-        displayHall("hall name");
+        displayHall(hall);
         displayInfo("Please enter " +  input + ":");
         displayLowerPart("Q. Quit sending request");
     }
@@ -281,7 +286,7 @@ public class UI {
     public void confirmSendRequest() {
         System.out.print('\u000C');
         title("SEND REQUEST FOR QUOTATION", "Customer", "username");
-        displayHall("hall name");
+        //displayHall("hall name");
         displayInfo("Request Info here");
         displayInfo("Are you sure to send this request for quotation?");
         displayInfo("Y. Confirm sending this request");
@@ -304,7 +309,7 @@ public class UI {
     public void sendRequestSuccess() {
         System.out.print('\u000C');
         title("SEND REQUEST FOR QUOTATION", "Customer", "username");
-        displayHall("hall name");
+        //displayHall("hall name");
         displayInfo("Request for quotation sent successfully.");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
@@ -351,10 +356,10 @@ public class UI {
     /**
      * Display the UI of viewing the quotations (need modify to display details)
      */
-    public void viewQuotations() {
+    public void viewQuotations(Quotation quotation, Hall hall) {
         System.out.print('\u000C');
         title("VIEW THE QUOTATIONS", "Customer", "username");
-        displayHall("hall name");
+        displayHall(hall);
         displayInfo("   Enter the choice:");
         displayInfo("1. Accept the quotation");
         displayInfo("2. Decline the quotation");
@@ -369,7 +374,7 @@ public class UI {
     public void paymentConfirm() {
         System.out.print('\u000C');
         title("CONFIRM PAYMENT", "Customer", "username");
-        displayHall("payment amount:");
+        displayInfo("payment amount:");
         displayInfo("Are you sure to pay the deposit?");
         displayInfo("Y. Confirm paying the deposit");
         //might have multiple quotations received
@@ -459,7 +464,6 @@ public class UI {
     public void changeBookingDateSuccess() {
         System.out.print('\u000C');
         title("CHANGE THE BOOKING DATE", "Customer", "username");
-        displayHall("hall name");
         displayInfo("Booking date changed successfully.");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
@@ -567,9 +571,10 @@ public class UI {
         displayInfo("1. Create a hall");
         displayInfo("2. Manage halls");
         displayInfo("3. View Requests");
-        displayInfo("4. Manage bookings");
         //manage bookings includes cancel bookings and refund payment
-        displayInfo("5. Manage Payment");
+        displayInfo("4. Manage bookings");
+        displayInfo("5. Manage account");
+        displayInfo("6. Manage Payment");
         displayLowerPart("Q. Log out");
     }
 
@@ -579,19 +584,19 @@ public class UI {
      */
     public void createAHall(String content) {
         System.out.print('\u000C');
-        title("CREATE A HALL", "Owner", "username");
+        //title("CREATE A HALL", "Owner", "username");
         displayInfo("   Please enter the " + content);
         displayLowerPart("R. Return to the Main menu");
     }
 
     /**
      * Display the select event type page
-     * @param content
      */
-    public void createAHallSelect(String content) {
+    public void createAHallType() {
         System.out.print('\u000C');
-        title("CREATE A HALL", "Owner", "username");
-        displayInfo("   Please select a event type");
+        //title("CREATE A HALL", "Owner", "username");
+        displayInfo("  Please select a event type");
+        displayInfo("   If multiple types, please enter numbers splits with a comma");
         displayInfo("1. Wedding ceremony");
         displayInfo("2. Wedding reception");
         displayInfo("3. Birthday");
@@ -602,25 +607,26 @@ public class UI {
     /**
      * Display manage halls page (need modify to display details)
      */
-    public void manageHalls() {
+    public void manageHalls(ArrayList<Hall> halls) {
         System.out.print('\u000C');
         title("MANAGE HALLS", "Owner", "username");
         displayInfo("   Enter the choice:");
-        displayHall("1. hall name1");
-        displayHall("2. hall name2");
-        displayHall("3. hall name3");
-        displayInfo("4. Next page");
-        displayInfo("5. Previous page");
+        for(int i=0; i<halls.size(); i++)
+        {
+            displayHall(halls.get(i));
+        }
+        displayInfo("N. Next page");
+        displayInfo("P. Previous page");
         displayLowerPart("R. Return to the Main menu");
     }
 
     /**
      * Display managing page of selected hall
      */
-    public void manageSelectedHall() {
+    public void manageSelectedHall(Hall hall) {
         System.out.print('\u000C');
         title("MANAGE HALLS", "Owner", "username");
-        displayHall("Hall name");
+        displayHall(hall);
         displayInfo("   Enter the choice:");
         displayInfo("1. Update hall information");
         displayInfo("2. Update discount for this hall");
@@ -777,5 +783,25 @@ public class UI {
         console.nextLine();
         registerSuccess();
         console.nextLine();
+    }
+
+    public void createHallSuccess() {
+        System.out.print('\u000C');
+        simpleTitle("Create A Hall");
+        displayInfo("Create Success!");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+    }
+
+    public void displayCreateSuccessful(Map hallMap){
+        displayInfo("   These are the hall information you just created: ");
+        displayInfo("   Hall ID: " + hallMap.get("hallId"));
+        displayInfo("   Owner ID: " + hallMap.get("ownerId"));
+        displayInfo("   Hall Name: " + hallMap.get("name"));
+        displayInfo("   Hall Location: " + hallMap.get("location"));
+        displayInfo("   Support Event Type: " + hallMap.get("supportEventType"));
+        displayInfo("   Hall Discount: " + hallMap.get("discount"));
+        displayInfo("   Hall Picture: " + hallMap.get("picture"));
+
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
 }

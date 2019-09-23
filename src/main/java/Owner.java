@@ -7,7 +7,7 @@ public class Owner extends User {
     }
 
 
-    public Owner(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no){
+    public Owner(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no, int id){
         this.username = username;
         this.fname = fname;
         this.lname = lname;
@@ -17,5 +17,6 @@ public class Owner extends User {
         this.email = email;
         this.address = address;
         this.phone_no = phone_no;
+        this.id = String.valueOf(id);
     }
 }

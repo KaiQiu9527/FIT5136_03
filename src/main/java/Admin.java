@@ -1,4 +1,5 @@
 public class Admin extends User {
+    int id;
     public Admin(){
         username = "admin";
         fname = "";
@@ -9,5 +10,7 @@ public class Admin extends User {
         email = "";
         address = "";
         phone_no = "";
+        id = 1;
+
     };
 }

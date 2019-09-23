@@ -1,4 +1,2 @@
-{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, usertype=customer, email=qiu@kai, username=qiukai}
-{fname=qiu, phone_no=1, password=1450575459, lname=kai, address=1, usertype=customer, email=11@11, username=kai}
-{fname=aa, phone_no=aa, password=-1159927984, lname=aa, address=aa, usertype=customer, email=a@a, username=jingqi}
-{fname=a, phone_no=a, password=-730490471, lname=b, address=a, usertype=owner, email=@, username=yingyi}
+{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, usertype=customer, id=1, email=qiu@kai, username=qiukai}
+{fname=kai, phone_no=kaiqiu, password=-1138826582, lname=qiu, address=kaiqiu, usertype=owner, id=2, email=kai@qiu, username=kaiqiu}

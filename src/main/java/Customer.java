@@ -23,7 +23,7 @@ public class Customer extends User {
 
     public Customer(){};
 
-    public Customer(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no){
+    public Customer(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no, int id){
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat();
         this.username = username;
@@ -35,5 +35,6 @@ public class Customer extends User {
         this.email = email;
         this.address = address;
         this.phone_no = phone_no;
+        this.id = String.valueOf(id);
     }
 }

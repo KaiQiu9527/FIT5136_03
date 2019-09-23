@@ -1,0 +1,1 @@
+{hallId=1, supportEventType=Wedding Ceremony Wedding Reception Birthday Anniversary , name=monash, discount=1.0, location=caulfield, ownerId=2, picture=www.baidu.com}

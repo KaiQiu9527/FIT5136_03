@@ -6,11 +6,16 @@ public abstract class User {
     String lname;
     String dob;
     String usertype;
-    int userid;
     String password_hash;
     String email;
     String address = "";
     String phone_no = "";
+    String id;
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
+
 
     public String getFname() {
         return fname;
@@ -44,13 +49,6 @@ public abstract class User {
         this.usertype = usertype;
     }
 
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
 
     public String getUsername() {
         return username;
