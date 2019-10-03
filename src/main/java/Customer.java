@@ -2,8 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Customer extends User {
-    String address;
-    int phone;
+
 
     public String getAddress() {
         return address;
@@ -13,17 +12,17 @@ public class Customer extends User {
         this.address = address;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getPhone() {
+        return phone_no;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        phone_no = phone;
     }
 
     public Customer(){};
 
-    public Customer(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no, int id){
+    public Customer(String username, String fname, String lname, String dob, String password_hash, String email, String address, String phone_no, String id){
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat();
         this.username = username;
@@ -35,6 +34,6 @@ public class Customer extends User {
         this.email = email;
         this.address = address;
         this.phone_no = phone_no;
-        this.id = String.valueOf(id);
+        this.id = id;
     }
 }

@@ -245,8 +245,8 @@ public class UI {
     public void viewHallList(ArrayList<Hall> halls,String username) {
         System.out.print('\u000C');
         title("VIEW THE HALLS", "Customer", username);
+        int i = 1;
         for (Hall hall : halls){
-            int i = 1;
             displayInfo(i+".");
             displayHall(hall);
             i++;
@@ -552,10 +552,10 @@ public class UI {
     /**
      * Display the admin manage discounts page (need modify to display details)
      */
-    public void updateDiscounts() {
+    public void updateDiscounts(Hall hall) {
         System.out.print('\u000C');
-        title("UPDATE DISCOUNT", "Admin", "username");
-        displayInfo("   You are updating discount for: ");
+        title("UPDATE DISCOUNT", "Hall Name", hall.getName());
+        displayInfo("   You are updating discount for: " + hall.getName());
         displayInfo("   Enter the discount:");
         displayLowerPart("R. Return to the Manage discounts");
     }
@@ -609,8 +609,8 @@ public class UI {
      */
     public void manageHalls(ArrayList<Hall> halls) {
         System.out.print('\u000C');
-        title("MANAGE HALLS", "Owner", "username");
-        displayInfo("   Enter the choice:");
+        title("MANAGE HALLS", "","");
+        displayInfo("   Enter the Hall ID:");
         for(int i=0; i<halls.size(); i++)
         {
             displayHall(halls.get(i));
@@ -630,6 +630,21 @@ public class UI {
         displayInfo("   Enter the choice:");
         displayInfo("1. Update hall information");
         displayInfo("2. Update discount for this hall");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    /**
+     * Display managing options of selected hall
+     */
+    public void updateHall(Hall hall) {
+        System.out.print('\u000C');
+        title("MANAGE HALLS", "Hall Name", hall.getName());
+        displayHall(hall);
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Update Hall Name");
+        displayInfo("2. Update Hall Location");
+        displayInfo("3. Update Support Event Type");
+        displayInfo("4. Update Picture");
         displayLowerPart("R. Return to the Main menu");
     }
 
