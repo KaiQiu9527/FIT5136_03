@@ -1,56 +1,104 @@
+import java.util.Date;
 public class Quotation {
-    int quotation_id;
-    int customer_id;
-    int hall_id;
-    String demand;
-    String booking_date;
-    String booking_time;
+    int quotationId;
+    int customerId;
+    int hallId;
+    int ownerId;
+    String eventType;
+    int eventSize;
+    Date startTime;
+    Date endTime;
+    boolean whetherCatering;
+    String state;
+    int price;
 
-    public int getQuotation_id() {
-        return quotation_id;
+    public int getQuotationId() {
+        return quotationId;
     }
 
-    public void setQuotation_id(int quotation_id) {
-        this.quotation_id = quotation_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getHallId() {
+        return hallId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public int getHall_id() {
-        return hall_id;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setHall_id(int hall_id) {
-        this.hall_id = hall_id;
+    public int getEventSize() {
+        return eventSize;
     }
 
-    public String getDemand() {
-        return demand;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setDemand(String demand) {
-        this.demand = demand;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public String getBooking_date() {
-        return booking_date;
+    public boolean isWhetherCatering() {
+        return whetherCatering;
     }
 
-    public void setBooking_date(String booking_date) {
-        this.booking_date = booking_date;
+    public String getState() {
+        return state;
     }
 
-    public String getBooking_time() {
-        return booking_time;
+    public int getPrice() {
+        return price;
     }
 
-    public void setBooking_time(String booking_time) {
-        this.booking_time = booking_time;
+    public void setQuotationId(int quotationId) {
+        this.quotationId = quotationId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setHallId(int hallId) {
+        this.hallId = hallId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setEventSize(int eventSize) {
+        this.eventSize = eventSize;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setWhetherCatering(boolean whetherCatering) {
+        this.whetherCatering = whetherCatering;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
+
+
