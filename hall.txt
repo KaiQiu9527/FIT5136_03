@@ -1,1 +1,9 @@
-{hallId=1, supportEventType=Wedding Ceremony Wedding Reception Birthday Anniversary , name=monash, discount=1.0, location=caulfield, ownerId=2, picture=www.baidu.com}
+
+{hallId=1, supportEventType=Wedding Ceremony Wedding Reception Birthday Anniversary, name=monash, discount=0.0, location=caulfield, ownerId=2, picture=www.baidu.com}
+
+{hallId=2, supportEventType=Wedding Ceremony Wedding Reception, name=xidian, discount=0.0, location=xian, ownerId=5, picture=www.google.com}
+
+{hallId=3, supportEventType=Wedding Ceremony, name=clayton, discount=0.1, location=clayton, ownerId=2, picture=wwww}
+
+{hallId=4, supportEventType=Wedding Ceremony Wedding Reception Anniversary, name=xinhui, discount=0.9, location=xinhui, ownerId=2, picture=aaaa}
+

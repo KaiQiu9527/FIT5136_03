@@ -40,7 +40,7 @@ public class FileIO{
                 if (map.get("usertype").equals("customer"))
                 {
                     customer = new Customer(map.get("username"),map.get("fname"),map.get("lname"),
-                            map.get("dob"),map.get("password"),map.get("email"),map.get("address"),map.get("phone_no"),Integer.parseInt(map.get("id")));
+                            map.get("dob"),map.get("password"),map.get("email"),map.get("address"),map.get("phone_no"),map.get("id"));
                     customers.add(customer);
                 }
                 else if (map.get("usertype").equals("owner"))
@@ -66,6 +66,8 @@ public class FileIO{
             Map<String,String> map = new HashMap<>();
             String line;
             while ((line = br.readLine()) != null){
+                if (line.equals(""))
+                    continue;
                 line = line.substring(1,line.length()-1);
                 ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
                 for (String e: list1){
@@ -105,7 +107,7 @@ public class FileIO{
         }
         //last check admin
         for (int i=0; i<admins.size(); i++) {
-            if (admins.get(i).getUsername().equals(username) && admins.get(i).getPassword_hash().equals(password_hash)) {
+            if (admins.get(i).getUsername().equals(username)) {
                 return admins.get(i);
             }
         }
@@ -118,6 +120,7 @@ public class FileIO{
         try {
             pw = new PrintWriter(new FileWriter("user.txt",true));
             pw.println(usermap);
+            pw.println();
             pw.flush();
             pw.close();
         } catch (Exception e){
@@ -130,11 +133,20 @@ public class FileIO{
         try {
             pw = new PrintWriter(new FileWriter("hall.txt",true));
             pw.println(hallMap);
+            pw.println();
             pw.flush();
             pw.close();
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+    /*
+    **读取用户拥有的hall
+     */
+    public ArrayList<Hall> viewAllHall(){
+        FileIO fileIO = new FileIO();
+        fileIO.startup();
+        return fileIO.halls;
     }
 
     public int getUserAmount() {
@@ -169,5 +181,24 @@ public class FileIO{
 
     public ArrayList<Hall> getHalls() {
         return halls;
+    }
+
+    public void updateHallList(ArrayList<Map<String,String>> maps) {
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new FileWriter("hall.txt"));
+            pw.println();
+            pw.flush();
+            pw.close();
+            for (Map<String,String> map : maps){
+                createAHall(map);
+            }
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            pw.close();
+        }
     }
 }

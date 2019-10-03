@@ -33,7 +33,7 @@ public class CustomerMain {
             case "5"://manage account
                 break;
             case "Q"://quit
-                System.exit(0);
+                new Main().welcome();
             default:
                 welcome();
                 break;

@@ -3,9 +3,9 @@ import java.util.*;
 
 public class Main {
 
-    static Customer customer;
-    static Admin admin;
-    static Owner owner;
+//    static Customer customer;
+//    static Admin admin;
+//    static Owner owner;
     static FileIO fileIO = new FileIO();
     static User user;
     static UI ui = new UI();
@@ -46,6 +46,7 @@ public class Main {
             }
         }catch (Exception e)
         {
+            //e.printStackTrace();
             welcome();
         }
 
@@ -91,6 +92,7 @@ public class Main {
                 }
                 if (usertype.equals("admin")) {
                     AdminMain adminMain = new AdminMain(user);
+                    adminMain.welcome();
                     break;
                 }
             }
