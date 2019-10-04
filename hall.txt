@@ -7,3 +7,5 @@
 
 {hallId=4, supportEventType=Wedding Ceremony Wedding Reception Anniversary, name=xinhui, discount=0.9, location=xinhui, ownerId=2, picture=aaaa}
 
+{hallId=10, supportEventType=Wedding Ceremony Wedding Reception Birthday Anniversary , name=test, discount=0.0, location=test, ownerId=2, picture=test}
+

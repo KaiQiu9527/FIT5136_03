@@ -10,7 +10,6 @@ public class OwnerMain {
     private static User user;
     static Scanner sc = new Scanner(System.in);
     private static ArrayList<Hall> halls = new ArrayList<>();
-    static Text text = new Text();
     static FileIO fileIO = new FileIO();
 
     public OwnerMain(User user)
@@ -134,9 +133,9 @@ public class OwnerMain {
         //write the map into a file
         fileIO.createAHall(hallMap);
         //now turn to the login page
-        text.displayInfo("What do you want to do now?:");
-        text.displayInfo("1. Back to Owner Main Screen");
-        text.displayInfo("All other input will exit");
+        ui.displayInfo("What do you want to do now?:");
+        ui.displayInfo("1. Back to Owner Main Screen");
+        ui.displayInfo("All other input will exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         String operation = console.nextLine();
         if (operation.equals("1"))

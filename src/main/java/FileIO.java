@@ -9,7 +9,6 @@ public class FileIO{
     static ArrayList<Owner> owners = new ArrayList<>();
     static ArrayList<Admin> admins = new ArrayList<>();
     ArrayList<Hall> halls = new ArrayList<>();
-    static Text text = new Text();
     static FileReader fileReader;
     static BufferedReader br;
 

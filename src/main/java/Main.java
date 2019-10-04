@@ -6,21 +6,23 @@ public class Main {
 //    static Customer customer;
 //    static Admin admin;
 //    static Owner owner;
-    static FileIO fileIO = new FileIO();
-    static User user;
-    static UI ui = new UI();
-    static Text text = new Text();
+    static private FileIO fileIO = new FileIO();
+    static private User user;
+    static private UI ui = new UI();
+    static private ArrayList<Hall> halls;
+    static Scanner sc = new Scanner(System.in);
 
 
     public static void main(String[] args) {
         Main main = new Main();
-        Scanner console = new Scanner(System.in);
         main.welcome();
     }
+    /*
+    **This is the welcome page, all the operations start from here
+     */
 
     public void welcome(){
         fileIO.startup();
-        Text text = new Text();
         Scanner console = new Scanner(System.in);
         ui.loginPage();
         try {
@@ -49,10 +51,6 @@ public class Main {
             //e.printStackTrace();
             welcome();
         }
-
-
-
-
     }
 
 
@@ -155,7 +153,7 @@ public class Main {
                 continue;
             if (password.length() < 6 || password.length() > 15){
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the password between 6 and 15 characters!!!!!!!!");
+                ui.displayInfo("Please enter the password between 6 and 15 characters!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }
@@ -166,7 +164,7 @@ public class Main {
                 continue;
             if (!confirm_password.equals(password)){
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the same password!!!!!!!!");
+                ui.displayInfo("Please enter the same password!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }
@@ -181,7 +179,7 @@ public class Main {
             String fname = console.nextLine();
             if (fname.equals("")) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the firstname correctly!!!!!!!!");
+                ui.displayInfo("Please enter the firstname correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }
@@ -194,7 +192,7 @@ public class Main {
             String lname = console.nextLine();
             if (lname.equals("")) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the lastname correctly!!!!!!!!");
+                ui.displayInfo("Please enter the lastname correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }
@@ -207,12 +205,12 @@ public class Main {
             String email = console.nextLine();
             if (email.equals("")) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the email correctly!!!!!!!!");
+                ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }else if (!email.contains("@") || email.length() <= 3){
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                text.displayInfo("Please enter the email correctly!!!!!!!!");
+                ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
             }
@@ -227,7 +225,7 @@ public class Main {
                 String address = console.nextLine();
                 if (address.equals("")) {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    text.displayInfo("Please enter the address correctly!!!!!!!!");
+                    ui.displayInfo("Please enter the address correctly!!!!!!!!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     continue;
                 }
@@ -240,7 +238,7 @@ public class Main {
                 String phone_no = console.nextLine();
                 if (phone_no.equals("")) {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    text.displayInfo("Please enter the phone no correctly!!!!!!!!");
+                    ui.displayInfo("Please enter the phone no correctly!!!!!!!!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     continue;
                 }
@@ -261,24 +259,23 @@ public class Main {
         usermap.put("id", String.valueOf(new FileIO().getUserAmount()+1));
         //display the information after input
         ui.registerSuccess();
-        text = new Text();
-        text.displayInfo("These are the information of you: ");
-        text.displayInfo("User ID: " + usermap.get("id"));
-        text.displayInfo("UserType: " + usermap.get("usertype"));
-        text.displayInfo("Username: " + usermap.get("username"));
-        text.displayInfo("Firstname: " + usermap.get("fname"));
-        text.displayInfo("Lastname: " + usermap.get("lname"));
-        text.displayInfo("Email: " + usermap.get("email"));
-        text.displayInfo("Address: " + usermap.get("address"));
-        text.displayInfo("Phone NO: " + usermap.get("phone_no"));
+        ui.displayInfo("These are the information of you: ");
+        ui.displayInfo("User ID: " + usermap.get("id"));
+        ui.displayInfo("UserType: " + usermap.get("usertype"));
+        ui.displayInfo("Username: " + usermap.get("username"));
+        ui.displayInfo("Firstname: " + usermap.get("fname"));
+        ui.displayInfo("Lastname: " + usermap.get("lname"));
+        ui.displayInfo("Email: " + usermap.get("email"));
+        ui.displayInfo("Address: " + usermap.get("address"));
+        ui.displayInfo("Phone NO: " + usermap.get("phone_no"));
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
 
         //write the map into a file
         fileIO.register(usermap);
         //now turn to the login page
-        text.displayInfo("What do you want to do now?:");
-        text.displayInfo("1. Back to home screen");
-        text.displayInfo("2. Press any other key to exit");
+        ui.displayInfo("What do you want to do now?:");
+        ui.displayInfo("1. Back to home screen");
+        ui.displayInfo("2. Press any other key to exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         String operation = console.nextLine();
         if (operation.equals("1")){
