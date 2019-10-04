@@ -21,7 +21,11 @@ public class FileIO{
         Customer customer;
         Owner owner;
         Admin admin;
-        Hall hall;
+        Hall hall = new Hall();
+        halls = new ArrayList<>();
+        customers = new ArrayList<>();
+        owners = new ArrayList<>();
+        admins = new ArrayList<>();
         try {
             fileReader = new FileReader("user.txt");
             br = new BufferedReader(fileReader);

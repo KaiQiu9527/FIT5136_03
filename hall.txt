@@ -9,3 +9,5 @@
 
 {hallId=10, supportEventType=Wedding Ceremony Wedding Reception Birthday Anniversary , name=test, discount=0.0, location=test, ownerId=2, picture=test}
 
+{hallId=12, supportEventType=Wedding Ceremony , name=R, discount=0.0, location=2, ownerId=2, picture=3}
+
