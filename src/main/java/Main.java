@@ -349,6 +349,7 @@ public class Main {
                 viewHallList();
                 break;
             case "2"://search a hall
+                searchAHall();
                 break;
             case "3"://view the quotation
                 break;
@@ -364,7 +365,7 @@ public class Main {
         }
     }
 
-    private static void viewHallList(){
+    private void viewHallList(){
         ui.viewHallList(halls,user.getUsername());
         while(true){
             String userInput = sc.nextLine();
@@ -378,11 +379,94 @@ public class Main {
                 try {
                     int hallSelection = Integer.parseInt(userInput);
                     ui.displayHall(halls.get(hallSelection-1));
+                    customerOperateHall(halls.get(hallSelection-1));
                 }catch (Exception e){
                     //ui.error
+                    viewHallList();
+                }
+        }
+    }
+
+    private void searchAHall(){
+        ui.searchAHall();
+        int selection = 0;
+        while (true) {
+            try {
+                selection = Integer.parseInt(sc.nextLine());
+                switch (selection){
+                    case 0:
+                        CustomerWelcome();
+                        break;
+                    case 1://by name
+                        searchAHallByName();
+                        break;
+                    case 2://by event type
+                        //searchAHallByEventType();
+                        break;
+                    case 3://by location
+                        //searchAHallByLocation();
+                        break;
+                    default:
+                        continue;
+                }
+            } catch (Exception e) {
+                ui.displayInfo("Please input the right selection!");
+                continue;
+            }
+        }
+    }
+
+    private void searchAHallByName() {
+        ui.searchAHallBy("name");
+        String hallName;
+        hallName = sc.nextLine();
+        boolean found = false;
+        Hall chosenHall = new Hall();
+        for (Hall hall : halls){
+            if (hall.getName().equals(hallName)) {
+                chosenHall = hall;
+                found = true;
+            }
+        }
+        if (!found){
+            ui.displayInfo("Not found! Please check the input!");
+            searchAHall();
+        }
+        else
+            customerOperateHall(chosenHall);
+
+
+    }
+
+    private void customerOperateHall(Hall hall) {
+        ui.customerSelectHall(hall);
+        int selection = 0;
+        String userInput = sc.nextLine();
+        while (true){
+            try {
+                selection = Integer.parseInt(userInput);
+                switch (selection){
+                    case 1:
+                        System.out.println("Send a request!");
+                        break;
+                    case 2:
+                        System.out.println("View comment of the hall!");
+                        break;
+                    default:
+                        continue;
+                }
+            }catch (Exception e){
+                if (userInput.equals("R")) {
+                    CustomerWelcome();
+                }
+                else {
+                    ui.displayInfo("Please input the right option!");
                     continue;
                 }
-            continue;
+            }
+            //break;
+            //temporary
+            customerOperateHall(hall);
         }
     }
 

@@ -260,9 +260,9 @@ public class UI {
     /**
      * Display the UI of customer select a hall (need modify to display details)
      */
-    public void customerSelectHall(Hall hall, String username) {
+    public void customerSelectHall(Hall hall) {
         System.out.print('\u000C');
-        title("VIEW THE HALLS", "Customer", username);
+        title("VIEW THE HALLS", "","");
         displayHall(hall);
         displayInfo("   Enter the choice:");
         displayInfo("1. Send a request for quotation");
@@ -326,7 +326,7 @@ public class UI {
         displayInfo("1. Search a hall by name");
         displayInfo("2. Search a hall by event type");
         displayInfo("3. Search a hall by location");
-        displayLowerPart("R. Return to the Main menu");
+        displayLowerPart("0. Return to the Main menu");
     }
 
     /**
@@ -334,7 +334,7 @@ public class UI {
      */
     public void searchAHallBy(String something) {
         System.out.print('\u000C');
-        title("SEARCH A HALL", "Customer", "username");
+        title("SEARCH A HALL", "","");
         displayInfo("   Search a hall by " + something + ":");
         displayInfo("   Please enter the " + something);
         displayLowerPart("R. Return to Search a Hall");
