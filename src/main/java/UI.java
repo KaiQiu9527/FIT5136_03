@@ -98,6 +98,7 @@ public class UI {
         System.out.println("+Discount: " + hall.getDiscount());
         System.out.println("+Picture: " + hall.getPicture());
         System.out.println("+Description: " + hall.getDescription());
+        System.out.println(("+Price: " + hall.getPrice()));
         System.out.println("+-----------------------------------------------------------------------+");
         System.out.println();
     }
@@ -820,6 +821,7 @@ public class UI {
         String rawDescription = hallMap.get("description");
         String description = rawDescription.replace("*",",");
         displayInfo("   Hall Description: " + description);
+        displayInfo("   Price: " + hallMap.get("price"));
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
 }

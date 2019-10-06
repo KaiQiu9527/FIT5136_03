@@ -104,6 +104,7 @@ public class FileIO{
                 String description = rawDescription.replace("*",",");
                 map.put("description",description);
                 hall.setDescription(map.get("description"));
+                hall.setPrice(Double.parseDouble(map.get("price")));
                 halls.add(hall);
             }
             br.close();

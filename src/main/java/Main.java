@@ -1,3 +1,5 @@
+import jdk.jshell.spi.ExecutionControlProvider;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -428,6 +430,7 @@ public class Main {
         String picture;
         String ownerId = user.getId();
         String description;
+        double price;
         Map<String,String> hallMap = new HashMap<>();
         //loop until the user input is correct
 
@@ -508,6 +511,21 @@ public class Main {
             description =  rawDescription.replace(",","*");
             break;
         }
+
+        while(true) {
+            ui.createAHall("Price");
+            try {
+                price = sc.nextDouble();
+            } catch (Exception e)
+            {
+                ui.displayInfo("Please input the right price!");
+                continue;
+            }
+            if (price < 0)
+                continue;
+            break;
+        }
+
         //use a HashMap to store user's information
         fileIO.startup();
         hallMap.put("hallId",String.valueOf((new FileIO().getBiggestHallID()+1)));
@@ -518,6 +536,10 @@ public class Main {
         hallMap.put("discount",String.valueOf(hallDiscount));
         hallMap.put("picture",picture);
         hallMap.put("description",description);
+        hallMap.put("price",String.valueOf(price));
+
+
+
 
 
 

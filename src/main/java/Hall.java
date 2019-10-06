@@ -7,6 +7,7 @@ public class Hall {
     String supportEventType;
     double discount;
     String picture;
+    double price;
 
     public int getHallId() {
         return hallId;
@@ -70,5 +71,13 @@ public class Hall {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
