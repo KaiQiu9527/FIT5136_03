@@ -12,6 +12,16 @@ public abstract class User {
     String phone_no = "";
     String id;
 
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    String discount = "0.0";
+
     public String getId() { return id; }
 
     public void setId(String id) { this.id = id; }

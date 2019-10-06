@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
@@ -242,6 +243,50 @@ public class Main {
                 user.setPhone_no(phone_no);
                 break;
             }
+
+            while (true){
+                ui.registerEnter("date of birth(\"dd-MM-yyyy\")");
+                String userInput = sc.nextLine();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                try{
+                    Date userInputDate = sdf.parse(userInput);
+                    if (userInputDate.after(sdf.getCalendar().getTime())){
+                        ui.displayInfo("Birthday should be after today!");
+                        continue;
+                    }
+                    else {
+                        user.setDob(userInput);
+                        break;
+                    }
+                }catch (Exception e){
+                    ui.displayInfo("Please input the right format of birthday!");
+                    continue;
+                }
+            }
+
+            if (type == 1){//if customer, set discount by choosing type
+                while (true) {
+                    ui.registerEnter("discount type");
+                    ui.displayInfo("Input 0 as default!");
+                    Discount discount = new Discount();
+                    Map<String, Double> map = new HashMap<>(discount.viewAllDiscount());
+                    Set<String> set = map.keySet();
+                    for (String key : set) {
+                        ui.displayInfo(key + ": " + map.get(key));
+                    }
+                    String userInput = sc.nextLine();
+                    if (userInput.equals("0"))
+                        break;
+                    if (set.contains(userInput)) {
+                        user.setDiscount(String.valueOf(map.get(userInput)));
+                        break;
+                    }
+                    else {
+                        ui.displayInfo("Please check your input, or input 0 to set as default!");
+                    }
+                }
+            }
+
         }
 
         //use a HashMap to store user's information
@@ -253,7 +298,9 @@ public class Main {
         usermap.put("email",user.getEmail());
         usermap.put("address",user.getAddress());
         usermap.put("phone_no",user.getPhone_no());
-        usermap.put("id", String.valueOf(new FileIO().getUserAmount()+1));
+        usermap.put("dob",user.getDob());
+        usermap.put("id", String.valueOf(fileIO.getBiggestUserID()+1));
+        usermap.put("discount",user.getDiscount());
         //display the information after input
         ui.registerSuccess();
         ui.displayInfo("These are the information of you: ");
@@ -265,6 +312,9 @@ public class Main {
         ui.displayInfo("Email: " + usermap.get("email"));
         ui.displayInfo("Address: " + usermap.get("address"));
         ui.displayInfo("Phone NO: " + usermap.get("phone_no"));
+        ui.displayInfo("Dob: " + usermap.get("dob"));
+        if (user.getUsertype().equals("customer"))
+            ui.displayInfo("Disocunt: "+ usermap.get("discount"));
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
 
         //write the map into a file
@@ -276,7 +326,7 @@ public class Main {
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         String operation = console.nextLine();
         if (operation.equals("1")){
-            welcome();
+            new Main().welcome();
         }
         else {
             System.exit(0);
@@ -377,6 +427,7 @@ public class Main {
         double hallDiscount = 0.00;
         String picture;
         String ownerId = user.getId();
+        String description;
         Map<String,String> hallMap = new HashMap<>();
         //loop until the user input is correct
 
@@ -436,14 +487,37 @@ public class Main {
             break;
         }
 
+        while(true) {
+            ui.createAHall("Discount");
+            try {
+                hallDiscount = Double.parseDouble(sc.nextLine());
+                if (location.equals(""))
+                    continue;
+            }catch (Exception e){
+                ui.displayInfo("Please input the right discount!");
+                continue;
+            }
+            break;
+        }
+
+        while (true){
+            ui.createAHall("Description");
+            String rawDescription = sc.nextLine();
+            if (rawDescription.equals(""))
+                continue;
+            description =  rawDescription.replace(",","*");
+            break;
+        }
         //use a HashMap to store user's information
-        hallMap.put("hallId",String.valueOf((new FileIO().getHallAmount())+1));
+        fileIO.startup();
+        hallMap.put("hallId",String.valueOf((new FileIO().getBiggestHallID()+1)));
         hallMap.put("ownerId",String.valueOf(ownerId));
         hallMap.put("name",name);
         hallMap.put("location",location);
         hallMap.put("supportEventType",supportEventType);
         hallMap.put("discount",String.valueOf(hallDiscount));
         hallMap.put("picture",picture);
+        hallMap.put("description",description);
 
 
 

@@ -3,7 +3,6 @@ import java.util.Date;
 
 public class Customer extends User {
 
-
     public String getAddress() {
         return address;
     }

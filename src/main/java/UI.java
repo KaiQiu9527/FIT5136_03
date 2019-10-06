@@ -97,6 +97,7 @@ public class UI {
         System.out.println("+Hall Support Event Type: " + hall.getSupportEventType());
         System.out.println("+Discount: " + hall.getDiscount());
         System.out.println("+Picture: " + hall.getPicture());
+        System.out.println("+Description: " + hall.getDescription());
         System.out.println("+-----------------------------------------------------------------------+");
         System.out.println();
     }
@@ -807,7 +808,7 @@ public class UI {
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
 
-    public void displayCreateSuccessful(Map hallMap){
+    public void displayCreateSuccessful(Map<String,String> hallMap){
         displayInfo("   These are the hall information you just created: ");
         displayInfo("   Hall ID: " + hallMap.get("hallId"));
         displayInfo("   Owner ID: " + hallMap.get("ownerId"));
@@ -816,7 +817,9 @@ public class UI {
         displayInfo("   Support Event Type: " + hallMap.get("supportEventType"));
         displayInfo("   Hall Discount: " + hallMap.get("discount"));
         displayInfo("   Hall Picture: " + hallMap.get("picture"));
-
+        String rawDescription = hallMap.get("description");
+        String description = rawDescription.replace("*",",");
+        displayInfo("   Hall Description: " + description);
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
     }
 }

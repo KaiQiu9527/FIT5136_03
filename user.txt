@@ -1,5 +1,8 @@
-{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, usertype=customer, id=1, email=qiu@kai, username=qiukai}
-{fname=kai, phone_no=kaiqiu, password=-1138826582, lname=qiu, address=kaiqiu, usertype=owner, id=2, email=kai@qiu, username=kaiqiu}
-{fname=kai, phone_no=kaiqiu, password=-959312042, lname=qiu, address=kaiqiu, usertype=admin, id=3, email=kai@qiu, username=admin}
-{fname=test1, phone_no=123456, password=1450575459, lname=test1, address=123456, usertype=customer, id=4, email=qiu@kai, username=test1}
-{fname=test2, phone_no=123456, password=1450575459, lname=test2, address=test2, usertype=owner, id=5, email=111@111, username=test2}
+{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, dob=27-12-1995, usertype=customer, discount=0.0, id=1, email=qiu@kai, username=qiukai}
+
+{fname=kai, phone_no=kaiqiu, password=-1138826582, lname=qiu, address=kaiqiu, dob=11-11-2019, usertype=owner, discount=0.0, id=3, email=kai@qiu, username=kaiqiu}
+
+{fname=m, phone_no=monash, password=-1068505110, lname=m, address=monash, dob=11-11-1111, usertype=owner, discount=0.0, id=4, email=m@mmmmm, username=monash}
+
+{fname=qqq, phone_no=qqqqqq, password=-952036768, lname=qqq, address=qqqqqqq, dob=11-11-1111, usertype=customer, discount=0.3, id=5, email=qqq@qq, username=qqqqqq}
+
