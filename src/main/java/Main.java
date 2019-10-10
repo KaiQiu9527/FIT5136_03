@@ -351,6 +351,7 @@ public class Main {
                 searchAHall();
                 break;
             case "3"://view the quotation
+                viewCustomerQuotation(user);
                 break;
             case "4"://manage bookings
                 break;
@@ -453,6 +454,7 @@ public class Main {
                 switch (selection){
                     case 1:
                         System.out.println("Send a request!");
+                        askForAQuotation(hall,user);
                         break;
                     case 2:
                         System.out.println("View comment of the hall!");
@@ -475,6 +477,151 @@ public class Main {
         }
     }
 
+    private void askForAQuotation(Hall hall,User user) {
+        Quotation quotation = new Quotation();
+        quotation.setState("new");
+        quotation.setOwnerId(hall.getOwnerId());
+        quotation.setHallId(hall.getHallId());
+        quotation.setPrice(hall.getPrice());
+        quotation.setCustomerId(Integer.parseInt(user.getId()));
+        //quotation.setQuotationId(fileIO.getBiggestQuotationID() + 1);
+        while (true){
+            ui.displayInfo("Please choose the event type!");
+            String supportEventType = hall.getSupportEventType();
+            String[] eventTypes = supportEventType.split("[+]");
+            int index = 0;
+            for (String type : eventTypes){
+                ui.displayInfo(++index + ". " + type);
+            }
+            String selectionInput = sc.nextLine();
+            try {
+                int selection = Integer.parseInt(selectionInput);
+                quotation.setEventType(eventTypes[selection-1]);
+                break;
+            } catch (Exception e){
+                continue;
+            }
+
+        }
+        /**
+         * User input date and select time
+         */
+        while (true){
+            ui.displayInfo("Please input the date! (dd-MM-yyyy)");
+            Date date;
+            StringBuilder sb = new StringBuilder();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String userInput = sc.nextLine();
+            try {
+                date = sdf.parse(userInput);
+            }catch (Exception e){
+                ui.displayInfo("Wrong format! Try again!");
+                continue;
+            }
+            sb.append(userInput);
+            sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+            ui.displayInfo("Please select the time period!");
+            ui.displayInfo("1. Morning 9:00-11:00");
+            ui.displayInfo("2. Afternoon 15:00-17:00");
+            ui.displayInfo("3. Evening 19:00-21:00");
+            userInput = sc.nextLine();
+            int selection = 0;
+            try {
+                selection = Integer.parseInt(userInput);
+                Date startTime;
+                Date endTime;
+                switch (selection){
+                    case 1:
+                        startTime = sdf.parse("9:00 "+sb.toString());
+                        endTime = sdf.parse("11:00 "+sb.toString());
+                        break;
+                    case 2:
+                        startTime = sdf.parse("15:00 "+sb.toString());
+                        endTime = sdf.parse("17:00 "+sb.toString());
+                        break;
+                    case 3:
+                        startTime = sdf.parse("19:00 "+sb.toString());
+                        endTime = sdf.parse("21:00 "+sb.toString());
+                        break;
+                    default:
+                        continue;
+                }
+                quotation.setStartTime(startTime);
+                quotation.setEndTime(endTime);
+            }catch (Exception e)
+            {
+                ui.displayInfo("Wrong selection!");
+                continue;
+            }
+            break;
+        }
+
+        while (true){
+            ui.displayInfo("Please input the event size!");
+            String userinput = sc.nextLine();
+            int size;
+            try {
+                size = Integer.parseInt(userinput);
+                quotation.setEventSize(size);
+            }catch (Exception e) {
+                ui.displayInfo("Please input correct size!");
+                continue;
+            }
+            break;
+        }
+
+        while (true){
+            ui.displayInfo("Please choose whether catering!");
+            ui.displayInfo("Input Y to make catering! ");
+            String userInput = sc.nextLine().toUpperCase();
+            if (userInput.equals("Y"))
+                quotation.setWhetherCatering(true);
+            else
+                quotation.setWhetherCatering(false);
+            break;
+        }
+        ui.sendQuotationConfirm();
+        String userInput = sc.nextLine().toUpperCase();
+        if (userInput.equals("Y")) {
+            fileIO.askForAQuotation(quotation);
+            ui.displayInfo("Sent successfully!");
+            CustomerWelcome();
+        }
+        else
+            customerOperateHall(hall);
+    }
+
+    private void viewCustomerQuotation(User user){
+        ArrayList<Quotation> quotations = fileIO.readCustomerQuotationList(user);
+        if (quotations.size() == 0){
+            ui.displayInfo("You don't have any quotations at this time!");
+            CustomerWelcome();
+        }
+        else {
+            ui.viewQuotations(quotations);
+            ui.displayInfo("Please choose a quotation to operate!");
+            String userInput = sc.nextLine();
+            int selection = 0;
+            try {
+                selection = Integer.parseInt(userInput);
+            }catch (Exception e){
+                if (userInput.toUpperCase().equals("R"))
+                    CustomerWelcome();
+                else
+                    viewCustomerQuotation(user);
+            }
+            if (selection>0 && selection<=quotations.size()){
+                ui.displayQuotation(quotations.get(selection-1));
+            }
+            else {
+                ui.displayInfo("Please choose the right quotation!");
+                viewCustomerQuotation(user);
+            }
+        }
+
+
+
+    }
     /**
      * These are the operations for owner
      * This is the welcome page of owner
@@ -532,27 +679,66 @@ public class Main {
         while(true) {
             ui.createAHallType();
             String typeSelectRaw;
-            typeSelectRaw = sc.nextLine();
-            String[] typeSelect = typeSelectRaw.split(",");
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i<typeSelect.length; i++){
-                switch (typeSelect[i]){
+            typeSelectRaw = sc.nextLine();
+            if (typeSelectRaw.equals("") || typeSelectRaw.equals(","))
+                continue;
+            if (!typeSelectRaw.contains(",") && typeSelectRaw.length() == 1){
+                switch (typeSelectRaw){
                     case "1":
-                        sb.append("Wedding Ceremony ");
+                        sb.append("Wedding Ceremony");
                         break;
                     case "2":
-                        sb.append("Wedding Reception ");
+                        sb.append("Wedding Reception");
                         break;
                     case "3":
-                        sb.append("Birthday ");
+                        sb.append("Birthday");
                         break;
                     case "4":
-                        sb.append("Anniversary ");
+                        sb.append("Anniversary");
+                        break;
+                    default:
+                        continue;
+                }
+                supportEventType = sb.toString();
+                break;
+            }
+            String[] typeSelect = typeSelectRaw.split(",");
+            int i=0;
+            for(; i<typeSelect.length-1; i++){
+                switch (typeSelect[i]){
+                    case "1":
+                        sb.append("Wedding Ceremony + ");
+                        break;
+                    case "2":
+                        sb.append("Wedding Reception + ");
+                        break;
+                    case "3":
+                        sb.append("Birthday + ");
+                        break;
+                    case "4":
+                        sb.append("Anniversary + ");
                         break;
                     default:
                         sb.append("");
                         break;
                 }
+            }
+            switch (typeSelect[i]){
+                case "1":
+                    sb.append("Wedding Ceremony");
+                    break;
+                case "2":
+                    sb.append("Wedding Reception");
+                    break;
+                case "3":
+                    sb.append("Birthday");
+                    break;
+                case "4":
+                    sb.append("Anniversary");
+                    break;
+                default:
+                    break;
             }
             supportEventType = sb.toString();
             if (supportEventType.equals(""))
@@ -581,8 +767,10 @@ public class Main {
             ui.createAHall("Discount");
             try {
                 hallDiscount = Double.parseDouble(sc.nextLine());
-                if (location.equals(""))
+                if (hallDiscount < 0 || hallDiscount > 1){
+                    ui.displayInfo("Discount should between 0 and 1!");
                     continue;
+                }
             }catch (Exception e){
                 ui.displayInfo("Please input the right discount!");
                 continue;

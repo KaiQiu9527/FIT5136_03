@@ -1,2 +1,4 @@
-{hallId=1, supportEventType=Wedding Ceremony Wedding Reception Birthday , price=1000.0, name=monash, discount=0.0, description=******, location=monash, ownerId=3, picture=baidu.com}
+{hallId=1, supportEventType=Wedding Ceremony + Wedding Reception + Birthday, price=1111.0, name=monash, discount=1.0, description=monash, location=monash, ownerId=3, picture=monash.com}
+
+{hallId=2, supportEventType=Wedding Ceremony, price=1111.0, name=melb, discount=0.5, description=melb, location=melb, ownerId=4, picture=melb.com}
 

@@ -358,16 +358,35 @@ public class UI {
     /**
      * Display the UI of viewing the quotations (need modify to display details)
      */
-    public void viewQuotations(Quotation quotation, Hall hall) {
+    public void viewQuotations(ArrayList<Quotation> quotations) {
         System.out.print('\u000C');
-        title("VIEW THE QUOTATIONS", "Customer", "username");
-        displayHall(hall);
-        displayInfo("   Enter the choice:");
-        displayInfo("1. Accept the quotation");
-        displayInfo("2. Decline the quotation");
-        //might have multiple quotations received
-        displayInfo("3. View the next quotation");
+        title("VIEW THE QUOTATIONS", "","");
+        int index = 0;
+        for (Quotation quotation : quotations){
+            displayInfo(String.valueOf(++index));
+            displayQuotation(quotation);
+            displayInfo("");
+        }
+//        displayInfo("   Enter the choice:");
+//        displayInfo("1. Accept the quotation");
+//        displayInfo("2. Decline the quotation");
+//        //might have multiple quotations received
+//        displayInfo("3. View the next quotation");
         displayLowerPart("R. Return to the Main menu");
+    }
+
+    public void displayQuotation(Quotation quotation) {
+        displayInfo("Quotation ID: " + quotation.getQuotationId());
+        displayInfo("Customer ID: " + quotation.getCustomerId());
+        displayInfo("Hall ID: " + quotation.getHallId());
+        displayInfo("Owner ID: " + quotation.getOwnerId());
+        displayInfo("Event type: " + quotation.getEventType());
+        displayInfo("Event size: " + quotation.getEventSize());
+        displayInfo("Start time: : " + quotation.getStartTime());
+        displayInfo("End time: : " + quotation.getEndTime());
+        displayInfo("Whether catering: " + quotation.getWhetherCatering());
+        displayInfo("State: " + quotation.getState());
+        displayInfo("Price: " + quotation.getPrice());
     }
 
     /**
@@ -694,11 +713,11 @@ public class UI {
      */
     public void sendQuotationConfirm() {
         System.out.print('\u000C');
-        title("VIEW REQUESTS", "Owner", "username");
+        title("VIEW REQUESTS", "", "");
         displayRequest("request no");
         displayInfo("Are you sure to send this quotation to customer?");
         displayInfo("Y. Confirm sending this quotation");
-        displayLowerPart("Q. Quit sending quotation");
+        displayLowerPart("Or quit sending quotation");
     }
 
     /**

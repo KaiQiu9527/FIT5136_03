@@ -1,14 +1,15 @@
+import javax.crypto.AEADBadTagException;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class FileIO{
     static ArrayList<Customer> customers = new ArrayList<>();
     static ArrayList<Owner> owners = new ArrayList<>();
     static ArrayList<Admin> admins = new ArrayList<>();
     static ArrayList<Hall> halls = new ArrayList<>();
+    static ArrayList<Quotation> quotations = new ArrayList<>();
     static Map<String, Double> discounts = new HashMap<>();
     static FileReader fileReader;
     static BufferedReader br;
@@ -28,6 +29,10 @@ public class FileIO{
         owners = new ArrayList<>();
         admins = new ArrayList<>();
         discounts = new HashMap<>();
+        quotations = new ArrayList<>();
+        /**
+         * read users from file
+         */
         try {
             fileReader = new FileReader("user.txt");
             br = new BufferedReader(fileReader);
@@ -78,6 +83,9 @@ public class FileIO{
             e.printStackTrace();
         }
 
+        /**
+         * read halls from file
+         */
         try {
             fileReader = new FileReader("hall.txt");
             br = new BufferedReader(fileReader);
@@ -113,6 +121,51 @@ public class FileIO{
             PrintWriter pw = null;
             try {
                 pw = new PrintWriter("hall.txt");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            pw.flush();
+            pw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        /**
+         * read quotations from file
+         */
+        try {
+            fileReader = new FileReader("quotation.txt");
+            br = new BufferedReader(fileReader);
+            Map<String,String> map = new HashMap<>();
+            String line;
+            while ((line = br.readLine()) != null){
+                if (line.equals(""))
+                    continue;
+                line = line.substring(1,line.length()-1);
+                ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
+                for (String e: list1){
+                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
+                    map.put(list2.get(0).trim(),list2.get(1).trim());
+                }
+                Quotation quotation = new Quotation();
+                quotation.setQuotationId(Integer.parseInt(map.get("quotationId")));
+                quotation.setCustomerId(Integer.parseInt(map.get("customerId")));
+                quotation.setHallId(Integer.parseInt(map.get("hallId")));
+                quotation.setOwnerId(Integer.parseInt(map.get("ownerId")));
+                quotation.setEventType(map.get("eventType"));
+                quotation.setEventSize(Integer.parseInt(map.get("eventSize")));
+                quotation.setStartTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("startTime")));
+                quotation.setEndTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("endTime")));
+                quotation.setWhetherCatering(Boolean.getBoolean(map.get("whetherCatering")));
+                quotation.setState(map.get("state"));
+                quotation.setPrice(Double.parseDouble(map.get("price")));
+                quotations.add(quotation);
+            }
+            br.close();
+            //if not break, means login failed
+        }catch (FileNotFoundException ex){
+            PrintWriter pw = null;
+            try {
+                pw = new PrintWriter("quotation.txt");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -234,6 +287,15 @@ public class FileIO{
         return i;
     }
 
+    public int getBiggestQuotationID(){
+        int i = 0;
+        for (Quotation quotation : quotations){
+            if (quotation.getQuotationId() > i)
+                i = quotation.getQuotationId();
+        }
+        return i;
+    }
+
     public ArrayList<Hall> getHalls() {
         return halls;
     }
@@ -306,5 +368,46 @@ public class FileIO{
                 return hall;
         }
         return null;
+    }
+
+    /**
+    *Customer request for a quotation
+     */
+    public void askForAQuotation(Quotation quotation){
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+        Map<String,String> quotationMap = new HashMap<>();
+        quotationMap.put("quotationId",String.valueOf(getBiggestQuotationID()+1));
+        quotationMap.put("customerId",String.valueOf(quotation.getCustomerId()));
+        quotationMap.put("hallId",String.valueOf(quotation.getHallId()));
+        quotationMap.put("ownerId",String.valueOf(quotation.getOwnerId()));
+        quotationMap.put("eventType", quotation.getEventType());
+        quotationMap.put("eventSize",String.valueOf(quotation.getEventSize()));
+        String startTime = sdf.format(quotation.getStartTime());
+        String endTime = sdf.format(quotation.getEndTime());
+        quotationMap.put("startTime",startTime);
+        quotationMap.put("endTime",endTime);
+        quotationMap.put("whetherCathering",String.valueOf(quotation.getWhetherCatering()));
+        quotationMap.put("state",quotation.getState());
+        quotationMap.put("price",String.valueOf(quotation.getPrice()));
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileWriter("quotation.txt",true));
+            pw.println(quotationMap);
+            pw.println();
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList readCustomerQuotationList(User user){
+        startup();
+        ArrayList<Quotation> customerQuotationList = new ArrayList<>();
+        for (Quotation quotation : quotations){
+            if (quotation.getCustomerId() == Integer.parseInt(user.getId()))
+                customerQuotationList.add(quotation);
+        }
+        return customerQuotationList;
     }
 }

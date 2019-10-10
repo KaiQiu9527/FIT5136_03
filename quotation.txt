@@ -1,0 +1,2 @@
+{quotationId=1, hallId=2, eventSize=100, price=1111.0, customerId=1, startTime=09:00 11-11-2011, eventType=Wedding Ceremony, endTime=11:00 11-11-2011, whetherCathering=true, state=new, ownerId=4}
+

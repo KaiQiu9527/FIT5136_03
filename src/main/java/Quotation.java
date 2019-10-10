@@ -1,16 +1,16 @@
 import java.util.Date;
 public class Quotation {
-    int quotationId;
-    int customerId;
-    int hallId;
-    int ownerId;
-    String eventType;
-    int eventSize;
-    Date startTime;
-    Date endTime;
-    boolean whetherCatering;
-    String state;
-    int price;
+    int quotationId;//auto
+    int customerId;//auto
+    int hallId;//auto
+    int ownerId;//auto
+    String eventType;//user select
+    int eventSize;//user select
+    Date startTime;//user select
+    Date endTime;//user select
+    boolean whetherCatering;//user select
+    String state;//auto
+    double price;//auto
 
     public int getQuotationId() {
         return quotationId;
@@ -44,7 +44,7 @@ public class Quotation {
         return endTime;
     }
 
-    public boolean isWhetherCatering() {
+    public boolean getWhetherCatering() {
         return whetherCatering;
     }
 
@@ -52,7 +52,7 @@ public class Quotation {
         return state;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -96,7 +96,7 @@ public class Quotation {
         this.state = state;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }
