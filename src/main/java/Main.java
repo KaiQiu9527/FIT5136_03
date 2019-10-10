@@ -13,7 +13,7 @@ public class Main {
     static private User user;
     static private UI ui = new UI();
     static private Hall hall = new Hall();
-    static private ArrayList<Hall> halls = new ArrayList<>();
+    //static private ArrayList<Hall> halls = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -340,7 +340,6 @@ public class Main {
      */
     private void CustomerWelcome(){
         fileIO.startup();
-        halls = fileIO.getHalls();
         ui.customerMainMenu(user.getUsername());
         String select = "";
         select = sc.nextLine();
@@ -366,7 +365,8 @@ public class Main {
     }
 
     private void viewHallList(){
-        ui.viewHallList(halls,user.getUsername());
+        ui.viewHallList(fileIO.viewAllHall(),user.getUsername());
+        //user can select a hall to view
         while(true){
             String userInput = sc.nextLine();
             if (userInput.equals("")) {
@@ -378,8 +378,8 @@ public class Main {
             else
                 try {
                     int hallSelection = Integer.parseInt(userInput);
-                    ui.displayHall(halls.get(hallSelection-1));
-                    customerOperateHall(halls.get(hallSelection-1));
+                    ui.displayHall(fileIO.viewAllHall().get(hallSelection-1));
+                    customerOperateHall(fileIO.viewAllHall().get(hallSelection-1));
                 }catch (Exception e){
                     //ui.error
                     viewHallList();
@@ -404,7 +404,7 @@ public class Main {
                         //searchAHallByEventType();
                         break;
                     case 3://by location
-                        //searchAHallByLocation();
+                        searchAHallByLocation();
                         break;
                     default:
                         continue;
@@ -420,21 +420,26 @@ public class Main {
         ui.searchAHallBy("name");
         String hallName;
         hallName = sc.nextLine();
-        boolean found = false;
-        Hall chosenHall = new Hall();
-        for (Hall hall : halls){
-            if (hall.getName().equals(hallName)) {
-                chosenHall = hall;
-                found = true;
-            }
-        }
-        if (!found){
+        Hall searchedHall = fileIO.searchAHallByName(hallName);
+        if (searchedHall == null){
             ui.displayInfo("Not found! Please check the input!");
             searchAHall();
         }
         else
-            customerOperateHall(chosenHall);
+            customerOperateHall(searchedHall);
+    }
 
+    private void searchAHallByLocation() {
+        ui.searchAHallBy("location");
+        String location;
+        location = sc.nextLine();
+        Hall searchedHall = fileIO.searchAHallByLocation(location);
+        if (searchedHall == null){
+            ui.displayInfo("Not found! Please check the input!");
+            searchAHall();
+        }
+        else
+            customerOperateHall(searchedHall);
 
     }
 
@@ -477,8 +482,6 @@ public class Main {
     private void OwnerWelcome(){
         ui.ownerMainMenu(user.getUsername());
         fileIO.startup();
-        //fill the halls
-        halls = new ArrayList<>(fileIO.halls);
         String select = "";
         select = sc.nextLine();
         switch (select){
@@ -645,27 +648,16 @@ public class Main {
             System.exit(0);
     }
 
-    public static ArrayList<Hall> viewOwnHall(int id){
-        ArrayList<Hall> ownHalls = new ArrayList<>();
-        for (Hall hall : halls){
-            if (hall.getOwnerId() == id)
-                ownHalls.add(hall);
-        }
-        return ownHalls;
+    public ArrayList<Hall> viewOwnHall(int id){
+        return fileIO.viewOwnHall(id);
     }
 
-    public static Hall viewAHall(int hallId){
-        for (Hall hall :halls){
-            if (hall.getHallId() == hallId)
-                return hall;
-        }
-        return null;
+    public Hall viewAHall(int hallId){
+        return fileIO.viewAHall(hallId);
     }
 
-    public static void manageAHall(){
-        ArrayList<Hall> ownHall = new ArrayList<>();
-        ownHall = new ArrayList<>(viewOwnHall(Integer.parseInt(user.getId()))) ;
-        Hall hall = new Hall();
+    public void manageAHall(){
+        ArrayList<Hall> ownHall = new ArrayList<>(viewOwnHall(Integer.parseInt(user.getId())));
         if (ownHall.size() == 0) {
             ui.displayInfo("You have no halls recorded in the system!");
             ui.displayInfo("You can create your first hall or back to the main menu!");
@@ -731,7 +723,7 @@ public class Main {
 
     }
 
-    private static void updateDiscounts(Hall hall) {
+    private void updateDiscounts(Hall hall) {
         ui.updateDiscounts(hall);
         String input = "";
         double discount = 0.00;
@@ -750,28 +742,12 @@ public class Main {
             ui.displayInfo("Please input discount between (0.00 - 1.00)!");
             manageAHall();
         }
-        halls.remove(hall);
-        hall.setDiscount(discount);
-        halls.add(hall);
-        ArrayList<Map<String,String>> maps = new ArrayList<>();
-        for (Hall aHall : halls){
-            Map<String,String> hallMap = new HashMap<>();
-            hallMap.put("hallId",String.valueOf((aHall.getHallId())));
-            hallMap.put("ownerId",String.valueOf(aHall.getOwnerId()));
-            hallMap.put("name",aHall.getName());
-            hallMap.put("location",aHall.getLocation());
-            hallMap.put("supportEventType",aHall.getSupportEventType());
-            hallMap.put("discount",String.valueOf(aHall.getDiscount()));
-            hallMap.put("picture",aHall.getPicture());
-            maps.add(hallMap);
-        }
-        FileIO fileIO = new FileIO();
-        fileIO.startup();
-        fileIO.updateHallList(maps);
+        fileIO.updateDiscount(hall,discount);
+        ui.displayInfo("Update discount successfully!");
         manageAHall();
     }
 
-    private static void updateHall(Hall hall) {
+    private void updateHall(Hall hall) {
         ui.updateHall(hall);
         String input = "";
         int select = 0;

@@ -255,4 +255,56 @@ public class FileIO{
             pw.close();
         }
     }
+
+    public ArrayList<Hall> viewOwnHall(int id){
+        ArrayList<Hall> ownHalls = new ArrayList<>();
+        for (Hall hall : halls){
+            if (hall.getOwnerId() == id)
+                ownHalls.add(hall);
+        }
+        return ownHalls;
+    }
+
+    public Hall viewAHall(int hallId){
+        for (Hall hall :halls){
+            if (hall.getHallId() == hallId)
+                return hall;
+        }
+        return null;
+    }
+
+    public void updateDiscount(Hall hall, double discount){
+        halls.remove(hall);
+        hall.setDiscount(discount);
+        halls.add(hall);
+        ArrayList<Map<String,String>> maps = new ArrayList<>();
+        for (Hall aHall : halls){
+            Map<String,String> hallMap = new HashMap<>();
+            hallMap.put("hallId",String.valueOf((aHall.getHallId())));
+            hallMap.put("ownerId",String.valueOf(aHall.getOwnerId()));
+            hallMap.put("name",aHall.getName());
+            hallMap.put("location",aHall.getLocation());
+            hallMap.put("supportEventType",aHall.getSupportEventType());
+            hallMap.put("discount",String.valueOf(aHall.getDiscount()));
+            hallMap.put("picture",aHall.getPicture());
+            maps.add(hallMap);
+        }
+        updateHallList(maps);
+    }
+
+    public Hall searchAHallByName(String name) {
+        for (Hall hall : halls) {
+            if (hall.getName().equals(name))
+                return hall;
+        }
+        return null;
+    }
+
+    public Hall searchAHallByLocation(String location) {
+        for (Hall hall : halls) {
+            if (hall.getLocation().equals(location))
+                return hall;
+        }
+        return null;
+    }
 }
