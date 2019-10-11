@@ -514,6 +514,11 @@ public class Main {
             String userInput = sc.nextLine();
             try {
                 date = sdf.parse(userInput);
+                //how to check whether the date is correct?
+                if (date.getMonth() > 12 || date.getDate() > 30 || date.getYear() < new Date().getYear()){
+                    ui.displayInfo("Wrong date!");
+                    continue;
+                }
             }catch (Exception e){
                 ui.displayInfo("Wrong format! Try again!");
                 continue;
@@ -580,7 +585,7 @@ public class Main {
                 quotation.setWhetherCatering(false);
             break;
         }
-        ui.sendQuotationConfirm();
+        ui.displayQuotation(quotation);
         String userInput = sc.nextLine().toUpperCase();
         if (userInput.equals("Y")) {
             fileIO.askForAQuotation(quotation);
@@ -611,7 +616,14 @@ public class Main {
                     viewCustomerQuotation(user);
             }
             if (selection>0 && selection<=quotations.size()){
-                ui.displayQuotation(quotations.get(selection-1));
+                Quotation quotation = quotations.get(selection-1);
+                ui.displayQuotation(quotation);
+                ui.customerOperateAQutation();
+                customerOperationQuotation(quotation);
+                if (quotation.getState().equals("new")){
+                    //////
+                }
+
             }
             else {
                 ui.displayInfo("Please choose the right quotation!");
@@ -622,6 +634,74 @@ public class Main {
 
 
     }
+
+    private void customerOperationQuotation(Quotation quotation) {
+        String userInput = "";
+        userInput = sc.nextLine();
+        switch (userInput){
+            case "1":
+                if (quotation.getState().equals("accepted"))
+                    booking(quotation);
+                if (quotation.getState().equals("new")){
+                    ui.displayInfo("Sorry, please wait for owner to process the request!");
+                    viewCustomerQuotation(user);
+                }
+                if (quotation.getState().equals("rejected")) {
+                    ui.displayInfo("Sorry, the request has been rejected! Please make a new quotation!");
+                    viewCustomerQuotation(user);
+                }
+                if (quotation.getState().equals("declined")) {
+                    ui.displayInfo("Sorry! The quotation has been declined by you!");
+                    viewCustomerQuotation(user);
+                }
+                break;
+            case "2":
+                //fileIO.declineQuotation(quotation);
+                ui.displayInfo("The quotation has been declined!");
+                break;
+            case "R":
+                viewCustomerQuotation(user);
+                break;
+            default:
+                ui.displayInfo("Please input the right option!");
+                customerOperationQuotation(quotation);
+                break;
+
+        }    }
+
+    private void booking(Quotation quotation) {
+        Booking booking = new Booking(quotation);
+        ui.displayBooking(booking);
+        ui.displayInfo("Now pay a deposit!");
+        ui.displayInfo("Please input your payment info!");
+        ui.displayInfo("Input \"R\" to go back!");
+        String userInput = sc.nextLine();
+        if (userInput.equals("")){
+            ui.displayInfo("Please input in right format!");
+            booking(quotation);
+        }
+        if (userInput.equals("R")){
+            booking(quotation);
+        }
+        ui.displayInfo("This is your payment info!");
+        ui.displayInfo(userInput);
+        ui.displayInfo("Please input \"Y\" to pay a deposit or \"N\" to decline");
+        userInput = sc.nextLine();
+        if (userInput.toUpperCase().equals("Y")){
+            ui.displayInfo("You have pay the deposit!");
+            ui.displayInfo("Now you can check or manage your booking in Main menu");
+            ui.displayInfo("You can also check the payment receipt in Main menu!");
+            fileIO.makeABooking(booking);
+            Payment payment = new Payment(booking);
+            fileIO.payADeposit(payment);
+            ui.displayInfo("Please press enter to back to the Main menu");
+            sc.nextLine();
+            CustomerWelcome();
+        }
+        else
+            customerOperationQuotation(quotation);
+    }
+
     /**
      * These are the operations for owner
      * This is the welcome page of owner

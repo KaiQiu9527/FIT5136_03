@@ -1,2 +1,2 @@
-{quotationId=1, hallId=2, eventSize=100, price=1111.0, customerId=1, startTime=09:00 11-11-2011, eventType=Wedding Ceremony, endTime=11:00 11-11-2011, whetherCathering=true, state=new, ownerId=4}
+{whetherCatering=true, quotationId=2, hallId=1, eventSize=100, price=1111.0, customerId=1, startTime=07:00 01-11-2019, eventType= Wedding Reception , endTime=09:00 01-11-2019, state=accepted, ownerId=3}
 

@@ -1,9 +1,9 @@
 import java.util.Date;
 public class Booking {
-    int bookingID;
-    int customerID;
-    int hallID;
-    int ownerID;
+    int bookingId;
+    int customerId;
+    int hallId;
+    int ownerId;
     String eventType;
     int eventSize;
     Date startTime;
@@ -12,36 +12,53 @@ public class Booking {
     String state;
     double price;
 
-    public int getBookingID() {
-        return bookingID;
+    public Booking(){
+
     }
 
-    public void setBookingID(int bookingID) {
-        this.bookingID = bookingID;
+    public Booking(Quotation quotation){
+        this.customerId = quotation.getCustomerId();
+        this.hallId = quotation.getHallId();
+        this.ownerId = quotation.getOwnerId();
+        this.eventType = quotation.getEventType();
+        this.eventSize = quotation.getEventSize();
+        this.startTime = quotation.getStartTime();
+        this.endTime = quotation.getEndTime();
+        this.whetherCatering = quotation.getWhetherCatering();
+        this.state = "new";
+        this.price = quotation.getPrice();
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getBookingId() {
+        return bookingId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setBookingId(int bookingID) {
+        this.bookingId = bookingID;
     }
 
-    public int getHallID() {
-        return hallID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setHallID(int hallID) {
-        this.hallID = hallID;
+    public void setCustomerId(int customerID) {
+        this.customerId = customerID;
     }
 
-    public int getOwnerID() {
-        return ownerID;
+    public int getHallId() {
+        return hallId;
     }
 
-    public void setOwnerID(int ownerID) {
-        this.ownerID = ownerID;
+    public void setHallId(int hallID) {
+        this.hallId = hallID;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerID) {
+        this.ownerId = ownerID;
     }
 
     public String getEventType() {
@@ -76,7 +93,7 @@ public class Booking {
         this.endTime = endTime;
     }
 
-    public boolean isWhetherCatering() {
+    public boolean getWhetherCatering() {
         return whetherCatering;
     }
 

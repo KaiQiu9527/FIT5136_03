@@ -105,14 +105,19 @@ public class UI {
 
     /**
      * Display booking information
-     * @param input the booking info
      */
-    public void displayBooking(String input) {
-        System.out.println("+Booking " + input + ": information displays here                                    +");
-        System.out.println("+Event time:                                                            +");
-        System.out.println("+Location:                                                              +");
-        System.out.println("+Deposit paid:                                                          +");
-        System.out.println("+-----------------------------------------------------------------------+");
+    public void displayBooking(Booking booking) {
+        displayInfo("Booking information: ");
+        displayInfo("Booking ID: " + booking.getBookingId());
+        displayInfo("Hall ID: "+ booking.getHallId());
+        displayInfo("Owner ID: "+ booking.getOwnerId());
+        displayInfo("Event Type: "+ booking.getEventType());
+        displayInfo("Event Size: "+ booking.getEventSize());
+        displayInfo("Start Time: "+ booking.getStartTime());
+        displayInfo("End Time: "+ booking.getEndTime());
+        displayInfo("Whether catering: "+ booking.getWhetherCatering());
+        displayInfo("Price: "+ booking.getPrice());
+        displayInfo("State: " + booking.getState());
     }
 
     /**
@@ -376,7 +381,8 @@ public class UI {
     }
 
     public void displayQuotation(Quotation quotation) {
-        displayInfo("Quotation ID: " + quotation.getQuotationId());
+        if (quotation.getQuotationId() != 0)
+            displayInfo("Quotation ID: " + quotation.getQuotationId());
         displayInfo("Customer ID: " + quotation.getCustomerId());
         displayInfo("Hall ID: " + quotation.getHallId());
         displayInfo("Owner ID: " + quotation.getOwnerId());
@@ -387,6 +393,13 @@ public class UI {
         displayInfo("Whether catering: " + quotation.getWhetherCatering());
         displayInfo("State: " + quotation.getState());
         displayInfo("Price: " + quotation.getPrice());
+    }
+
+    public void displayQuotationOperation()
+    {
+        displayInfo("Are you sure to send this request for quotation?");
+        displayInfo("Y. Confirm sending this request");
+        displayLowerPart("Q. Quit sending request");
     }
 
     /**
@@ -423,7 +436,6 @@ public class UI {
     public void customerSelectBookings() {
         System.out.print('\u000C');
         title("MANAGE BOOKINGS", "Customer", "username");
-        displayBooking("booking no");
         displayInfo("   Enter the choice:");
         displayInfo("1. Change the booking date");
         displayInfo("2. Cancel the booking");
@@ -741,7 +753,6 @@ public class UI {
     public void ownerSelectBookings() {
         System.out.print('\u000C');
         title("MANAGE BOOKINGS", "Customer", "username");
-        displayBooking("booking no");
         displayInfo("   Enter the choice:");
         displayInfo("1. Cancel the booking");
         displayLowerPart("R. Return to Manage bookings");
@@ -753,7 +764,6 @@ public class UI {
     public void ownerCancelConfirm() {
         System.out.print('\u000C');
         title("CANCEL BOOKING", "Owner", "username");
-        displayBooking("booking no");
         displayInfo("   Are you sure to cancel this booking?");
         displayInfo("   ---------------------------------------");
         displayInfo("Y. Yes, I want to cancel it.");
@@ -842,5 +852,13 @@ public class UI {
         displayInfo("   Hall Description: " + description);
         displayInfo("   Price: " + hallMap.get("price"));
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+    }
+
+    public void customerOperateAQutation() {
+        System.out.print('\u000C');
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Make a booking");
+        displayInfo("2. Decline the quotation");
+        displayLowerPart("R. Return to the Main menu");
     }
 }

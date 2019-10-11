@@ -13,6 +13,8 @@ public class FileIO{
     static Map<String, Double> discounts = new HashMap<>();
     static FileReader fileReader;
     static BufferedReader br;
+    static ArrayList<Booking> bookings = new ArrayList<>();
+    static ArrayList<Payment> payments = new ArrayList<>();
 
     public static void main(String[] args) {
         FileIO fileIO = new FileIO();
@@ -30,6 +32,8 @@ public class FileIO{
         admins = new ArrayList<>();
         discounts = new HashMap<>();
         quotations = new ArrayList<>();
+        bookings = new ArrayList<>();
+        payments = new ArrayList<>();
         /**
          * read users from file
          */
@@ -175,6 +179,94 @@ public class FileIO{
             e.printStackTrace();
         }
 
+        /**
+         * read bookings from file
+         */
+        try {
+            fileReader = new FileReader("booking.txt");
+            br = new BufferedReader(fileReader);
+            Map<String,String> map = new HashMap<>();
+            String line;
+            while ((line = br.readLine()) != null){
+                if (line.equals(""))
+                    continue;
+                line = line.substring(1,line.length()-1);
+                ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
+                for (String e: list1){
+                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
+                    map.put(list2.get(0).trim(),list2.get(1).trim());
+                }
+                Booking booking = new Booking();
+                booking.setBookingId(Integer.parseInt(map.get("bookingId")));
+                booking.setCustomerId(Integer.parseInt(map.get("customerId")));
+                booking.setHallId(Integer.parseInt(map.get("hallId")));
+                booking.setOwnerId(Integer.parseInt(map.get("ownerId")));
+                booking.setEventType(map.get("eventType"));
+                booking.setEventSize(Integer.parseInt(map.get("eventSize")));
+                booking.setStartTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("startTime")));
+                booking.setEndTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("endTime")));
+                booking.setWhetherCatering(Boolean.getBoolean(map.get("whetherCatering")));
+                booking.setState(map.get("state"));
+                booking.setPrice(Double.parseDouble(map.get("price")));
+                bookings.add(booking);
+            }
+            br.close();
+            //if not break, means login failed
+        }catch (FileNotFoundException ex){
+            PrintWriter pw = null;
+            try {
+                pw = new PrintWriter("booking.txt");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            pw.flush();
+            pw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /**
+         * read payments from file
+         */
+        try {
+            fileReader = new FileReader("payment.txt");
+            br = new BufferedReader(fileReader);
+            Map<String,String> map = new HashMap<>();
+            String line;
+            while ((line = br.readLine()) != null){
+                if (line.equals(""))
+                    continue;
+                line = line.substring(1,line.length()-1);
+                ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
+                for (String e: list1){
+                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
+                    map.put(list2.get(0).trim(),list2.get(1).trim());
+                }
+                Payment payment = new Payment();
+                payment.setPaymentId(Integer.parseInt(map.get("paymentId")));
+                payment.setBookingId(Integer.parseInt(map.get("bookingId")));
+                payment.setUserId(Integer.parseInt(map.get("userId")));
+                payment.setPaidDateTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("paidDateTime")));
+                payment.setPaymentState(map.get("paymentState"));
+                payment.setPrice(Double.parseDouble(map.get("price")));
+                payments.add(payment);
+            }
+            br.close();
+            //if not break, means login failed
+        }catch (FileNotFoundException ex){
+            PrintWriter pw = null;
+            try {
+                pw = new PrintWriter("payment.txt");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            pw.flush();
+            pw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     //verify the login
@@ -296,6 +388,24 @@ public class FileIO{
         return i;
     }
 
+    public int getBiggestBookingID(){
+        int i = 0;
+        for (Booking booking : bookings){
+            if (booking.getBookingId() > i)
+                i = booking.getBookingId();
+        }
+        return i;
+    }
+
+    public int getBiggestPaymentID(){
+        int i = 0;
+        for (Payment payment : payments){
+            if (payment.getPaymentId() > i)
+                i = payment.getBookingId();
+        }
+        return i;
+    }
+
     public ArrayList<Hall> getHalls() {
         return halls;
     }
@@ -386,7 +496,7 @@ public class FileIO{
         String endTime = sdf.format(quotation.getEndTime());
         quotationMap.put("startTime",startTime);
         quotationMap.put("endTime",endTime);
-        quotationMap.put("whetherCathering",String.valueOf(quotation.getWhetherCatering()));
+        quotationMap.put("whetherCatering",String.valueOf(quotation.getWhetherCatering()));
         quotationMap.put("state",quotation.getState());
         quotationMap.put("price",String.valueOf(quotation.getPrice()));
         PrintWriter pw;
@@ -409,5 +519,60 @@ public class FileIO{
                 customerQuotationList.add(quotation);
         }
         return customerQuotationList;
+    }
+
+    public void makeABooking(Booking booking){
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+        Map<String,String> bookingMap = new HashMap<>();
+        bookingMap.put("bookingId",String.valueOf(getBiggestBookingID()+1));
+        bookingMap.put("customerId",String.valueOf(booking.getCustomerId()));
+        bookingMap.put("hallId",String.valueOf(booking.getHallId()));
+        bookingMap.put("ownerId",String.valueOf(booking.getOwnerId()));
+        bookingMap.put("eventType", booking.getEventType());
+        bookingMap.put("eventSize",String.valueOf(booking.getEventSize()));
+        String startTime = sdf.format(booking.getStartTime());
+        String endTime = sdf.format(booking.getEndTime());
+        bookingMap.put("startTime",startTime);
+        bookingMap.put("endTime",endTime);
+        bookingMap.put("whetherCatering",String.valueOf(booking.getWhetherCatering()));
+        bookingMap.put("state",booking.getState());
+        bookingMap.put("price",String.valueOf(booking.getPrice()));
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileWriter("booking.txt",true));
+            pw.println(bookingMap);
+            pw.println();
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void payADeposit(Payment payment){
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+        Map<String,String> paymentMap = new HashMap<>();
+        paymentMap.put("paymentId",String.valueOf(getBiggestPaymentID()+1));
+        paymentMap.put("bookingId",String.valueOf(payment.getBookingId()));
+        paymentMap.put("userId",String.valueOf(payment.getUserId()));
+        String paidDateTime = sdf.format(payment.getPaidDateTime());
+        paymentMap.put("paidDateTime", paidDateTime);
+        paymentMap.put("paymentState",payment.getPaymentState());
+        paymentMap.put("price",String.valueOf(payment.getPrice()));
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileWriter("payment.txt",true));
+            pw.println(paymentMap);
+            pw.println();
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public void declineQuotation(Quotation quotation) {
+        System.out.println("Not yet!");
     }
 }

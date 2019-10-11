@@ -1,12 +1,22 @@
+import java.util.Calendar;
 import java.util.Date;
 
 public class Payment {
     int paymentId;
     int BookingId;
-    Date paidDateTime;
-    double discount;
+    int userId;
+    Date paidDateTime = new Date();
     double price;
-    String paymentState;
+    String paymentState = "paid";
+
+    public Payment(){
+    }
+
+    public Payment(Booking booking){
+        this.BookingId = booking.getBookingId();
+        this.price = booking.getPrice();
+        this.userId = booking.getCustomerId();
+    }
 
     public int getPaymentId() {
         return paymentId;
@@ -32,14 +42,6 @@ public class Payment {
         this.paidDateTime = paidDateTime;
     }
 
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -55,4 +57,13 @@ public class Payment {
     public void setPaymentState(String paymentState) {
         this.paymentState = paymentState;
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }
