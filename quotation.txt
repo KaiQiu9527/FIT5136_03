@@ -1,2 +1,4 @@
-{whetherCatering=true, quotationId=2, hallId=1, eventSize=100, price=1111.0, customerId=1, startTime=07:00 01-11-2019, eventType= Wedding Reception , endTime=09:00 01-11-2019, state=accepted, ownerId=3}
+{whetherCatering=false, quotationId=1, hallId=1, eventSize=12, price=1111.0, customerId=1, startTime=09:00 11-11-2019, eventType=Birthday, endTime=11:00 11-11-2019, state=accepted, ownerId=3}
+
+{whetherCatering=false, quotationId=2, hallId=2, eventSize=1, price=1111.0, customerId=1, startTime=07:00 11-02-2020, eventType=Wedding Ceremony, endTime=09:00 11-02-2020, state=rejected, ownerId=4}
 

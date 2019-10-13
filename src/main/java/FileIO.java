@@ -511,6 +511,49 @@ public class FileIO{
         }
     }
 
+    public void updateQuotationList(ArrayList<Quotation> quotations){
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileWriter("quotation.txt"));
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        for (Quotation quotation : quotations){
+            updateAQuotation(quotation);
+        }
+        startup();
+    }
+
+    public void updateAQuotation(Quotation quotation){
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+        Map<String,String> quotationMap = new HashMap<>();
+        quotationMap.put("quotationId",String.valueOf(quotation.getQuotationId()));
+        quotationMap.put("customerId",String.valueOf(quotation.getCustomerId()));
+        quotationMap.put("hallId",String.valueOf(quotation.getHallId()));
+        quotationMap.put("ownerId",String.valueOf(quotation.getOwnerId()));
+        quotationMap.put("eventType", quotation.getEventType());
+        quotationMap.put("eventSize",String.valueOf(quotation.getEventSize()));
+        String startTime = sdf.format(quotation.getStartTime());
+        String endTime = sdf.format(quotation.getEndTime());
+        quotationMap.put("startTime",startTime);
+        quotationMap.put("endTime",endTime);
+        quotationMap.put("whetherCatering",String.valueOf(quotation.getWhetherCatering()));
+        quotationMap.put("state",quotation.getState());
+        quotationMap.put("price",String.valueOf(quotation.getPrice()));
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new FileWriter("quotation.txt",true));
+            pw.println(quotationMap);
+            pw.println();
+            pw.flush();
+            pw.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList readCustomerQuotationList(User user){
         startup();
         ArrayList<Quotation> customerQuotationList = new ArrayList<>();
@@ -521,10 +564,20 @@ public class FileIO{
         return customerQuotationList;
     }
 
+    public ArrayList readOwnerQuotationList(User user){
+        startup();
+        ArrayList<Quotation> ownerQuotationList = new ArrayList<>();
+        for (Quotation quotation : quotations){
+            if (quotation.getOwnerId() == Integer.parseInt(user.getId()))
+                ownerQuotationList.add(quotation);
+        }
+        return ownerQuotationList;
+    }
+
     public void makeABooking(Booking booking){
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         Map<String,String> bookingMap = new HashMap<>();
-        bookingMap.put("bookingId",String.valueOf(getBiggestBookingID()+1));
+        bookingMap.put("bookingId",booking.getBookingId() == 0 ? String.valueOf(getBiggestBookingID()+1) : String.valueOf(booking.getBookingId()));
         bookingMap.put("customerId",String.valueOf(booking.getCustomerId()));
         bookingMap.put("hallId",String.valueOf(booking.getHallId()));
         bookingMap.put("ownerId",String.valueOf(booking.getOwnerId()));
@@ -574,5 +627,65 @@ public class FileIO{
 
     public void declineQuotation(Quotation quotation) {
         System.out.println("Not yet!");
+    }
+
+
+    public void ownerSendQuotation(Quotation quotation) {
+        startup();
+        Quotation modifiedQuotation = new Quotation();
+        for (Quotation quotation1 : quotations){
+            if (quotation1.getQuotationId() == quotation.getQuotationId()){
+                modifiedQuotation = quotation1;
+            }
+        }
+        quotations.remove(modifiedQuotation);
+        quotation.setState("accepted");
+        quotations.add(quotation);
+        updateQuotationList(quotations);
+    }
+
+    public void ownerRejectRequest(Quotation quotation) {
+        startup();
+        Quotation modifiedQuotation = new Quotation();
+        for (Quotation quotation1 : quotations){
+            if (quotation1.getQuotationId() == quotation.getQuotationId()){
+                modifiedQuotation = quotation1;
+            }
+        }
+        quotations.remove(modifiedQuotation);
+        quotation.setState("rejected");
+        quotations.add(quotation);
+        updateQuotationList(quotations);
+    }
+
+    public ArrayList<Booking> viewCustomerBookingList(User user) {
+        ArrayList<Booking> customerBookingList = new ArrayList<>();
+        for (Booking booking : bookings){
+            if (String.valueOf(booking.getCustomerId()).equals(user.getId())){
+                customerBookingList.add(booking);
+            }
+        }
+        return customerBookingList;
+
+
+
+    }
+
+    public void updateBooking(Booking newBooking) {
+        startup();
+        for (Booking booking : bookings){
+            if (booking.getBookingId() == newBooking.getBookingId())
+                booking.setState("changed");
+        }
+        newBooking.setState("new");
+        bookings.add(newBooking);
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("booking.txt",false));
+            for (Booking booking : bookings){
+                makeABooking(booking);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

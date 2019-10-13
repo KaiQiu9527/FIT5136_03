@@ -1,6 +1,6 @@
 import java.util.Date;
 public class Booking {
-    int bookingId;
+    int bookingId = 0;
     int customerId;
     int hallId;
     int ownerId;

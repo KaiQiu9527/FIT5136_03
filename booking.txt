@@ -1,2 +1,6 @@
-{whetherCatering=false, hallId=1, eventSize=100, price=1111.0, customerId=1, startTime=07:00 01-11-2019, eventType=Wedding Reception, endTime=09:00 01-11-2019, state=new, ownerId=3, bookingId=1}
+{whetherCatering=false, hallId=1, eventSize=12, price=1111.0, customerId=1, startTime=07:00 12-12-2020, eventType=Birthday, endTime=09:00 12-12-2020, state=changed, ownerId=3, bookingId=1}
+
+{whetherCatering=false, hallId=1, eventSize=12, price=1111.0, customerId=1, startTime=07:00 30-08-2020, eventType=Birthday, endTime=09:00 30-08-2020, state=changed, ownerId=3, bookingId=1}
+
+{whetherCatering=false, hallId=1, eventSize=12, price=1111.0, customerId=1, startTime=09:00 09-09-2020, eventType=Birthday, endTime=11:00 09-09-2020, state=new, ownerId=3, bookingId=1}
 

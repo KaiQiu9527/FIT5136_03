@@ -418,15 +418,15 @@ public class UI {
     /**
      * Display the main page of manage bookings (need modify to display details)
      */
-    public void manageBookings() {
+    public void manageBookings(ArrayList<Booking> bookings) {
         System.out.print('\u000C');
-        title("MANAGE BOOKINGS", "Customer", "username");
-        displayInfo("   Enter the choice:");
-        displayInfo("1. Sample booking 1");
-        displayInfo("2. Sample booking 2");
-        displayInfo("3. Sample booking 3");
-        displayInfo("4. Next page");
-        displayInfo("5. Previous page");
+        title("MANAGE BOOKINGS", "Customer", "");
+        int i = 0;
+        for (Booking booking : bookings){
+            i++;
+            displayInfo(i+". ");
+            displayBooking(booking);
+        }
         displayLowerPart("R. Return to the Main menu");
     }
 
@@ -860,5 +860,22 @@ public class UI {
         displayInfo("1. Make a booking");
         displayInfo("2. Decline the quotation");
         displayLowerPart("R. Return to the Main menu");
+    }
+
+    public void ownerOperateAQuotation() {
+        System.out.print('\u000C');
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Send the quotation");
+        displayInfo("2. Reject the request");
+        displayLowerPart("R. Return to the Main menu");
+    }
+
+    public void displayBookingOperation() {
+        System.out.print('\u000C');
+        displayInfo("   Enter the choice:");
+        displayInfo("1. Change the booking date");
+        displayInfo("2. Cancel the booking");
+        displayLowerPart("R. Return to the Main menu");
+
     }
 }

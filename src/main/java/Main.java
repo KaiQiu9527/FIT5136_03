@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Main {
 
-//    static Customer customer;
+    //    static Customer customer;
 //    static Admin admin;
 //    static Owner owner;
     static private FileIO fileIO = new FileIO();
@@ -22,15 +22,15 @@ public class Main {
     }
 
     /**
-     *This is the welcome page, all the operations start from here
+     * This is the welcome page, all the operations start from here
      */
-    public void welcome(){
+    public void welcome() {
         fileIO.startup();
         Scanner console = new Scanner(System.in);
         ui.loginPage();
         try {
             int input = Integer.parseInt(console.nextLine());
-            switch (input){
+            switch (input) {
                 case 1:
                     System.out.print('\u000C');
                     login();
@@ -49,16 +49,14 @@ public class Main {
                     welcome();
                     break;
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             //e.printStackTrace();
             welcome();
         }
     }
 
 
-    public void login()
-    {
+    public void login() {
         Scanner console = new Scanner(System.in);
         String username;
         String password_hash = "";
@@ -72,19 +70,18 @@ public class Main {
             else break;
         }
 
-        while (true){
+        while (true) {
             ui.loginStep("password");
             password_hash = String.valueOf(console.nextLine().hashCode());
             //read the file and check the username and password
-            user = fileIO.loginVerify(username,password_hash);
+            user = fileIO.loginVerify(username, password_hash);
             if (user != null) {
                 ui.loginVerification(true);
                 String usertype = user.getUsertype();
                 if (usertype.equals("customer")) {
                     CustomerWelcome();
                     break;
-                }
-                else if (usertype.equals("owner")) {
+                } else if (usertype.equals("owner")) {
                     OwnerWelcome();
                     //
                     break;
@@ -93,8 +90,7 @@ public class Main {
                     AdminWelcome();
                     break;
                 }
-            }
-            else{
+            } else {
                 ui.loginVerification(false);
                 welcome();
                 break;
@@ -104,29 +100,28 @@ public class Main {
         //System.out.println("Verifying...");
     }
 
-    public void register()
-    {
+    public void register() {
         Scanner console = new Scanner(System.in);
         User user;
         String password;
         String confirm_password;
         int type = -1;
-        Map<String,String> usermap = new HashMap<>();
+        Map<String, String> usermap = new HashMap<>();
         //loop until the user input is correct
-        while(true) {
+        while (true) {
             ui.registerPage();
-            try{
+            try {
                 //if user input is not a correct number, return a warning
                 type = Integer.parseInt(console.nextLine());
-            }catch (Exception e){
+            } catch (Exception e) {
                 continue;
             }
-            switch (type){
-                case 1 :
+            switch (type) {
+                case 1:
                     user = new Customer();
                     user.setUsertype("customer");
                     break;
-                case 2 :
+                case 2:
                     user = new Owner();
                     user.setUsertype("owner");
                     break;
@@ -136,7 +131,7 @@ public class Main {
             break;
         }
 
-        while(true) {
+        while (true) {
             ui.registerEnter("username");
             String username = console.nextLine();
             if (username.equals(""))
@@ -151,7 +146,7 @@ public class Main {
             password = console.nextLine();
             if (password.equals(""))
                 continue;
-            if (password.length() < 6 || password.length() > 15){
+            if (password.length() < 6 || password.length() > 15) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the password between 6 and 15 characters!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -162,7 +157,7 @@ public class Main {
             confirm_password = console.nextLine();
             if (confirm_password.equals(""))
                 continue;
-            if (!confirm_password.equals(password)){
+            if (!confirm_password.equals(password)) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the same password!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -174,7 +169,7 @@ public class Main {
             break;
         }
 
-        while(true) {
+        while (true) {
             ui.registerEnter("first name");
             String fname = console.nextLine();
             if (fname.equals("")) {
@@ -187,7 +182,7 @@ public class Main {
             break;
         }
 
-        while(true) {
+        while (true) {
             ui.registerEnter("last name");
             String lname = console.nextLine();
             if (lname.equals("")) {
@@ -200,7 +195,7 @@ public class Main {
             break;
         }
 
-        while(true) {
+        while (true) {
             ui.registerEnter("email");
             String email = console.nextLine();
             if (email.equals("")) {
@@ -208,7 +203,7 @@ public class Main {
                 ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 continue;
-            }else if (!email.contains("@") || email.length() <= 3){
+            } else if (!email.contains("@") || email.length() <= 3) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -218,9 +213,8 @@ public class Main {
             break;
         }
 
-        if (type == 1 || type == 2)
-        {
-            while(true) {
+        if (type == 1 || type == 2) {
+            while (true) {
                 ui.registerEnter("address");
                 String address = console.nextLine();
                 if (address.equals("")) {
@@ -233,7 +227,7 @@ public class Main {
                 break;
             }
 
-            while(true) {
+            while (true) {
                 ui.registerEnter("phone no");
                 String phone_no = console.nextLine();
                 if (phone_no.equals("")) {
@@ -246,27 +240,26 @@ public class Main {
                 break;
             }
 
-            while (true){
+            while (true) {
                 ui.registerEnter("date of birth(\"dd-MM-yyyy\")");
                 String userInput = sc.nextLine();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                try{
+                try {
                     Date userInputDate = sdf.parse(userInput);
-                    if (userInputDate.after(sdf.getCalendar().getTime())){
+                    if (userInputDate.after(sdf.getCalendar().getTime())) {
                         ui.displayInfo("Birthday should be after today!");
                         continue;
-                    }
-                    else {
+                    } else {
                         user.setDob(userInput);
                         break;
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     ui.displayInfo("Please input the right format of birthday!");
                     continue;
                 }
             }
 
-            if (type == 1){//if customer, set discount by choosing type
+            if (type == 1) {//if customer, set discount by choosing type
                 while (true) {
                     ui.registerEnter("discount type");
                     ui.displayInfo("Input 0 as default!");
@@ -282,8 +275,7 @@ public class Main {
                     if (set.contains(userInput)) {
                         user.setDiscount(String.valueOf(map.get(userInput)));
                         break;
-                    }
-                    else {
+                    } else {
                         ui.displayInfo("Please check your input, or input 0 to set as default!");
                     }
                 }
@@ -292,17 +284,17 @@ public class Main {
         }
 
         //use a HashMap to store user's information
-        usermap.put("usertype",user.getUsertype());
-        usermap.put("username",user.getUsername());
-        usermap.put("password",user.getPassword_hash());
-        usermap.put("fname",user.getFname());
-        usermap.put("lname",user.getLname());
-        usermap.put("email",user.getEmail());
-        usermap.put("address",user.getAddress());
-        usermap.put("phone_no",user.getPhone_no());
-        usermap.put("dob",user.getDob());
-        usermap.put("id", String.valueOf(fileIO.getBiggestUserID()+1));
-        usermap.put("discount",user.getDiscount());
+        usermap.put("usertype", user.getUsertype());
+        usermap.put("username", user.getUsername());
+        usermap.put("password", user.getPassword_hash());
+        usermap.put("fname", user.getFname());
+        usermap.put("lname", user.getLname());
+        usermap.put("email", user.getEmail());
+        usermap.put("address", user.getAddress());
+        usermap.put("phone_no", user.getPhone_no());
+        usermap.put("dob", user.getDob());
+        usermap.put("id", String.valueOf(fileIO.getBiggestUserID() + 1));
+        usermap.put("discount", user.getDiscount());
         //display the information after input
         ui.registerSuccess();
         ui.displayInfo("These are the information of you: ");
@@ -316,7 +308,7 @@ public class Main {
         ui.displayInfo("Phone NO: " + usermap.get("phone_no"));
         ui.displayInfo("Dob: " + usermap.get("dob"));
         if (user.getUsertype().equals("customer"))
-            ui.displayInfo("Disocunt: "+ usermap.get("discount"));
+            ui.displayInfo("Disocunt: " + usermap.get("discount"));
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
 
         //write the map into a file
@@ -327,23 +319,23 @@ public class Main {
         ui.displayInfo("2. Press any other key to exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         String operation = console.nextLine();
-        if (operation.equals("1")){
+        if (operation.equals("1")) {
             new Main().welcome();
-        }
-        else {
+        } else {
             System.exit(0);
         }
     }
+
     /**
-     *These are the operations for customer main
-     *This is the welcome page for customer
+     * These are the operations for customer main
+     * This is the welcome page for customer
      */
-    private void CustomerWelcome(){
+    private void CustomerWelcome() {
         fileIO.startup();
         ui.customerMainMenu(user.getUsername());
         String select = "";
         select = sc.nextLine();
-        switch (select){
+        switch (select) {
             case "1"://view hall lists
                 viewHallList();
                 break;
@@ -354,6 +346,7 @@ public class Main {
                 viewCustomerQuotation(user);
                 break;
             case "4"://manage bookings
+                viewCustomerBookingList(user);
                 break;
             case "5"://manage account
                 break;
@@ -362,6 +355,130 @@ public class Main {
             default:
                 CustomerWelcome();
                 break;
+        }
+    }
+
+    private void viewCustomerBookingList(User user) {
+        ArrayList<Booking> bookings = new ArrayList<Booking>(fileIO.viewCustomerBookingList(user));
+        if (bookings.size() == 0) {
+            ui.displayInfo("Sorry, you don't have any booking history!");
+            CustomerWelcome();
+        }
+        ui.manageBookings(bookings);
+        while (true) {
+            ui.displayInfo("Please select the booking you want!");
+            String userInput = sc.nextLine();
+            if (userInput.equals("")) {
+                //ui.error
+                continue;
+            } else if (userInput.equals("R"))
+                CustomerWelcome();
+            else
+                try {
+                    int bookingSelection = Integer.parseInt(userInput);
+                    ui.displayBooking(bookings.get(bookingSelection - 1));
+                    customerOperateBooking(bookings.get(bookingSelection - 1));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    CustomerWelcome();
+                }
+                break;
+        }
+
+    }
+
+    private void customerOperateBooking(Booking booking) {
+        ui.displayBookingOperation();
+        String userInput = "";
+        int selection = 0;
+        try {
+            userInput = sc.nextLine();
+            selection = Integer.parseInt(userInput);
+        } catch (Exception e) {
+            if (userInput.equals("R"))
+                viewCustomerBookingList(user);
+            ui.displayInfo("Please select correctly!");
+            customerOperateBooking(booking);
+        }
+        if (selection == 1) {
+            double minus = 0.0;
+            long nowTime = new Date().getTime();
+            long bookingTime = booking.getStartTime().getTime();
+            minus = bookingTime - nowTime / (1000 * 3600);
+            if (!booking.getState().equals("new")){
+                ui.displayInfo("Sorry! The booking has been changed!");
+                ui.displayInfo("Please select the booking with state \"new\"");
+                viewCustomerBookingList(user);
+            }
+            if (minus >= 24)
+                customerChangeBookingDate(booking);
+            else {
+                ui.displayInfo("Sorry, the start time is within 24 hours!");
+                ui.displayInfo("So you can't change it any more!");
+                customerOperateBooking(booking);
+            }
+        }
+    }
+
+    private void customerChangeBookingDate(Booking booking) {
+        while (true) {
+            ui.displayInfo("Please input the date! (dd-MM-yyyy)");
+            Date date;
+            StringBuilder sb = new StringBuilder();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String userInput = sc.nextLine();
+            try {
+                date = sdf.parse(userInput);
+                //how to check whether the date is correct?
+                if ((date.getTime() - new Date().getTime()) <= 0) {
+                    ui.displayInfo("You should input a future date!!");
+                    continue;
+                }
+            } catch (Exception e) {
+                ui.displayInfo("Wrong format! Try again!");
+                continue;
+            }
+            sb.append(userInput);
+            sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+            ui.displayInfo("Please select the time period!");
+            ui.displayInfo("1. Morning 9:00-11:00");
+            ui.displayInfo("2. Afternoon 15:00-17:00");
+            ui.displayInfo("3. Evening 19:00-21:00");
+            userInput = sc.nextLine();
+            int selection = 0;
+            try {
+                selection = Integer.parseInt(userInput);
+                Date startTime;
+                Date endTime;
+                switch (selection) {
+                    case 1:
+                        startTime = sdf.parse("9:00 " + sb.toString());
+                        endTime = sdf.parse("11:00 " + sb.toString());
+                        break;
+                    case 2:
+                        startTime = sdf.parse("15:00 " + sb.toString());
+                        endTime = sdf.parse("17:00 " + sb.toString());
+                        break;
+                    case 3:
+                        startTime = sdf.parse("19:00 " + sb.toString());
+                        endTime = sdf.parse("21:00 " + sb.toString());
+                        break;
+                    default:
+                        continue;
+                }
+                Booking newBooking = booking;
+                newBooking.setStartTime(startTime);
+                newBooking.setEndTime(endTime);
+                newBooking.setState("changed");
+                fileIO.updateBooking(newBooking);
+                ui.displayInfo("Change successfully!");
+                viewCustomerBookingList(user);
+                break;
+            } catch (Exception e) {
+                ui.displayInfo("Wrong selection!");
+                continue;
+            }
+
         }
     }
 
@@ -388,13 +505,13 @@ public class Main {
         }
     }
 
-    private void searchAHall(){
+    private void searchAHall() {
         ui.searchAHall();
         int selection = 0;
         while (true) {
             try {
                 selection = Integer.parseInt(sc.nextLine());
-                switch (selection){
+                switch (selection) {
                     case 0:
                         CustomerWelcome();
                         break;
@@ -414,6 +531,7 @@ public class Main {
                 ui.displayInfo("Please input the right selection!");
                 continue;
             }
+
         }
     }
 
@@ -586,6 +704,8 @@ public class Main {
             break;
         }
         ui.displayQuotation(quotation);
+        ui.displayInfo("Please choose send the request!");
+        ui.displayInfo("Input Y to send or any other to leave! ");
         String userInput = sc.nextLine().toUpperCase();
         if (userInput.equals("Y")) {
             fileIO.askForAQuotation(quotation);
@@ -619,38 +739,31 @@ public class Main {
                 Quotation quotation = quotations.get(selection-1);
                 ui.displayQuotation(quotation);
                 ui.customerOperateAQutation();
-                customerOperationQuotation(quotation);
-                if (quotation.getState().equals("new")){
-                    //////
-                }
-
+                customerOperateQuotation(quotation);
             }
             else {
                 ui.displayInfo("Please choose the right quotation!");
                 viewCustomerQuotation(user);
             }
         }
-
-
-
     }
 
-    private void customerOperationQuotation(Quotation quotation) {
+    private void customerOperateQuotation(Quotation quotation) {
         String userInput = "";
         userInput = sc.nextLine();
         switch (userInput){
             case "1":
                 if (quotation.getState().equals("accepted"))
                     booking(quotation);
-                if (quotation.getState().equals("new")){
+                else if (quotation.getState().equals("new")){
                     ui.displayInfo("Sorry, please wait for owner to process the request!");
                     viewCustomerQuotation(user);
                 }
-                if (quotation.getState().equals("rejected")) {
+                else if (quotation.getState().equals("rejected")) {
                     ui.displayInfo("Sorry, the request has been rejected! Please make a new quotation!");
                     viewCustomerQuotation(user);
                 }
-                if (quotation.getState().equals("declined")) {
+                else if (quotation.getState().equals("declined")) {
                     ui.displayInfo("Sorry! The quotation has been declined by you!");
                     viewCustomerQuotation(user);
                 }
@@ -664,10 +777,11 @@ public class Main {
                 break;
             default:
                 ui.displayInfo("Please input the right option!");
-                customerOperationQuotation(quotation);
+                customerOperateQuotation(quotation);
                 break;
 
-        }    }
+        }
+    }
 
     private void booking(Quotation quotation) {
         Booking booking = new Booking(quotation);
@@ -699,7 +813,7 @@ public class Main {
             CustomerWelcome();
         }
         else
-            customerOperationQuotation(quotation);
+            customerOperateQuotation(quotation);
     }
 
     /**
@@ -719,6 +833,7 @@ public class Main {
                 manageAHall();
                 break;
             case "3"://view request
+                viewOwnerQuotationList(user);
                 break;
             case "4"://manage bookings
                 //manage bookings includes cancel bookings and refund payment
@@ -731,6 +846,97 @@ public class Main {
                 new Main().welcome();
             default:
                 new Main().OwnerWelcome();
+                break;
+        }
+    }
+
+    private void viewOwnerQuotationList(User user) {
+        ArrayList<Quotation> quotations = new ArrayList<>(fileIO.readOwnerQuotationList(user));
+        if (quotations.size() == 0){
+            ui.displayInfo("You don't have any quotations requested at this time!");
+            OwnerWelcome();
+        }
+        else {
+            ui.viewQuotations(quotations);
+            ui.displayInfo("Please choose a quotation to operate!");
+            String userInput = sc.nextLine();
+            int selection = 0;
+            try {
+                selection = Integer.parseInt(userInput);
+            }catch (Exception e){
+                if (userInput.toUpperCase().equals("R"))
+                    OwnerWelcome();
+                else
+                    viewOwnerQuotationList(user);
+            }
+            if (selection>0 && selection<=quotations.size()){
+                Quotation quotation = quotations.get(selection-1);
+                ui.displayQuotation(quotation);
+                ui.ownerOperateAQuotation();
+                ownerOperateQuotation(quotation);
+                if (quotation.getState().equals("new")){
+                    //////
+                }
+
+            }
+            else {
+                ui.displayInfo("Please choose the right quotation!");
+                viewOwnerQuotationList(user);
+            }
+        }
+
+
+    }
+
+    private void ownerOperateQuotation(Quotation quotation) {
+        String userInput = "";
+        userInput = sc.nextLine();
+        switch (userInput){
+            case "1":
+                if (quotation.getState().equals("accepted")) {
+                    ui.displayInfo("The quotation has been sent to the customer before!");
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("new")){
+                    ui.displayInfo("Now the quotation is sent to the customer!");
+                    fileIO.ownerSendQuotation(quotation);
+                    fileIO.startup();
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("rejected")) {
+                    ui.displayInfo("The request has been rejected by you!");
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("declined")) {
+                    ui.displayInfo("The request has been declined by customer!");
+                    viewOwnerQuotationList(user);
+                }
+                break;
+            case "2":
+                if (quotation.getState().equals("accepted")) {
+                    ui.displayInfo("The quotation has been sent to the customer before!");
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("new")){
+                    ui.displayInfo("Now the quotation is rejected!");
+                    fileIO.ownerRejectRequest(quotation);
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("rejected")) {
+                    ui.displayInfo("The request has been rejected by you!");
+                    viewOwnerQuotationList(user);
+                }
+                if (quotation.getState().equals("declined")) {
+                    ui.displayInfo("The request has been declined by customer!");
+                    viewOwnerQuotationList(user);
+                }
+                break;
+            case "R":
+                viewCustomerQuotation(user);
+                break;
+            default:
+                ui.displayInfo("Please input the right option!");
+                customerOperateQuotation(quotation);
                 break;
         }
     }
