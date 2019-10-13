@@ -1,2 +1,0 @@
-{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, usertype=customer, id=1, email=qiu@kai, username=qiukai}
-{fname=kai, phone_no=kaiqiu, password=-1138826582, lname=qiu, address=kaiqiu, usertype=owner, id=2, email=kai@qiu, username=kaiqiu}

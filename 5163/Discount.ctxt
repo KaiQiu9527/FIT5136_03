@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Discount
+comment1.params=
+comment1.target=Discount()
+comment2.params=type\ discount
+comment2.target=void\ modifyDiscount(java.lang.String,\ double)
+comment3.params=type
+comment3.target=void\ deleteDiscount(java.lang.String)
+comment4.params=
+comment4.target=java.util.Map\ viewAllDiscount()
+comment5.params=type
+comment5.target=double\ getDiscount(java.lang.String)
+numComments=6
