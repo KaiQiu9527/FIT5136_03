@@ -1,5 +1,3 @@
-import jdk.jshell.spi.ExecutionControlProvider;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -510,6 +508,7 @@ public class Main {
         int selection = 0;
         while (true) {
             try {
+                ui.displayInfo("Please select how to search a hall!");
                 selection = Integer.parseInt(sc.nextLine());
                 switch (selection) {
                     case 0:
@@ -531,7 +530,7 @@ public class Main {
                 ui.displayInfo("Please input the right selection!");
                 continue;
             }
-
+            break;
         }
     }
 

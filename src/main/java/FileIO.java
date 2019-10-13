@@ -1,6 +1,4 @@
-import javax.crypto.AEADBadTagException;
 import java.io.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -50,7 +48,7 @@ public class FileIO{
                 ArrayList<String> list1 = new ArrayList<String>(Arrays.asList(line.split(",")));
                 for (String e: list1){
                     ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(e.split("=")));
-                    map.put(list2.get(0).strip(),list2.get(1).strip());
+                    map.put(list2.get(0).trim(),list2.get(1).trim());
                 }
                 //check the user input with data
 
