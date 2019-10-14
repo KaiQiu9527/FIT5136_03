@@ -1,4 +1,4 @@
-{hallId=1, supportEventType=Wedding Ceremony + Wedding Reception + Birthday, price=1111.0, name=monash, discount=1.0, description=monash, location=monash, ownerId=3, picture=monash.com}
+{hallId=1, supportEventType=Wedding Ceremony + Wedding Reception + Birthday, price=1000.0, name=monash, discount=0.5, description=big*and big, location=monash, ownerId=6, picture=monash.jpg}
 
-{hallId=2, supportEventType=Wedding Ceremony, price=1111.0, name=melb, discount=0.5, description=melb, location=melb, ownerId=4, picture=melb.com}
+{hallId=2, supportEventType=Wedding Reception + Birthday, price=2000.0, name=testHall, discount=0.7, description=good* and great, location=testLocation, ownerId=6, picture=pic.jpg}
 

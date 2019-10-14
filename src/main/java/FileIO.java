@@ -457,6 +457,11 @@ public class FileIO{
             hallMap.put("supportEventType",aHall.getSupportEventType());
             hallMap.put("discount",String.valueOf(aHall.getDiscount()));
             hallMap.put("picture",aHall.getPicture());
+            String rawDescription = aHall.getDescription();
+            String description = "";
+            description =  rawDescription.replace(",","*");
+            hallMap.put("description",description);
+            hallMap.put("price", String.valueOf(aHall.getPrice()));
             maps.add(hallMap);
         }
         updateHallList(maps);

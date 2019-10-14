@@ -6,3 +6,5 @@
 
 {fname=qqq, phone_no=qqqqqq, password=-952036768, lname=qqq, address=qqqqqqq, dob=11-11-1111, usertype=customer, discount=0.3, id=5, email=qqq@qq, username=qqqqqq}
 
+{fname=yihui, phone_no=999888111, password=-730656315, lname=xia, address=abc, dob=20-01-1991, usertype=owner, discount=0.0, id=6, email=ddd@gmail.com, username=yihui}
+

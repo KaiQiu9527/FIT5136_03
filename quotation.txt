@@ -2,3 +2,5 @@
 
 {whetherCatering=false, quotationId=2, hallId=2, eventSize=1, price=1111.0, customerId=1, startTime=07:00 11-02-2020, eventType=Wedding Ceremony, endTime=09:00 11-02-2020, state=rejected, ownerId=4}
 
+{whetherCatering=false, quotationId=3, hallId=2, eventSize=100, price=2000.0, customerId=1, startTime=03:00 20-10-2019, eventType=Wedding Reception, endTime=05:00 20-10-2019, state=accepted, ownerId=6}
+

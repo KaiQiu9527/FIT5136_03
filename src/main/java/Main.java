@@ -419,66 +419,72 @@ public class Main {
     }
 
     private void customerChangeBookingDate(Booking booking) {
-        while (true) {
-            ui.displayInfo("Please input the date! (dd-MM-yyyy)");
+        try {
             Date date;
             StringBuilder sb = new StringBuilder();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            String userInput = sc.nextLine();
-            try {
-                date = sdf.parse(userInput);
-                //how to check whether the date is correct?
-                if ((date.getTime() - new Date().getTime()) <= 0) {
-                    ui.displayInfo("You should input a future date!!");
+            String userInput;
+            while (true) {
+                ui.displayInfo("Please input the date! (dd-MM-yyyy)");
+                sb = new StringBuilder();
+                sdf = new SimpleDateFormat("dd-MM-yyyy");
+                userInput = sc.nextLine();
+                try {
+                    date = sdf.parse(userInput);
+                    //how to check whether the date is correct?
+                    if ((date.getTime() - new Date().getTime()) <= 0) {
+                        ui.displayInfo("You should input a future date!!");
+                        continue;
+                    }
+                } catch (Exception e) {
+                    ui.displayInfo("Wrong format! Try again!");
                     continue;
                 }
-            } catch (Exception e) {
-                ui.displayInfo("Wrong format! Try again!");
-                continue;
-            }
-            sb.append(userInput);
-            sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
-            ui.displayInfo("Please select the time period!");
-            ui.displayInfo("1. Morning 9:00-11:00");
-            ui.displayInfo("2. Afternoon 15:00-17:00");
-            ui.displayInfo("3. Evening 19:00-21:00");
-            userInput = sc.nextLine();
-            int selection = 0;
-            try {
-                selection = Integer.parseInt(userInput);
-                Date startTime;
-                Date endTime;
-                switch (selection) {
-                    case 1:
-                        startTime = sdf.parse("9:00 " + sb.toString());
-                        endTime = sdf.parse("11:00 " + sb.toString());
-                        break;
-                    case 2:
-                        startTime = sdf.parse("15:00 " + sb.toString());
-                        endTime = sdf.parse("17:00 " + sb.toString());
-                        break;
-                    case 3:
-                        startTime = sdf.parse("19:00 " + sb.toString());
-                        endTime = sdf.parse("21:00 " + sb.toString());
-                        break;
-                    default:
-                        continue;
+                sb.append(userInput);
+                sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+                ui.displayInfo("Please select the time period!");
+                ui.displayInfo("1. Morning 9:00-11:00");
+                ui.displayInfo("2. Afternoon 15:00-17:00");
+                ui.displayInfo("3. Evening 19:00-21:00");
+                userInput = sc.nextLine();
+                int selection = 0;
+                try {
+                    selection = Integer.parseInt(userInput);
+                    Date startTime;
+                    Date endTime;
+                    switch (selection) {
+                        case 1:
+                            startTime = sdf.parse("9:00 " + sb.toString());
+                            endTime = sdf.parse("11:00 " + sb.toString());
+                            break;
+                        case 2:
+                            startTime = sdf.parse("15:00 " + sb.toString());
+                            endTime = sdf.parse("17:00 " + sb.toString());
+                            break;
+                        case 3:
+                            startTime = sdf.parse("19:00 " + sb.toString());
+                            endTime = sdf.parse("21:00 " + sb.toString());
+                            break;
+                        default:
+                            continue;
+                    }
+                    Booking newBooking = booking;
+                    newBooking.setStartTime(startTime);
+                    newBooking.setEndTime(endTime);
+                    newBooking.setState("changed");
+                    fileIO.updateBooking(newBooking);
+                    ui.displayInfo("Change successfully!");
+                    viewCustomerBookingList(user);
+                    break;
+                } catch (Exception e) {
+                    ui.displayInfo("Wrong selection!");
+                    continue;
                 }
-                Booking newBooking = booking;
-                newBooking.setStartTime(startTime);
-                newBooking.setEndTime(endTime);
-                newBooking.setState("changed");
-                fileIO.updateBooking(newBooking);
-                ui.displayInfo("Change successfully!");
-                viewCustomerBookingList(user);
-                break;
-            } catch (Exception e) {
-                ui.displayInfo("Wrong selection!");
-                continue;
             }
+        }catch (Exception e){
+            e.printStackTrace();
 
-        }
-    }
+        }    }
 
     private void viewHallList(){
         ui.viewHallList(fileIO.viewAllHall(),user.getUsername());
