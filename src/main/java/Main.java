@@ -24,10 +24,9 @@ public class Main {
      */
     public void welcome() {
         fileIO.startup();
-        Scanner console = new Scanner(System.in);
         ui.loginPage();
         try {
-            int input = Integer.parseInt(console.nextLine());
+            int input = Integer.parseInt(sc.nextLine());
             switch (input) {
                 case 1:
                     System.out.print('\u000C');
@@ -55,12 +54,11 @@ public class Main {
 
 
     public void login() {
-        Scanner console = new Scanner(System.in);
         String username;
         String password_hash = "";
         while (true) {
             ui.loginStep("username");
-            username = console.nextLine();
+            username = sc.nextLine();
             if (username.equals(""))
                 ui.loginStep("username");
             else if (username.toUpperCase().equals("Q"))
@@ -70,7 +68,7 @@ public class Main {
 
         while (true) {
             ui.loginStep("password");
-            password_hash = String.valueOf(console.nextLine().hashCode());
+            password_hash = String.valueOf(sc.nextLine().hashCode());
             //read the file and check the username and password
             user = fileIO.loginVerify(username, password_hash);
             if (user != null) {
@@ -90,6 +88,7 @@ public class Main {
                 }
             } else {
                 ui.loginVerification(false);
+                sc.nextLine();
                 welcome();
                 break;
             }
@@ -99,7 +98,6 @@ public class Main {
     }
 
     public void register() {
-        Scanner console = new Scanner(System.in);
         User user;
         String password;
         String confirm_password;
@@ -110,7 +108,7 @@ public class Main {
             ui.registerPage();
             try {
                 //if user input is not a correct number, return a warning
-                type = Integer.parseInt(console.nextLine());
+                type = Integer.parseInt(sc.nextLine());
             } catch (Exception e) {
                 continue;
             }
@@ -123,7 +121,12 @@ public class Main {
                     user = new Owner();
                     user.setUsertype("owner");
                     break;
-                default: //if user input an incorrect number, return a warning
+                default:
+                    //if user input an incorrect number, return a warning
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Please select a correct user type!!!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
             }
             break;
@@ -131,9 +134,14 @@ public class Main {
 
         while (true) {
             ui.registerEnter("username");
-            String username = console.nextLine();
-            if (username.equals(""))
+            String username = sc.nextLine();
+            if (username.equals("")) {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("User name can not be blank!!!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
+            }
             user.setUsername(username);
             break;
         }
@@ -141,24 +149,26 @@ public class Main {
 
         while (true) {
             ui.registerEnter("password");
-            password = console.nextLine();
+            password = sc.nextLine();
             if (password.equals(""))
                 continue;
             if (password.length() < 6 || password.length() > 15) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the password between 6 and 15 characters!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
 
             ui.registerEnter("password again");
-            confirm_password = console.nextLine();
+            confirm_password = sc.nextLine();
             if (confirm_password.equals(""))
                 continue;
             if (!confirm_password.equals(password)) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the same password!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             //hash password and store it
@@ -169,11 +179,12 @@ public class Main {
 
         while (true) {
             ui.registerEnter("first name");
-            String fname = console.nextLine();
+            String fname = sc.nextLine();
             if (fname.equals("")) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                ui.displayInfo("Please enter the firstname correctly!!!!!!!!");
+                ui.displayInfo("Please enter the first name correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             user.setFname(fname);
@@ -182,11 +193,12 @@ public class Main {
 
         while (true) {
             ui.registerEnter("last name");
-            String lname = console.nextLine();
+            String lname = sc.nextLine();
             if (lname.equals("")) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                ui.displayInfo("Please enter the lastname correctly!!!!!!!!");
+                ui.displayInfo("Please enter the last name correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             user.setLname(lname);
@@ -195,16 +207,12 @@ public class Main {
 
         while (true) {
             ui.registerEnter("email");
-            String email = console.nextLine();
-            if (email.equals("")) {
+            String email = sc.nextLine();
+            if (!email.contains("@") || email.length() <= 5) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                continue;
-            } else if (!email.contains("@") || email.length() <= 3) {
-                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                ui.displayInfo("Please enter the email correctly!!!!!!!!");
-                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             user.setEmail(email);
@@ -214,11 +222,12 @@ public class Main {
         if (type == 1 || type == 2) {
             while (true) {
                 ui.registerEnter("address");
-                String address = console.nextLine();
+                String address = sc.nextLine();
                 if (address.equals("")) {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    ui.displayInfo("Please enter the address correctly!!!!!!!!");
+                    ui.displayInfo("Address should not be blank");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
                 user.setAddress(address);
@@ -227,11 +236,12 @@ public class Main {
 
             while (true) {
                 ui.registerEnter("phone no");
-                String phone_no = console.nextLine();
+                String phone_no = sc.nextLine();
                 if (phone_no.equals("")) {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    ui.displayInfo("Please enter the phone no correctly!!!!!!!!");
+                    ui.displayInfo("Phone number should not be blank!!!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
                 user.setPhone_no(phone_no);
@@ -245,14 +255,20 @@ public class Main {
                 try {
                     Date userInputDate = sdf.parse(userInput);
                     if (userInputDate.after(sdf.getCalendar().getTime())) {
-                        ui.displayInfo("Birthday should be after today!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        ui.displayInfo("Birthday should not be after today!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                     } else {
                         user.setDob(userInput);
                         break;
                     }
                 } catch (Exception e) {
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Please input the right format of birthday!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
             }
@@ -274,7 +290,9 @@ public class Main {
                         user.setDiscount(String.valueOf(map.get(userInput)));
                         break;
                     } else {
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                         ui.displayInfo("Please check your input, or input 0 to set as default!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     }
                 }
             }
@@ -316,7 +334,7 @@ public class Main {
         ui.displayInfo("1. Back to home screen");
         ui.displayInfo("2. Press any other key to exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        String operation = console.nextLine();
+        String operation = sc.nextLine();
         if (operation.equals("1")) {
             new Main().welcome();
         } else {
@@ -359,7 +377,10 @@ public class Main {
     private void viewCustomerBookingList(User user) {
         ArrayList<Booking> bookings = new ArrayList<Booking>(fileIO.viewCustomerBookingList(user));
         if (bookings.size() == 0) {
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Sorry, you don't have any booking history!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             CustomerWelcome();
         }
         ui.manageBookings(bookings);
@@ -368,6 +389,10 @@ public class Main {
             String userInput = sc.nextLine();
             if (userInput.equals("")) {
                 //ui.error
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Sorry, you have to input the correct number of booking");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             } else if (userInput.equals("R"))
                 CustomerWelcome();
@@ -395,7 +420,10 @@ public class Main {
         } catch (Exception e) {
             if (userInput.equals("R"))
                 viewCustomerBookingList(user);
-            ui.displayInfo("Please select correctly!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("Please input the correct content!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             customerOperateBooking(booking);
         }
         if (selection == 1) {
@@ -404,15 +432,21 @@ public class Main {
             long bookingTime = booking.getStartTime().getTime();
             minus = bookingTime - nowTime / (1000 * 3600);
             if (!booking.getState().equals("new")){
-                ui.displayInfo("Sorry! The booking has been changed!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Sorry! The booking has been changed previously!");
                 ui.displayInfo("Please select the booking with state \"new\"");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 viewCustomerBookingList(user);
             }
             if (minus >= 24)
                 customerChangeBookingDate(booking);
             else {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Sorry, the start time is within 24 hours!");
-                ui.displayInfo("So you can't change it any more!");
+                ui.displayInfo("The booking date can not be within 24 hours!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 customerOperateBooking(booking);
             }
         }
@@ -433,11 +467,17 @@ public class Main {
                     date = sdf.parse(userInput);
                     //how to check whether the date is correct?
                     if ((date.getTime() - new Date().getTime()) <= 0) {
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                         ui.displayInfo("You should input a future date!!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                     }
                 } catch (Exception e) {
-                    ui.displayInfo("Wrong format! Try again!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Wrong date format! Please input as dd-MM-yyyy");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
                 sb.append(userInput);
@@ -466,6 +506,10 @@ public class Main {
                             endTime = sdf.parse("21:00 " + sb.toString());
                             break;
                         default:
+                            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                            ui.displayInfo("Please select the correct time.");
+                            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                            sc.nextLine();
                             continue;
                     }
                     Booking newBooking = booking;
@@ -477,14 +521,18 @@ public class Main {
                     viewCustomerBookingList(user);
                     break;
                 } catch (Exception e) {
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Wrong selection!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
 
-        }    }
+        }
+    }
 
     private void viewHallList(){
         ui.viewHallList(fileIO.viewAllHall(),user.getUsername());
@@ -514,7 +562,7 @@ public class Main {
         int selection = 0;
         while (true) {
             try {
-                ui.displayInfo("Please select how to search a hall!");
+                ui.displayInfo("Please select how to search hall!");
                 selection = Integer.parseInt(sc.nextLine());
                 switch (selection) {
                     case 0:
@@ -530,10 +578,17 @@ public class Main {
                         searchAHallByLocation();
                         break;
                     default:
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        ui.displayInfo("Please input the correct selection.");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                 }
             } catch (Exception e) {
-                ui.displayInfo("Please input the right selection!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Please input the correct selection!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             break;
@@ -546,7 +601,10 @@ public class Main {
         hallName = sc.nextLine();
         Hall searchedHall = fileIO.searchAHallByName(hallName);
         if (searchedHall == null){
-            ui.displayInfo("Not found! Please check the input!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("Not found! Please check the name again.");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             searchAHall();
         }
         else
@@ -559,7 +617,10 @@ public class Main {
         location = sc.nextLine();
         Hall searchedHall = fileIO.searchAHallByLocation(location);
         if (searchedHall == null){
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Not found! Please check the input!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             searchAHall();
         }
         else
@@ -583,6 +644,10 @@ public class Main {
                         System.out.println("View comment of the hall!");
                         break;
                     default:
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        ui.displayInfo("Please input the correct selection!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                 }
             }catch (Exception e){
@@ -590,7 +655,10 @@ public class Main {
                     CustomerWelcome();
                 }
                 else {
-                    ui.displayInfo("Please input the right option!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Please input the correct selection!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
             }
@@ -622,6 +690,10 @@ public class Main {
                 quotation.setEventType(eventTypes[selection-1]);
                 break;
             } catch (Exception e){
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Please check your input.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
 
@@ -639,11 +711,17 @@ public class Main {
                 date = sdf.parse(userInput);
                 //how to check whether the date is correct?
                 if (date.getMonth() > 12 || date.getDate() > 30 || date.getYear() < new Date().getYear()){
-                    ui.displayInfo("Wrong date!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Wrong date.");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     continue;
                 }
             }catch (Exception e){
-                ui.displayInfo("Wrong format! Try again!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Wrong format.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             sb.append(userInput);
@@ -672,13 +750,20 @@ public class Main {
                         endTime = sdf.parse("21:00 "+sb.toString());
                         break;
                     default:
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        ui.displayInfo("Please select the correct option.");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                 }
                 quotation.setStartTime(startTime);
                 quotation.setEndTime(endTime);
             }catch (Exception e)
             {
-                ui.displayInfo("Wrong selection!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Please select the correct option.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             break;
@@ -692,7 +777,10 @@ public class Main {
                 size = Integer.parseInt(userinput);
                 quotation.setEventSize(size);
             }catch (Exception e) {
-                ui.displayInfo("Please input correct size!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Please input the correct size.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             break;
@@ -715,6 +803,7 @@ public class Main {
         if (userInput.equals("Y")) {
             fileIO.askForAQuotation(quotation);
             ui.displayInfo("Sent successfully!");
+            sc.nextLine();
             CustomerWelcome();
         }
         else
@@ -725,6 +814,7 @@ public class Main {
         ArrayList<Quotation> quotations = fileIO.readCustomerQuotationList(user);
         if (quotations.size() == 0){
             ui.displayInfo("You don't have any quotations at this time!");
+            sc.nextLine();
             CustomerWelcome();
         }
         else {
@@ -947,7 +1037,6 @@ public class Main {
     }
 
     private static void createHall(){
-        Scanner console = new Scanner(System.in);
         String name;
         String location;
         String supportEventType;
@@ -961,7 +1050,7 @@ public class Main {
 
         while(true) {
             ui.createAHall("Hall Name");
-            name = console.nextLine();
+            name = sc.nextLine();
             if (name.equals(""))
                 continue;
             break;
@@ -1120,7 +1209,7 @@ public class Main {
         ui.displayInfo("1. Back to Owner Main Screen");
         ui.displayInfo("All other input will exit");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-        String operation = console.nextLine();
+        String operation = sc.nextLine();
         if (operation.equals("1"))
             new Main().OwnerWelcome();
         else
