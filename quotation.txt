@@ -4,3 +4,5 @@
 
 {whetherCatering=false, quotationId=3, hallId=2, eventSize=100, price=2000.0, customerId=1, startTime=03:00 20-10-2019, eventType=Wedding Reception, endTime=05:00 20-10-2019, state=accepted, ownerId=6}
 
+{whetherCatering=false, quotationId=4, hallId=1, eventSize=2000, price=1000.0, customerId=1, startTime=07:00 20-10-2019, eventType=Birthday, endTime=09:00 20-10-2019, state=accepted, ownerId=6}
+

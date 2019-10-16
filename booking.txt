@@ -10,3 +10,5 @@
 
 {whetherCatering=false, hallId=2, eventSize=100, price=2000.0, customerId=1, startTime=09:00 15-10-2019, eventType=Wedding Reception, endTime=11:00 15-10-2019, state=new, ownerId=6, bookingId=2}
 
+{whetherCatering=false, hallId=1, eventSize=2000, price=1000.0, customerId=1, startTime=07:00 20-10-2019, eventType=Birthday, endTime=09:00 20-10-2019, state=new, ownerId=6, bookingId=3}
+
