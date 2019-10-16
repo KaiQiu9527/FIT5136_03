@@ -775,10 +775,15 @@ public class Main {
             int size;
             try {
                 size = Integer.parseInt(userinput);
-                quotation.setEventSize(size);
+                if (size > 0 && size < 10000)
+                    quotation.setEventSize(size);
+                else
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Size should be larger than 0 and less than 10000.");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             }catch (Exception e) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                ui.displayInfo("Please input the correct size.");
+                ui.displayInfo("Please input the correct integer for the size.");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 sc.nextLine();
                 continue;
@@ -787,8 +792,10 @@ public class Main {
         }
 
         while (true){
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Please choose whether catering!");
-            ui.displayInfo("Input Y to make catering! ");
+            ui.displayInfo("Input Y to means your event needs catering from host.");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             String userInput = sc.nextLine().toUpperCase();
             if (userInput.equals("Y"))
                 quotation.setWhetherCatering(true);
@@ -797,8 +804,10 @@ public class Main {
             break;
         }
         ui.displayQuotation(quotation);
-        ui.displayInfo("Please choose send the request!");
-        ui.displayInfo("Input Y to send or any other to leave! ");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        ui.displayInfo("Please confirm send the request!");
+        ui.displayInfo("Input Y to send or any other input to leave! ");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         String userInput = sc.nextLine().toUpperCase();
         if (userInput.equals("Y")) {
             fileIO.askForAQuotation(quotation);
@@ -813,13 +822,16 @@ public class Main {
     private void viewCustomerQuotation(User user){
         ArrayList<Quotation> quotations = fileIO.readCustomerQuotationList(user);
         if (quotations.size() == 0){
-            ui.displayInfo("You don't have any quotations at this time!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("You don't have any quotations right now.");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             sc.nextLine();
             CustomerWelcome();
         }
         else {
             ui.viewQuotations(quotations);
-            ui.displayInfo("Please choose a quotation to operate!");
+            ui.displayInfo("Please choose a quotation to operate.");
+            ui.displayInfo("Input the quotation ID...");
             String userInput = sc.nextLine();
             int selection = 0;
             try {
@@ -837,7 +849,7 @@ public class Main {
                 customerOperateQuotation(quotation);
             }
             else {
-                ui.displayInfo("Please choose the right quotation!");
+                ui.displayInfo("Please input the right quotation ID");
                 viewCustomerQuotation(user);
             }
         }
@@ -851,27 +863,43 @@ public class Main {
                 if (quotation.getState().equals("accepted"))
                     booking(quotation);
                 else if (quotation.getState().equals("new")){
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Sorry, please wait for owner to process the request!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     viewCustomerQuotation(user);
                 }
                 else if (quotation.getState().equals("rejected")) {
-                    ui.displayInfo("Sorry, the request has been rejected! Please make a new quotation!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Sorry, the request has been declined by the owner.");
+                    ui.displayInfo(" Please make a new quotation.");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     viewCustomerQuotation(user);
                 }
                 else if (quotation.getState().equals("declined")) {
-                    ui.displayInfo("Sorry! The quotation has been declined by you!");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    ui.displayInfo("Sorry! The quotation has been declined by you.");
+                    System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    sc.nextLine();
                     viewCustomerQuotation(user);
                 }
                 break;
             case "2":
                 //fileIO.declineQuotation(quotation);
-                ui.displayInfo("The quotation has been declined!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("This quotation has been declined!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 break;
             case "R":
                 viewCustomerQuotation(user);
                 break;
             default:
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right option!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 customerOperateQuotation(quotation);
                 break;
 
@@ -882,11 +910,15 @@ public class Main {
         Booking booking = new Booking(quotation);
         ui.displayBooking(booking);
         ui.displayInfo("Now pay a deposit!");
-        ui.displayInfo("Please input your payment info!");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        ui.displayInfo("Please input your credit card information");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         ui.displayInfo("Input \"R\" to go back!");
         String userInput = sc.nextLine();
         if (userInput.equals("")){
-            ui.displayInfo("Please input in right format!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("Please input in right format.");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             booking(quotation);
         }
         if (userInput.equals("R")){
@@ -894,12 +926,16 @@ public class Main {
         }
         ui.displayInfo("This is your payment info!");
         ui.displayInfo(userInput);
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         ui.displayInfo("Please input \"Y\" to pay a deposit or \"N\" to decline");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         userInput = sc.nextLine();
         if (userInput.toUpperCase().equals("Y")){
-            ui.displayInfo("You have pay the deposit!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("You have pay the deposit successfully!");
             ui.displayInfo("Now you can check or manage your booking in Main menu");
-            ui.displayInfo("You can also check the payment receipt in Main menu!");
+            ui.displayInfo("You can also check your receipt in Main menu!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             fileIO.makeABooking(booking);
             Payment payment = new Payment(booking);
             fileIO.payADeposit(payment);
@@ -948,12 +984,14 @@ public class Main {
     private void viewOwnerQuotationList(User user) {
         ArrayList<Quotation> quotations = new ArrayList<>(fileIO.readOwnerQuotationList(user));
         if (quotations.size() == 0){
-            ui.displayInfo("You don't have any quotations requested at this time!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("You don't have any request right now.");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             OwnerWelcome();
         }
         else {
             ui.viewQuotations(quotations);
-            ui.displayInfo("Please choose a quotation to operate!");
+            ui.displayInfo("Please choose a request to operate...");
             String userInput = sc.nextLine();
             int selection = 0;
             try {
@@ -975,7 +1013,10 @@ public class Main {
 
             }
             else {
-                ui.displayInfo("Please choose the right quotation!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Please choose the right option!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 viewOwnerQuotationList(user);
             }
         }
@@ -989,7 +1030,8 @@ public class Main {
         switch (userInput){
             case "1":
                 if (quotation.getState().equals("accepted")) {
-                    ui.displayInfo("The quotation has been sent to the customer before!");
+                    ui.displayInfo("The quotation has already been sent to the customer.");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("new")){
@@ -1000,29 +1042,34 @@ public class Main {
                 }
                 if (quotation.getState().equals("rejected")) {
                     ui.displayInfo("The request has been rejected by you!");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("declined")) {
-                    ui.displayInfo("The request has been declined by customer!");
+                    ui.displayInfo("The quotation has been declined by customer!");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 break;
             case "2":
                 if (quotation.getState().equals("accepted")) {
-                    ui.displayInfo("The quotation has been sent to the customer before!");
+                    ui.displayInfo("The quotation has already been sent to the customer.");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("new")){
-                    ui.displayInfo("Now the quotation is rejected!");
+                    ui.displayInfo("Now the quotation has been rejected!");
                     fileIO.ownerRejectRequest(quotation);
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("rejected")) {
-                    ui.displayInfo("The request has been rejected by you!");
+                    ui.displayInfo("The request has already been rejected by you!");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("declined")) {
                     ui.displayInfo("The request has been declined by customer!");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 break;
@@ -1030,11 +1077,15 @@ public class Main {
                 viewCustomerQuotation(user);
                 break;
             default:
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right option!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 customerOperateQuotation(quotation);
                 break;
         }
     }
+
 
     private static void createHall(){
         String name;
@@ -1152,7 +1203,10 @@ public class Main {
                     continue;
                 }
             }catch (Exception e){
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right discount!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             break;
@@ -1168,12 +1222,15 @@ public class Main {
         }
 
         while(true) {
-            ui.createAHall("Price");
+            ui.createAHall("Standard Price");
             try {
                 price = sc.nextDouble();
             } catch (Exception e)
             {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right price!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             if (price < 0)
@@ -1227,8 +1284,11 @@ public class Main {
     public void manageAHall(){
         ArrayList<Hall> ownHall = new ArrayList<>(viewOwnHall(Integer.parseInt(user.getId())));
         if (ownHall.size() == 0) {
-            ui.displayInfo("You have no halls recorded in the system!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            ui.displayInfo("You have no halls registered in the system!");
             ui.displayInfo("You can create your first hall or back to the main menu!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             new Main().OwnerWelcome();
             return;
         }
@@ -1245,7 +1305,10 @@ public class Main {
                     case "R":
                         new Main().OwnerWelcome();
                     default:
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                         ui.displayInfo("Please input the right ID!");
+                        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                        sc.nextLine();
                         continue;
                 }
 
@@ -1256,7 +1319,10 @@ public class Main {
                     maximumId = demo.getHallId();
             }
             if (hallID == 0 || hallID > maximumId){
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right ID!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             else {
@@ -1265,13 +1331,16 @@ public class Main {
                 break;
             }
         }
-        ui.displayInfo("Please select the option!");
+        ui.displayInfo("Please select the option...");
         int select = 0;
         while (true){
             try {
                 select = Integer.parseInt(sc.nextLine());
             }catch (Exception e){
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right option!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 continue;
             }
             switch (select){
@@ -1302,16 +1371,25 @@ public class Main {
             if (input.toUpperCase().equals("R"))
                 manageAHall();
             else {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right discount!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 updateHall(hall);
             }
         }
         if (discount < 0.00 || discount > 1.00){
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Please input discount between (0.00 - 1.00)!");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+            sc.nextLine();
             manageAHall();
         }
         fileIO.updateDiscount(hall,discount);
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         ui.displayInfo("Update discount successfully!");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+        sc.nextLine();
         manageAHall();
     }
 
@@ -1326,7 +1404,10 @@ public class Main {
             if (input.toUpperCase().equals("R"))
                 manageAHall();
             else {
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the right option!");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
                 updateHall(hall);
             }
         }

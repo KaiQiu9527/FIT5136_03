@@ -368,7 +368,6 @@ public class UI {
         title("VIEW THE QUOTATIONS", "","");
         int index = 0;
         for (Quotation quotation : quotations){
-            displayInfo(String.valueOf(++index));
             displayQuotation(quotation);
             displayInfo("");
         }
@@ -381,18 +380,19 @@ public class UI {
     }
 
     public void displayQuotation(Quotation quotation) {
-        if (quotation.getQuotationId() != 0)
+        if (quotation.getQuotationId() != 0) {
             displayInfo("Quotation ID: " + quotation.getQuotationId());
-        displayInfo("Customer ID: " + quotation.getCustomerId());
-        displayInfo("Hall ID: " + quotation.getHallId());
-        displayInfo("Owner ID: " + quotation.getOwnerId());
-        displayInfo("Event type: " + quotation.getEventType());
-        displayInfo("Event size: " + quotation.getEventSize());
-        displayInfo("Start time: : " + quotation.getStartTime());
-        displayInfo("End time: : " + quotation.getEndTime());
-        displayInfo("Whether catering: " + quotation.getWhetherCatering());
-        displayInfo("State: " + quotation.getState());
-        displayInfo("Price: " + quotation.getPrice());
+            displayInfo("Customer ID: " + quotation.getCustomerId());
+            displayInfo("Hall ID: " + quotation.getHallId());
+            displayInfo("Owner ID: " + quotation.getOwnerId());
+            displayInfo("Event type: " + quotation.getEventType());
+            displayInfo("Event size: " + quotation.getEventSize());
+            displayInfo("Start time: : " + quotation.getStartTime());
+            displayInfo("End time: : " + quotation.getEndTime());
+            displayInfo("Whether catering: " + quotation.getWhetherCatering());
+            displayInfo("State: " + quotation.getState());
+            displayInfo("Price: " + quotation.getPrice());
+        }
     }
 
     public void displayQuotationOperation()
