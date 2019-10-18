@@ -128,7 +128,6 @@ public class Main {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Please select a correct user type!!!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    sc.nextLine();
                     continue;
             }
             break;
@@ -141,7 +140,6 @@ public class Main {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("User name can not be blank!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             user.setUsername(username);
@@ -158,7 +156,6 @@ public class Main {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the password between 6 and 15 characters!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
 
@@ -170,7 +167,6 @@ public class Main {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the same password!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             //hash password and store it
@@ -186,7 +182,6 @@ public class Main {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the first name correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             user.setFname(fname);
@@ -200,7 +195,6 @@ public class Main {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the last name correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             user.setLname(lname);
@@ -210,11 +204,10 @@ public class Main {
         while (true) {
             ui.registerEnter("email");
             String email = sc.nextLine();
-            if (!email.contains("@") || email.length() <= 5) {
+            if (!email.contains("@") || email.length() <= 3) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please enter the email correctly!!!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             user.setEmail(email);
@@ -229,7 +222,6 @@ public class Main {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Address should not be blank");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    sc.nextLine();
                     continue;
                 }
                 user.setAddress(address);
@@ -243,7 +235,6 @@ public class Main {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Phone number should not be blank!!!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    sc.nextLine();
                     continue;
                 }
                 user.setPhone_no(phone_no);
@@ -254,18 +245,20 @@ public class Main {
                 ui.registerEnter("date of birth(\"dd-MM-yyyy\")");
                 String userInput = sc.nextLine();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                sdf.setLenient(false);
                 try {
                     Date userInputDate = sdf.parse(userInput);
-                    if (userInputDate.after(sdf.getCalendar().getTime())) {
+                    if (userInputDate.compareTo(new Date()) >= 0 )
+                    {
                         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                        ui.displayInfo("Birthday should not be after today!");
+                        ui.displayInfo("Are you kidding me??");
+                        ui.displayInfo("You should input the right birthday");
                         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                        sc.nextLine();
                         continue;
-                    } else {
-                        user.setDob(userInput);
-                        break;
                     }
+                    else
+                        user.setDob(userInput);
+                    break;
                 } catch (Exception e) {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Please input the right format of birthday!");
@@ -708,22 +701,21 @@ public class Main {
             Date date;
             StringBuilder sb = new StringBuilder();
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            sdf.setLenient(false);
             String userInput = sc.nextLine();
             try {
                 date = sdf.parse(userInput);
-                //how to check whether the date is correct?
-                if (date.getMonth() > 12 || date.getDate() > 30 || date.getYear() < new Date().getYear()){
+                if (date.compareTo(new Date()) <= 0 )
+                {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    ui.displayInfo("Wrong date.");
+                    ui.displayInfo("You should input a future date!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    sc.nextLine();
                     continue;
                 }
             }catch (Exception e){
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                ui.displayInfo("Wrong format.");
+                ui.displayInfo("Wrong format!!!!!!");
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                sc.nextLine();
                 continue;
             }
             sb.append(userInput);
@@ -779,10 +771,12 @@ public class Main {
                 size = Integer.parseInt(userinput);
                 if (size > 0 && size < 10000)
                     quotation.setEventSize(size);
-                else
+                else {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Size should be larger than 0 and less than 10000.");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                    continue;
+                }
             }catch (Exception e) {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                 ui.displayInfo("Please input the correct integer for the size.");
@@ -805,6 +799,7 @@ public class Main {
                 quotation.setWhetherCatering(false);
             break;
         }
+        quotation.setPrice((int) hall.getPrice() * (1-hall.getDiscount()) * (1-Double.parseDouble(user.getDiscount())));
         ui.displayQuotation(quotation);
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
         ui.displayInfo("Please confirm send the request!");
@@ -834,6 +829,7 @@ public class Main {
             ui.viewQuotations(quotations);
             ui.displayInfo("Please choose a quotation to operate.");
             ui.displayInfo("Input the quotation ID...");
+            ui.displayInfo("Input R to exit!");
             String userInput = sc.nextLine();
             int selection = 0;
             try {
@@ -1040,6 +1036,8 @@ public class Main {
                     ui.displayInfo("Now the quotation is sent to the customer!");
                     fileIO.ownerSendQuotation(quotation);
                     fileIO.startup();
+                    ui.displayInfo("Please enter to return!");
+                    sc.nextLine();
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("rejected")) {
@@ -1060,7 +1058,7 @@ public class Main {
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("new")){
-                    ui.displayInfo("Now the quotation has been rejected!");
+                    ui.displayInfo("Now the quotation has been accepted!");
                     fileIO.ownerRejectRequest(quotation);
                     viewOwnerQuotationList(user);
                 }

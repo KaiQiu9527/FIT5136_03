@@ -155,9 +155,9 @@ public class FileIO{
                 quotation.setOwnerId(Integer.parseInt(map.get("ownerId")));
                 quotation.setEventType(map.get("eventType"));
                 quotation.setEventSize(Integer.parseInt(map.get("eventSize")));
-                quotation.setStartTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("startTime")));
-                quotation.setEndTime(new SimpleDateFormat("hh:mm dd-MM-yyyy").parse(map.get("endTime")));
-                quotation.setWhetherCatering(Boolean.getBoolean(map.get("whetherCatering")));
+                quotation.setStartTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").parse(map.get("startTime")));
+                quotation.setEndTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").parse(map.get("endTime")));
+                quotation.setWhetherCatering(map.get("whetherCatering").equals("true")? true : false);
                 quotation.setState(map.get("state"));
                 quotation.setPrice(Double.parseDouble(map.get("price")));
                 quotations.add(quotation);
@@ -487,7 +487,7 @@ public class FileIO{
     *Customer request for a quotation
      */
     public void askForAQuotation(Quotation quotation){
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd-MM-yyyy");
         Map<String,String> quotationMap = new HashMap<>();
         quotationMap.put("quotationId",String.valueOf(getBiggestQuotationID()+1));
         quotationMap.put("customerId",String.valueOf(quotation.getCustomerId()));

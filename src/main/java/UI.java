@@ -366,10 +366,12 @@ public class UI {
     public void viewQuotations(ArrayList<Quotation> quotations) {
         System.out.print('\u000C');
         title("VIEW THE QUOTATIONS", "","");
-        int index = 0;
+        int index = 1;
         for (Quotation quotation : quotations){
+            displayInfo(String.valueOf(index));
             displayQuotation(quotation);
             displayInfo("");
+            index++;
         }
 //        displayInfo("   Enter the choice:");
 //        displayInfo("1. Accept the quotation");

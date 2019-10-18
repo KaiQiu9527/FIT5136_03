@@ -6,3 +6,15 @@
 
 {whetherCatering=false, quotationId=4, hallId=1, eventSize=2000, price=1000.0, customerId=1, startTime=07:00 20-10-2019, eventType=Birthday, endTime=09:00 20-10-2019, state=accepted, ownerId=6}
 
+{whetherCatering=true, quotationId=5, hallId=2, eventSize=100, price=2000.0, customerId=1, startTime=07:00 17-10-2019, eventType=Birthday, endTime=09:00 17-10-2019, state=accepted, ownerId=6}
+
+{whetherCatering=true, quotationId=6, hallId=1, eventSize=0, price=1000.0, customerId=1, startTime=19:00 11-11-2020, eventType=Wedding Ceremony , endTime=21:00 11-11-2020, state=new, ownerId=6}
+
+{whetherCatering=true, quotationId=7, hallId=2, eventSize=12, price=0.0, customerId=1, startTime=15:00 01-01-2022, eventType= Birthday, endTime=17:00 01-01-2022, state=new, ownerId=6}
+
+{whetherCatering=true, quotationId=8, hallId=2, eventSize=122, price=600.0000000000001, customerId=1, startTime=15:00 01-01-2022, eventType=Wedding Reception , endTime=17:00 01-01-2022, state=new, ownerId=6}
+
+{whetherCatering=true, quotationId=9, hallId=1, eventSize=22, price=500.0, customerId=1, startTime=15:00 02-02-2222, eventType= Wedding Reception , endTime=17:00 02-02-2222, state=new, ownerId=6}
+
+{whetherCatering=true, quotationId=10, hallId=2, eventSize=88, price=600.0000000000001, customerId=1, startTime=15:00 19-10-2019, eventType=Wedding Reception , endTime=17:00 19-10-2019, state=new, ownerId=6}
+
