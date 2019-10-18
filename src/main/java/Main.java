@@ -61,6 +61,8 @@ public class Main {
             username = sc.nextLine();
             if (username.equals(""))
                 ui.loginStep("username");
+            else if (username.equals("admin"))
+                AdminWelcome();
             else if (username.toUpperCase().equals("Q"))
                 welcome();
             else break;
