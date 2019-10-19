@@ -1,10 +1,8 @@
-{fname=qiu, phone_no=qiukai, password=-959312042, lname=kai, address=qiukai, dob=27-12-1995, usertype=customer, discount=0.0, id=1, email=qiu@kai, username=qiukai}
+{fname=firstname, phone_no=1234567890, password=-1003854882, lname=lastname, address=Caulfield, dob=27-12-1995, usertype=owner, discount=0.0, id=1, email=xxx@gmail.com, username=owner1}
 
-{fname=kai, phone_no=kaiqiu, password=-1138826582, lname=qiu, address=kaiqiu, dob=11-11-2019, usertype=owner, discount=0.0, id=3, email=kai@qiu, username=kaiqiu}
+{fname=Good, phone_no=0444111222, password=-1003854881, lname=Tom, address=Clayton, dob=20-01-1991, usertype=owner, discount=0.0, id=2, email=goodtom@gmail.com, username=owner2}
 
-{fname=m, phone_no=monash, password=-1068505110, lname=m, address=monash, dob=11-11-1111, usertype=owner, discount=0.0, id=4, email=m@mmmmm, username=monash}
+{fname=Vincent, phone_no=0355123456, password=1611562003, lname=Carter, address=Melbourne, dob=20-02-1978, usertype=customer, discount=0.3, id=3, email=vincecarter@gmail.com, username=customer1}
 
-{fname=qqq, phone_no=qqqqqq, password=-952036768, lname=qqq, address=qqqqqqq, dob=11-11-1111, usertype=customer, discount=0.3, id=5, email=qqq@qq, username=qqqqqq}
-
-{fname=yihui, phone_no=999888111, password=-730656315, lname=xia, address=abc, dob=20-01-1991, usertype=owner, discount=0.0, id=6, email=ddd@gmail.com, username=yihui}
+{fname=Ivy, phone_no=0544266177, password=1611562004, lname=Lee, address=North Melbourne, dob=23-11-1985, usertype=customer, discount=0.5, id=4, email=ivylee@gmail.com, username=customer2}
 

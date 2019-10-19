@@ -1,10 +1,2 @@
-{paymentId=1, price=1111.0, paidDateTime=08:26 11-10-2019, paymentState=paid, userId=1, bookingId=0}
-
-{paymentId=1, price=1111.0, paidDateTime=04:07 12-10-2019, paymentState=paid, userId=1, bookingId=0}
-
-{paymentId=1, price=1111.0, paidDateTime=04:14 12-10-2019, paymentState=paid, userId=1, bookingId=0}
-
-{paymentId=1, price=2000.0, paidDateTime=11:31 14-10-2019, paymentState=paid, userId=1, bookingId=0}
-
-{paymentId=1, price=1000.0, paidDateTime=04:28 16-10-2019, paymentState=paid, userId=1, bookingId=0}
+{paymentId=1, price=20000.0, paidDateTime=10:24 19-10-2019, paymentState=paid, userId=3, bookingId=0}
 

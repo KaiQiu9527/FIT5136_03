@@ -467,20 +467,27 @@ public class FileIO{
         updateHallList(maps);
     }
 
-    public Hall searchAHallByName(String name) {
+    public ArrayList<Hall> searchAHallByName(String name) {
+        startup();
+        ArrayList<Hall> searchedHallList = new ArrayList<>();
         for (Hall hall : halls) {
-            if (hall.getName().equals(name))
-                return hall;
+            if (hall.getName().contains(name))
+                searchedHallList.add(hall);
         }
-        return null;
+        return searchedHallList;
     }
 
-    public Hall searchAHallByLocation(String location) {
+    public ArrayList<Hall> searchAHallByLocation(String location) {
+        startup();
+        ArrayList<Hall> searchedHallList = new ArrayList<>();
         for (Hall hall : halls) {
-            if (hall.getLocation().equals(location))
-                return hall;
+            if (hall.getLocation().contains(location))
+                searchedHallList.add(hall);
         }
-        return null;
+        if (searchedHallList.size() !=0 )
+            return searchedHallList;
+        else
+            return null;
     }
 
     /**

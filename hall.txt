@@ -1,4 +1,8 @@
-{hallId=1, supportEventType=Wedding Ceremony + Wedding Reception + Birthday, price=1000.0, name=monash, discount=0.5, description=big*and big, location=monash, ownerId=6, picture=monash.jpg}
+{hallId=2, supportEventType=Birthday + Anniversary, price=3000.0, name=Caulfield Racecourse, discount=0.1, description=A very large place for a big party!, location=Caulfield Train Station, ownerId=1, picture=pictureofracecourse.jpg}
 
-{hallId=2, supportEventType=Wedding Reception + Birthday, price=2000.0, name=testHall, discount=0.7, description=good* and great, location=testLocation, ownerId=6, picture=pic.jpg}
+{hallId=1, supportEventType=Wedding Ceremony + Wedding Reception, price=1200.0, name=Caulfield church, discount=0.35, description=This is wonderful place for wedding!, location=33 caulfield road, ownerId=1, picture=1500}
+
+{hallId=3, supportEventType=Wedding Ceremony + Wedding Reception + Birthday + Anniversary, price=2000.0, name=BigRoom, discount=0.1, description=XXX, location=Victoria, ownerId=2, picture=picture.jpg}
+
+{hallId=4, supportEventType=Birthday, price=500.0, name=Small hall, discount=0.0, description=This is a beautiful little place!, location=Yarra River, ownerId=2, picture=beautiful pic.gif}
 

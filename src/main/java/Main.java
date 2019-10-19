@@ -263,7 +263,6 @@ public class Main {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     ui.displayInfo("Please input the right format of birthday!");
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
-                    sc.nextLine();
                     continue;
                 }
             }
@@ -594,8 +593,8 @@ public class Main {
         ui.searchAHallBy("name");
         String hallName;
         hallName = sc.nextLine();
-        Hall searchedHall = fileIO.searchAHallByName(hallName);
-        if (searchedHall == null){
+        ArrayList<Hall> searchedHallList = new ArrayList<Hall>(fileIO.searchAHallByName(hallName));
+        if (searchedHallList.size() == 0){
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Not found! Please check the name again.");
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -603,15 +602,15 @@ public class Main {
             searchAHall();
         }
         else
-            customerOperateHall(searchedHall);
+            viewSearchedHallList(searchedHallList);
     }
 
     private void searchAHallByLocation() {
         ui.searchAHallBy("location");
         String location;
         location = sc.nextLine();
-        Hall searchedHall = fileIO.searchAHallByLocation(location);
-        if (searchedHall == null){
+        ArrayList<Hall> searchedHallList = new ArrayList<Hall>(fileIO.searchAHallByLocation(location));
+        if (searchedHallList.size() == 0){
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
             ui.displayInfo("Not found! Please check the input!");
             System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
@@ -619,9 +618,38 @@ public class Main {
             searchAHall();
         }
         else
-            customerOperateHall(searchedHall);
+            viewSearchedHallList(searchedHallList);
 
     }
+
+    public void viewSearchedHallList(ArrayList<Hall> searchedHallList){
+        int i = 0;
+        for (Hall hall : searchedHallList){
+            ui.displayInfo(String.valueOf(++i));
+            ui.displayHall(hall);
+        }
+        ui.displayInfo("Please select the hall you want!");
+        String userInput = sc.nextLine();
+        int selection = 0;
+        try {
+            selection = Integer.parseInt(userInput);
+        }
+        catch (Exception e){
+            ui.displayInfo("Please input the right selection!");
+            searchAHall();
+        }
+        if (selection>0 &&selection <= searchedHallList.size()){
+            customerOperateHall(searchedHallList.get(selection-1));
+        }
+        else{
+            ui.displayInfo("Please input the right selection!");
+            searchAHall();
+        }
+
+    }
+
+
+
 
     private void customerOperateHall(Hall hall) {
         ui.customerSelectHall(hall);
@@ -1033,6 +1061,23 @@ public class Main {
                     viewOwnerQuotationList(user);
                 }
                 if (quotation.getState().equals("new")){
+                    String input;
+                    double newPrice;
+                    while (true){
+                        ui.displayInfo("Please input the price for the quotation!");
+                        ui.displayInfo("If you don't want to change, please input 0");
+                        input = sc.nextLine();
+                        try {
+                            newPrice = Double.parseDouble(input);
+                            if (newPrice != 0)
+                                quotation.setPrice(newPrice);
+                            break;
+                        } catch (Exception e){
+                            ui.displayInfo("Please input the right price!");
+                            continue;
+                        }
+                    }
+
                     ui.displayInfo("Now the quotation is sent to the customer!");
                     fileIO.ownerSendQuotation(quotation);
                     fileIO.startup();
@@ -1224,7 +1269,8 @@ public class Main {
         while(true) {
             ui.createAHall("Standard Price");
             try {
-                price = sc.nextDouble();
+                String userInput = sc.nextLine();
+                price = Double.parseDouble(userInput);
             } catch (Exception e)
             {
                 System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
