@@ -2,3 +2,7 @@
 
 {whetherCatering=false, hallId=2, eventSize=1000, price=20000.0, customerId=3, startTime=07:00 12-01-2020, eventType=Birthday, endTime=09:00 12-01-2020, state=new, ownerId=1, bookingId=1}
 
+{whetherCatering=false, hallId=2, eventSize=100, price=2000.0, customerId=5, startTime=09:00 01-02-2020, eventType=Birthday, endTime=11:00 01-02-2020, state=changed, ownerId=1, bookingId=2}
+
+{whetherCatering=false, hallId=2, eventSize=100, price=2000.0, customerId=5, startTime=03:00 11-12-2019, eventType=Birthday, endTime=05:00 11-12-2019, state=new, ownerId=1, bookingId=2}
+

@@ -879,7 +879,7 @@ public class Main {
                 customerOperateQuotation(quotation);
             }
             else {
-                ui.displayInfo("Please input the right quotation ID");
+                ui.displayInfo("Please choose the right quotation!");
                 viewCustomerQuotation(user);
             }
         }
@@ -1088,6 +1088,7 @@ public class Main {
                     ui.displayInfo("Please enter to return!");
                     sc.nextLine();
                     viewOwnerQuotationList(user);
+                    break;
                 }
                 if (quotation.getState().equals("rejected")) {
                     ui.displayInfo("The request has been rejected by you!");

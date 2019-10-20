@@ -1,2 +1,4 @@
 {paymentId=1, price=20000.0, paidDateTime=10:24 19-10-2019, paymentState=paid, userId=3, bookingId=0}
 
+{paymentId=1, price=2000.0, paidDateTime=05:41 20-10-2019, paymentState=paid, userId=5, bookingId=0}
+
