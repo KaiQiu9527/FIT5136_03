@@ -1,9 +1,13 @@
-import java.security.interfaces.DSAPublicKey;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
+/**
+ * Discount is the entity class to represent customer's type and discount in our program.
+ * Discount class has one Map type attribute discount, it store the data of customer types and their assigned discount.
+ *
+ * @version 1.1
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class Discount {
     Map<String,Double> discount = new HashMap<>();
 

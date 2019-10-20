@@ -1,4 +1,24 @@
 import java.util.Date;
+
+/**
+ * Booking is the entity class to represent a booked event in our program.
+ * A booking object being generated means the quotation is confirmed and payment is made.
+ * Booking has eleven attributes, they are:
+ * int bookingId; it represents the id of the booking.
+ * int customerId; it represent the related customer id.
+ * int hallId; it represent the related hall id.
+ * int ownerId; it represent the related owner id.
+ * String eventType; it represent the event type of the booking.
+ * int eventSize; it represent the event size of the booking.
+ * Date startTime; it represent the start time of the booking.
+ * Date endTime; it represent the end time of the booking.
+ * boolean whetherCatering; it represent whether this booked event requires catering.
+ * String state; it represent the state of the booking.
+ * double price; it represent the price of the booking.
+ *
+ * @version 1.1
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class Booking {
     int bookingId = 0;
     int customerId;

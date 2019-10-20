@@ -1,6 +1,13 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * Customer is the entity class to represent customer in our program.
+ * Customer is a derived class which extends User class.
+ * It has the same attributes of the User class.
+ *
+ * @version 1.1
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class Customer extends User {
 
     public String getAddress() {

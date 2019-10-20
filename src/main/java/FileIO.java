@@ -2,6 +2,16 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * The FileIO is the database handler class in our program.
+ * It is used to store data in text files and read data from the text files.
+ * The database store data includes user's data, hall's information, booking's information and
+ * its history, payment information and its history, payment information and its history,
+ * quotation information and its history.
+ *
+ * @version 1.2
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class FileIO{
     static ArrayList<Customer> customers = new ArrayList<>();
     static ArrayList<Owner> owners = new ArrayList<>();
@@ -19,6 +29,9 @@ public class FileIO{
         fileIO.startup();
     }
 
+    /**
+     * Read all the stored files to update object lists
+     */
     protected void startup(){
         Customer customer;
         Owner owner;
@@ -291,6 +304,10 @@ public class FileIO{
         return null;
     }
 
+    /**
+     * Function to write data for register
+     * @param userMap the userMap object
+     */
     public void register(Map userMap){
         PrintWriter pw;
         try {
@@ -304,6 +321,10 @@ public class FileIO{
         }
     }
 
+    /**
+     * Function to write data for create a hall
+     * @param hallMap the hallMap object
+     */
     public void createAHall(Map hallMap){
         PrintWriter pw;
         try {
@@ -316,8 +337,10 @@ public class FileIO{
             e.printStackTrace();
         }
     }
-    /*
-    **读取用户拥有的hall
+
+    /**
+     * Function to read data for displaying halls
+     * @return ArrayList of hall object
      */
     public ArrayList<Hall> viewAllHall(){
         FileIO fileIO = new FileIO();
@@ -325,6 +348,10 @@ public class FileIO{
         return fileIO.halls;
     }
 
+    /**
+     * Function to get amount of users
+     * @return amount of users
+     */
     public int getUserAmount() {
         int amount = 0;
         try {
@@ -340,6 +367,10 @@ public class FileIO{
         return amount;
     }
 
+    /**
+     * Function to get amount of halls
+     * @return the amount of halls
+     */
     public int getHallAmount() {
         int amount = 0;
         try {
@@ -355,6 +386,10 @@ public class FileIO{
         return amount;
     }
 
+    /**
+     * Function to read data for hall id
+     * @return the hall id
+     */
     public int getBiggestHallID(){
         int i = 0;
         for (Hall hall : halls){
@@ -364,6 +399,10 @@ public class FileIO{
         return i;
     }
 
+    /**
+     * Function to get the biggest user id
+     * @return the biggest user id
+     */
     public int getBiggestUserID(){
         int i = 0;
         for (Customer customer : customers){
@@ -377,6 +416,10 @@ public class FileIO{
         return i;
     }
 
+    /**
+     * Function to get the biggest quotation id
+     * @return the biggest quotation id
+     */
     public int getBiggestQuotationID(){
         int i = 0;
         for (Quotation quotation : quotations){
@@ -386,6 +429,10 @@ public class FileIO{
         return i;
     }
 
+    /**
+     * Function to get the biggest booking id
+     * @return the biggest booking id
+     */
     public int getBiggestBookingID(){
         int i = 0;
         for (Booking booking : bookings){
@@ -395,6 +442,10 @@ public class FileIO{
         return i;
     }
 
+    /**
+     * Function to get the biggest payment id
+     * @return the biggest payment id
+     */
     public int getBiggestPaymentID(){
         int i = 0;
         for (Payment payment : payments){
@@ -404,10 +455,10 @@ public class FileIO{
         return i;
     }
 
-    public ArrayList<Hall> getHalls() {
-        return halls;
-    }
-
+    /**
+     * Function to read and write data for updating halls list
+     * @param maps the map object
+     */
     public void updateHallList(ArrayList<Map<String,String>> maps) {
         PrintWriter pw = null;
         try {
@@ -426,6 +477,11 @@ public class FileIO{
         }
     }
 
+    /**
+     * Function to read data for displaying owner's halls
+     * @param id the owner id
+     * @return the owner's halls
+     */
     public ArrayList<Hall> viewOwnHall(int id){
         ArrayList<Hall> ownHalls = new ArrayList<>();
         for (Hall hall : halls){
@@ -435,6 +491,11 @@ public class FileIO{
         return ownHalls;
     }
 
+    /**
+     * Function to read data for displaying a hall's information
+     * @param hallId the hall id
+     * @return the hall object
+     */
     public Hall viewAHall(int hallId){
         for (Hall hall :halls){
             if (hall.getHallId() == hallId)
@@ -443,6 +504,11 @@ public class FileIO{
         return null;
     }
 
+    /**
+     * Function to read and write data for updating discount for a certain hall
+     * @param hall the hall object
+     * @param discount the double object to update the new discount
+     */
     public void updateDiscount(Hall hall, double discount){
         halls.remove(hall);
         hall.setDiscount(discount);
@@ -467,6 +533,11 @@ public class FileIO{
         updateHallList(maps);
     }
 
+    /**
+     * Function to read data for searching a hall by name
+     * @param name the hall's name or part of the hall's name
+     * @return the ArrayList of matched halls
+     */
     public ArrayList<Hall> searchAHallByName(String name) {
         startup();
         ArrayList<Hall> searchedHallList = new ArrayList<>();
@@ -477,6 +548,11 @@ public class FileIO{
         return searchedHallList;
     }
 
+    /**
+     * Function to read data for searching a hall by location
+     * @param location the hall's location or part of the hall's location
+     * @return the ArrayList of matched halls
+     */
     public ArrayList<Hall> searchAHallByLocation(String location) {
         startup();
         ArrayList<Hall> searchedHallList = new ArrayList<>();
@@ -491,7 +567,7 @@ public class FileIO{
     }
 
     /**
-    *Customer request for a quotation
+     * Function to read and write data for customer requesting for a quotation
      */
     public void askForAQuotation(Quotation quotation){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd-MM-yyyy");
@@ -521,6 +597,10 @@ public class FileIO{
         }
     }
 
+    /**
+     * Function to read and write data for updating quotations list
+     * @param quotations the quotations to be updated
+     */
     public void updateQuotationList(ArrayList<Quotation> quotations){
         PrintWriter pw;
         try {
@@ -536,6 +616,10 @@ public class FileIO{
         startup();
     }
 
+    /**
+     * Function to write data for updating one quotation
+     * @param quotation the quotation to be updated
+     */
     public void updateAQuotation(Quotation quotation){
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         Map<String,String> quotationMap = new HashMap<>();
@@ -564,6 +648,11 @@ public class FileIO{
         }
     }
 
+    /**
+     * Function to read data for get customer's quotation list
+     * @param user the customer
+     * @return customer's quotation list
+     */
     public ArrayList readCustomerQuotationList(User user){
         startup();
         ArrayList<Quotation> customerQuotationList = new ArrayList<>();
@@ -574,6 +663,11 @@ public class FileIO{
         return customerQuotationList;
     }
 
+    /**
+     * Function to read data for get owner's quotation list
+     * @param user the owner
+     * @return owner's quotation list
+     */
     public ArrayList readOwnerQuotationList(User user){
         startup();
         ArrayList<Quotation> ownerQuotationList = new ArrayList<>();
@@ -584,6 +678,10 @@ public class FileIO{
         return ownerQuotationList;
     }
 
+    /**
+     * Function to write data for making a booking
+     * @param booking the new booking object
+     */
     public void makeABooking(Booking booking){
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         Map<String,String> bookingMap = new HashMap<>();
@@ -612,6 +710,10 @@ public class FileIO{
         }
     }
 
+    /**
+     * Function to write for customer confirming booking by paying a deposit
+     * @param payment the new payment made by customer
+     */
     public void payADeposit(Payment payment){
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         Map<String,String> paymentMap = new HashMap<>();
@@ -634,12 +736,18 @@ public class FileIO{
         }
     }
 
-
+    /**
+     * Function to decline a quotation for customer
+     * @param quotation the quotation object
+     */
     public void declineQuotation(Quotation quotation) {
         System.out.println("Not yet!");
     }
 
-
+    /**
+     * Function to write data for owner sending quotation
+     * @param quotation the quotation to be sent
+     */
     public void ownerSendQuotation(Quotation quotation) {
         startup();
         Quotation modifiedQuotation = new Quotation();
@@ -654,6 +762,10 @@ public class FileIO{
         updateQuotationList(quotations);
     }
 
+    /**
+     * Function to write data for owner reject a request
+     * @param quotation the request to be rejected
+     */
     public void ownerRejectRequest(Quotation quotation) {
         startup();
         Quotation modifiedQuotation = new Quotation();
@@ -668,6 +780,11 @@ public class FileIO{
         updateQuotationList(quotations);
     }
 
+    /**
+     * Function to read data for displaying a customer's booking list
+     * @param user the customer
+     * @return ArrayList of bookings
+     */
     public ArrayList<Booking> viewCustomerBookingList(User user) {
         ArrayList<Booking> customerBookingList = new ArrayList<>();
         for (Booking booking : bookings){
@@ -681,6 +798,10 @@ public class FileIO{
 
     }
 
+    /**
+     * Function to read and write data for updating a booking
+     * @param newBooking
+     */
     public void updateBooking(Booking newBooking) {
         startup();
         for (Booking booking : bookings){
@@ -697,5 +818,23 @@ public class FileIO{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Function to read data for searching a hall by support event type
+     * @param eventType the support event type of a hall
+     * @return the ArrayList of matched halls
+     */
+    public ArrayList<Hall> searchAHallByEventType(String eventType) {
+        startup();
+        ArrayList<Hall> searchedHallList = new ArrayList<>();
+        for (Hall hall : halls) {
+            if (hall.getSupportEventType().contains(eventType))
+                searchedHallList.add(hall);
+        }
+        if (searchedHallList.size() !=0 )
+            return searchedHallList;
+        else
+            return null;
     }
 }

@@ -2,16 +2,22 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Main {
+/**
+ * The FileIO is the database handler class in our program.
+ * It is used to store data in text files and read data from the text files.
+ * The database store data includes user's data, hall's information, booking's information and
+ * its history, payment information and its history, payment information and its history,
+ * quotation information and its history.
+ *
+ * @version 1.2
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 
-    //    static Customer customer;
-//    static Admin admin;
-//    static Owner owner;
+public class Main {
     static private FileIO fileIO = new FileIO();
     static private User user;
     static private UI ui = new UI();
     static private Hall hall = new Hall();
-    //static private ArrayList<Hall> halls = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -20,7 +26,7 @@ public class Main {
     }
 
     /**
-     * This is the welcome page, all the operations start from here
+     * This is the welcome page, including login register and exit. All the operations start from here
      */
     public void welcome() {
         fileIO.startup();
@@ -47,15 +53,17 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            //e.printStackTrace();
             welcome();
         }
     }
 
-
+    /**
+     * The login operation for all users
+     */
     public void login() {
         String username;
         String password_hash = "";
+        //Select user type
         while (true) {
             ui.loginStep("username");
             username = sc.nextLine();
@@ -67,7 +75,6 @@ public class Main {
                 welcome();
             else break;
         }
-
         while (true) {
             ui.loginStep("password");
             password_hash = String.valueOf(sc.nextLine().hashCode());
@@ -81,7 +88,6 @@ public class Main {
                     break;
                 } else if (usertype.equals("owner")) {
                     OwnerWelcome();
-                    //
                     break;
                 }
                 if (usertype.equals("admin")) {
@@ -95,10 +101,10 @@ public class Main {
                 break;
             }
         }
-
-        //System.out.println("Verifying...");
     }
-
+    /**
+     * The register operation for all users
+     */
     public void register() {
         User user;
         String password;
@@ -371,7 +377,10 @@ public class Main {
                 break;
         }
     }
-
+    /**
+     * Operation for customer to check booking
+     * @param user the User object
+     */
     private void viewCustomerBookingList(User user) {
         ArrayList<Booking> bookings = new ArrayList<Booking>(fileIO.viewCustomerBookingList(user));
         if (bookings.size() == 0) {
@@ -407,7 +416,10 @@ public class Main {
         }
 
     }
-
+    /**
+     * Operation for customer to operates his or her booking
+     * @param booking the selected booking object
+     */
     private void customerOperateBooking(Booking booking) {
         ui.displayBookingOperation();
         String userInput = "";
@@ -449,7 +461,10 @@ public class Main {
             }
         }
     }
-
+    /**
+     * Operation for customer to change the booking date
+     * @param booking the selected booking object
+     */
     private void customerChangeBookingDate(Booking booking) {
         try {
             Date date;
@@ -531,7 +546,9 @@ public class Main {
 
         }
     }
-
+    /**
+     * Operation for customer to view a list of halls
+     */
     private void viewHallList(){
         ui.viewHallList(fileIO.viewAllHall(),user.getUsername());
         //user can select a hall to view
@@ -554,7 +571,9 @@ public class Main {
                 }
         }
     }
-
+    /**
+     * Operation for customer to search halls by name, event type or location
+     */
     private void searchAHall() {
         ui.searchAHall();
         int selection = 0;
@@ -570,7 +589,7 @@ public class Main {
                         searchAHallByName();
                         break;
                     case 2://by event type
-                        //searchAHallByEventType();
+                        searchAHallByEventType();
                         break;
                     case 3://by location
                         searchAHallByLocation();
@@ -626,6 +645,51 @@ public class Main {
 
     }
 
+    private void searchAHallByEventType() {
+        while (true){
+            ui.searchAHallBy("support event type");
+            ui.displayInfo("   Please select the event type:");
+            ui.displayInfo("1. Wedding Ceremony");
+            ui.displayInfo("2. Wedding Reception");
+            ui.displayInfo("3. Birthday");
+            ui.displayInfo("4. Anniversary");
+            String selection = sc.nextLine();
+            String supportEventType = "";
+            if (!selection.equals("")  && selection.length() == 1){
+                switch (selection){
+                    case "1":
+                        supportEventType = "Wedding Ceremony";
+                        break;
+                    case "2":
+                        supportEventType = "Wedding Reception";
+                        break;
+                    case "3":
+                        supportEventType = "Birthday";
+                        break;
+                    case "4":
+                        supportEventType = "Anniversary";
+                        break;
+                    default:
+                        continue;
+                }
+            }
+            ArrayList<Hall> searchedHallList = new ArrayList<Hall>(fileIO.searchAHallByEventType(supportEventType));
+            if (searchedHallList.size() == 0){
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                ui.displayInfo("Not found! Please check your input again.");
+                System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+                sc.nextLine();
+                searchAHall();
+            }
+            else
+                viewSearchedHallList(searchedHallList);
+        }
+    }
+
+    /**
+     * Operation for displaying searched halls
+     * @param searchedHallList
+     */
     public void viewSearchedHallList(ArrayList<Hall> searchedHallList){
         int i = 0;
         for (Hall hall : searchedHallList){
@@ -652,9 +716,10 @@ public class Main {
 
     }
 
-
-
-
+    /**
+     * Operation for customer to operates the selected halls
+     * @param hall the selected hall object
+     */
     private void customerOperateHall(Hall hall) {
         ui.customerSelectHall(hall);
         int selection = 0;
@@ -695,6 +760,11 @@ public class Main {
         }
     }
 
+    /**
+     * Operation for customer to ask for a quotation
+     * @param hall the selected hall object
+     * @param user the customer
+     */
     private void askForAQuotation(Hall hall,User user) {
         Quotation quotation = new Quotation();
         quotation.setState("new");
@@ -847,7 +917,10 @@ public class Main {
         else
             customerOperateHall(hall);
     }
-
+    /**
+     * Operation for customers to view his or her quotations
+     * @param user the user object
+     */
     private void viewCustomerQuotation(User user){
         ArrayList<Quotation> quotations = fileIO.readCustomerQuotationList(user);
         if (quotations.size() == 0){
@@ -885,6 +958,11 @@ public class Main {
         }
     }
 
+    /**
+     * Operation for customer to do something with the selected operation.
+     * If the quotation's state is responded by owner, then the customer could choose to accept the quotation.
+     * @param quotation the selected quotation object
+     */
     private void customerOperateQuotation(Quotation quotation) {
         String userInput = "";
         userInput = sc.nextLine();
@@ -935,7 +1013,10 @@ public class Main {
 
         }
     }
-
+    /**
+     * Operation to accept the quotation and create a related booking object
+     * @param quotation the accepted quotation
+     */
     private void booking(Quotation quotation) {
         Booking booking = new Booking(quotation);
         ui.displayBooking(booking);
@@ -978,8 +1059,7 @@ public class Main {
     }
 
     /**
-     * These are the operations for owner
-     * This is the welcome page of owner
+     * This is the Home Page for owner
      */
     private void OwnerWelcome(){
         ui.ownerMainMenu(user.getUsername());
@@ -1011,6 +1091,10 @@ public class Main {
         }
     }
 
+    /**
+     * Operation for owner to view his or her quotation list
+     * @param user the owner
+     */
     private void viewOwnerQuotationList(User user) {
         ArrayList<Quotation> quotations = new ArrayList<>(fileIO.readOwnerQuotationList(user));
         if (quotations.size() == 0){
@@ -1054,6 +1138,11 @@ public class Main {
 
     }
 
+    /**
+     * Operation for owner to select whether send the quotation or not.
+     * If want to send the quotation to customer, owner could choose to update the price.
+     * @param quotation the selected quotation object
+     */
     private void ownerOperateQuotation(Quotation quotation) {
         String userInput = "";
         userInput = sc.nextLine();
@@ -1136,7 +1225,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * Operation for owner to create a hall
+     */
     private static void createHall(){
         String name;
         String location;
@@ -1324,14 +1415,27 @@ public class Main {
             System.exit(0);
     }
 
+    /**
+     * Operation to display owner's halls
+     * @param id owner's user id
+     * @return the ArrayList of Hall
+     */
     public ArrayList<Hall> viewOwnHall(int id){
         return fileIO.viewOwnHall(id);
     }
 
+    /**
+     * Operation to display one hall
+     * @param hallId the hall id
+     * @return the String to display hall information
+     */
     public Hall viewAHall(int hallId){
         return fileIO.viewAHall(hallId);
     }
 
+    /**
+     * Operation for owner to manage his or her halls
+     */
     public void manageAHall(){
         ArrayList<Hall> ownHall = new ArrayList<>(viewOwnHall(Integer.parseInt(user.getId())));
         if (ownHall.size() == 0) {
@@ -1411,6 +1515,10 @@ public class Main {
 
     }
 
+    /**
+     * Operation for owner to update discount of a selected hall
+     * @param hall the selected hall object
+     */
     private void updateDiscounts(Hall hall) {
         ui.updateDiscounts(hall);
         String input = "";
@@ -1444,6 +1552,11 @@ public class Main {
         manageAHall();
     }
 
+    /**
+     * Operation for owner to update a selected hall's information
+     * NOT complete yet
+     * @param hall the selected hall
+     */
     private void updateHall(Hall hall) {
         ui.updateHall(hall);
         String input = "";
@@ -1474,7 +1587,7 @@ public class Main {
     }
 
     /**
-     * These are the operations for administrator
+     * Operation for admin's Home Page
      */
     public void AdminWelcome(){
         ui.adminMainMenu(user.getUsername());
@@ -1482,17 +1595,23 @@ public class Main {
         select = sc.nextLine();
         switch (select){
             case "1"://create a hall
+                new Main().AdminWelcome();
                 break;
             case "2"://manage halls
+                new Main().AdminWelcome();
                 break;
             case "3"://view request
+                new Main().AdminWelcome();
                 break;
             case "4"://manage bookings
                 //manage bookings includes cancel bookings and refund payment
+                new Main().AdminWelcome();
                 break;
             case "5"://manage account
+                new Main().AdminWelcome();
                 break;
             case "6": //manage payment
+                new Main().AdminWelcome();
                 break;
             case "Q"://quit
                 new Main().welcome();

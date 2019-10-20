@@ -1,4 +1,23 @@
 import java.util.Date;
+
+/**
+ * Quotation is the entity class to represent quotation in our program.
+ * Quotation has eleven attributes, they are:
+ * int quotationId; it represents the id of the quotation.
+ * int customerId; it represent the related customer id.
+ * int hallId; it represent the related hall id.
+ * int ownerId; it represent the related owner id.
+ * String eventType; it represent the event type of the quotation.
+ * int eventSize; it represent the event size of the quotation.
+ * Date startTime; it represent the start time of the quotation.
+ * Date endTime; it represent the end time of the quotation.
+ * boolean whetherCatering; it represent whether this quotation requires catering.
+ * String state; it represent the state of the quotation.
+ * double price; it represent the price of the quotation.
+ *
+ * @version 1.1
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class Quotation {
     int quotationId;//auto
     int customerId;//auto

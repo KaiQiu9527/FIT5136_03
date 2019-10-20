@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * The UI class is the boundary class in our program.
+ * It is used to display information for all kinds of user of our program.
+ *
+ * @version 1.4
+ * @author FIT 5136 2019 sem 2, Monday 10:am Group 3
+ */
 public class UI {
     /**
      * Generate the left space for displaying UI
@@ -311,7 +318,7 @@ public class UI {
         displayInfo("2. Afternoon time 13:00 to 17:00");
         displayInfo("3. Evening        18:00 to 22:00");
         displayLowerPart("Q. Quit sending request");
-    } 
+    }
 
     public void sendRequestSuccess() {
         System.out.print('\u000C');
