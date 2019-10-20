@@ -224,6 +224,10 @@ public class Main {
                     System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
                     continue;
                 }
+                if (address.contains(",")){
+                    ui.displayInfo("Please remove comma!");
+                    continue;
+                }
                 user.setAddress(address);
                 break;
             }

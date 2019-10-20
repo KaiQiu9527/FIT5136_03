@@ -6,3 +6,5 @@
 
 {fname=Ivy, phone_no=0544266177, password=1611562004, lname=Lee, address=North Melbourne, dob=23-11-1985, usertype=customer, discount=0.5, id=4, email=ivylee@gmail.com, username=customer2}
 
+{fname=demo, phone_no=+61 0412345678, password=857100870, lname=demo, address=Monash Caulfield VIC 3160, dob=12-12-1995, usertype=customer, discount=0.5, id=5, email=demo@monash.edu, username=demo1}
+
