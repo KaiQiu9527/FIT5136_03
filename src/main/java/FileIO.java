@@ -560,10 +560,7 @@ public class FileIO{
             if (hall.getLocation().contains(location))
                 searchedHallList.add(hall);
         }
-        if (searchedHallList.size() !=0 )
-            return searchedHallList;
-        else
-            return null;
+        return searchedHallList;
     }
 
     /**

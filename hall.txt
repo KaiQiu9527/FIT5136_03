@@ -6,3 +6,5 @@
 
 {hallId=4, supportEventType=Birthday, price=500.0, name=Small hall, discount=0.0, description=This is a beautiful little place!, location=Yarra River, ownerId=2, picture=beautiful pic.gif}
 
+{hallId=5, supportEventType=Wedding Ceremony + Wedding Reception + Birthday, price=1000.0, name=Big hall, discount=0.1, description=description, location=Caulfield, ownerId=1, picture=picture.gif}
+

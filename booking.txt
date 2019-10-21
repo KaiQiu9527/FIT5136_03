@@ -6,3 +6,7 @@
 
 {whetherCatering=false, hallId=2, eventSize=100, price=2000.0, customerId=5, startTime=03:00 11-12-2019, eventType=Birthday, endTime=05:00 11-12-2019, state=new, ownerId=1, bookingId=2}
 
+{whetherCatering=false, hallId=1, eventSize=100, price=1000.0, customerId=3, startTime=07:00 20-11-2019, eventType=Wedding Ceremony, endTime=09:00 20-11-2019, state=changed, ownerId=1, bookingId=3}
+
+{whetherCatering=false, hallId=1, eventSize=100, price=1000.0, customerId=3, startTime=03:00 12-11-2020, eventType=Wedding Ceremony, endTime=05:00 12-11-2020, state=new, ownerId=1, bookingId=3}
+

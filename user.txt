@@ -5,10 +5,5 @@
 {fname=Vincent, phone_no=0355123456, password=1611562003, lname=Carter, address=Melbourne, dob=20-02-1978, usertype=customer, discount=0.3, id=3, email=vincecarter@gmail.com, username=customer1}
 
 {fname=Ivy, phone_no=0544266177, password=1611562004, lname=Lee, address=North Melbourne, dob=23-11-1985, usertype=customer, discount=0.5, id=4, email=ivylee@gmail.com, username=customer2}
-
-{fname=demo, phone_no=+61 0412345678, password=857100870, lname=demo, address=Monash Caulfield VIC 3160, dob=12-12-1995, usertype=customer, discount=0.5, id=5, email=demo@monash.edu, username=demo1}
-
-{fname=111, phone_no=111111, password=1449589344, lname=111, address=111, dob=11-11-1111, usertype=customer, discount=0.0, id=6, email=111@1111, username=111111}
-
-{fname=123, phone_no=2222, password=1449589344, lname=123, address=111111, dob=22-2-222, usertype=owner, discount=0.0, id=7, email=123@456, username=1111111}
+{fname=xxx, phone_no=1234567890, password=1450575459, lname=yyy, address=DDD, dob=22-01-1991, usertype=customer, discount=0.5, id=5, email=ddd@, username=xxx}
 
